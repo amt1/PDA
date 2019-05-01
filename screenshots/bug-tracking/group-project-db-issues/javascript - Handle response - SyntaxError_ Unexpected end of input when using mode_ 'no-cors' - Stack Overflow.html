@@ -1,0 +1,1920 @@
+<!DOCTYPE html>
+<!-- saved from url=(0120)https://stackoverflow.com/questions/43317967/handle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors -->
+<html itemscope="" itemtype="http://schema.org/QAPage" class="html__responsive"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <title>javascript - Handle response - SyntaxError: Unexpected end of input when using mode: 'no-cors' - Stack Overflow</title>
+        <link rel="shortcut icon" href="https://cdn.sstatic.net/Sites/stackoverflow/img/favicon.ico?v=4f32ecc8f43d">
+        <link rel="apple-touch-icon image_src" href="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a">
+        <link rel="search" type="application/opensearchdescription+xml" title="Stack Overflow" href="https://stackoverflow.com/opensearch.xml">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
+
+
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://stackoverflow.com/questions/43317967/handle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors">
+        <meta property="og:site_name" content="Stack Overflow">
+        <meta property="og:image" itemprop="image primaryImageOfPage" content="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon@2.png?v=73d79a89bded">
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:domain" content="stackoverflow.com">
+        <meta name="twitter:title" property="og:title" itemprop="name" content="Handle response - SyntaxError: Unexpected end of input when using mode: &#39;no-cors&#39;">
+        <meta name="twitter:description" property="og:description" itemprop="description" content="I tried a ReactJS fetch call to a REST-API and want to handle the response. The call works, i get a response, which i can see in Chrome Dev Tools:
+
+function getAllCourses() {
+fetch(&#39;http://localhos...">
+            <script src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/osd.js"></script><script src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/pubads_impl_rendering_2019041601.js"></script><script src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/rules-p-c1rF4kxgLUzNc.js" async=""></script><script async="" src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/quant.js"></script><script async="" src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/beacon.js"></script><script async="" src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/analytics.js"></script><script src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/jquery.min.js"></script>
+        <script src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/stub.en.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/stacks.css">
+    <link rel="stylesheet" type="text/css" href="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/primary.css">
+
+    
+            <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Handle response - SyntaxError: Unexpected end of input when using mode: &#39;no-cors&#39;&#39;" href="https://stackoverflow.com/feeds/question/43317967">
+            <meta name="twitter:app:country" content="US">
+            <meta name="twitter:app:name:iphone" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:iphone" content="871299723">
+            <meta name="twitter:app:url:iphone" content="se-zaphod://stackoverflow.com/questions/43317967/handle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors">
+            <meta name="twitter:app:name:ipad" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:ipad" content="871299723">
+            <meta name="twitter:app:url:ipad" content="se-zaphod://stackoverflow.com/questions/43317967/handle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors">
+            <meta name="twitter:app:name:googleplay" content="Stack Exchange Android">
+            <meta name="twitter:app:url:googleplay" content="http://stackoverflow.com/questions/43317967/handle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors">
+            <meta name="twitter:app:id:googleplay" content="com.stackexchange.marvin">
+        <script>
+
+            StackExchange.ready(function () {
+                                    
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.initSnippetRenderer();
+                    });
+                    
+
+                StackExchange.using("postValidation", function () {
+                    StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+                });
+
+                
+                StackExchange.question.init({showAnswerHelp:true,totalCommentCount:0,shownCommentCount:0,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:43317967});
+
+                styleCode();
+
+                    StackExchange.realtime.subscribeToQuestion('1', '43317967');
+                                                    StackExchange.using("gps", function () { StackExchange.gps.trackOutboundClicks('#content', '.post-text'); });
+
+            });
+        </script>
+
+        
+        
+        
+        
+        
+        
+
+
+        <script>
+        StackExchange.init({"locale":"en","serverTime":1555929285,"routeName":"Questions/Show","stackAuthUrl":"https://stackauth.com","networkMetaHostname":"meta.stackexchange.com","site":{"name":"Stack Overflow","description":"Q&A for professional and enthusiast programmers","isNoticesTabEnabled":true,"enableNewTagCreationWarning":true,"insertSpaceAfterNameTabCompletion":false,"id":1,"childUrl":"https://meta.stackoverflow.com","enableSocialMediaInSharePopup":true,"protocol":"https"},"user":{"fkey":"f81af1515860bbcd9a0f72e4d563f320325f1b5e3826779068f47ffa7bfb33d3","tid":"e01dbaca-58ad-28a8-14ad-d505ad7441c7","rep":0,"isAnonymous":true,"isAnonymousNetworkWide":true,"ab":{"inline_signup_hero":{"v":"d","g":2}}},"events":{"postType":{"question":1},"postEditionSection":{"title":1,"body":2,"tags":3}},"story":{"minCompleteBodyLength":75,"likedTagsMaxLength":300,"dislikedTagsMaxLength":300},"jobPreferences":{"maxNumDeveloperRoles":2,"maxNumIndustries":4},"svgIconPath":"https://cdn.sstatic.net/Img/svg-icons","svgIconHash":"6e41a6bc8765"}, {"userProfile":{"openGraphAPIKey":"58740831ad23540e00c58987"},"userMessaging":{},"tags":{},"snippets":{"snippetsEnabled":true,"renderDomain":"stacksnippets.net"},"slack":{"sidebarAdDismissCookie":"slack-sidebar-ad"},"site":{"allowImageUploads":true,"enableUserHovercards":true,"styleCode":true,"enableImgurHttps":true,"forceHttpsImages":true},"paths":{},"monitoring":{"clientTimingsAbsoluteTimeout":30000,"clientTimingsDebounceTimeout":1000},"mentions":{"maxNumUsersInDropdown":50},"markdown":{"asteriskIntraWordEmphasis":true},"flags":{"allowRetractingFlags":true},"comments":{},"accounts":{"currentPasswordRequiredForChangingStackIdPassword":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"c26a14a700f5","js/moderator.en.js":"94bd1b32cd69","js/pseudomoderator.en.js":"c0a9a418b269","js/full-anon.en.js":"015ce3915ef6","js/full.en.js":"173a1edb1d4d","js/wmd.en.js":"74769f1b57af","js/mobile.en.js":"d8b51ec4cd2b","js/help.en.js":"8179f44b2f78","js/tageditor.en.js":"3b2cac738282","js/tageditornew.en.js":"7c407fa23f29","js/inline-tag-editing.en.js":"bd4171ec162a","js/revisions.en.js":"9042f0dc9de0","js/review.en.js":"d894eef47fd4","js/tagsuggestions.en.js":"1b1fef557065","js/post-validation.en.js":"8c76c5d03010","js/explore-qlist.en.js":"66e52888786d","js/events.en.js":"b654aeefa6f3","js/keyboard-shortcuts.en.js":"109dfcf844e5","js/external-editor.en.js":"2b7327372e32","js/adops.en.js":"22a9bd59b1e9","js/begin-edit-event.en.js":"a7dd7889f621","js/stacks-polyfills.en.js":"1b7c8d975c88","js/external-editor.en.js":"2b7327372e32","js/snippet-javascript.en.js":"3959ddc8f13f","js/snippet-javascript-codemirror.en.js":"a579d900c8e5"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+    </script>
+    <noscript id="noscript-css"><style>body,.top-bar{margin-top:1.9em}</style></noscript>
+    <script async="" src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/full-anon.en.js"></script><link rel="stylesheet" href="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/clc.min.css" type="text/css"><link rel="preload" href="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/f(5).txt" as="script"><script type="text/javascript" src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/f(5).txt"></script><link rel="preload" href="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/f(6).txt" as="script"><script type="text/javascript" src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/f(6).txt"></script><script src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/pubads_impl_2019041601.js" async=""></script><script async="" src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/snippet-javascript.en.js"></script><script async="" src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/post-validation.en.js"></script><script async="" src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/prettify-full.en.js"></script><script async="" src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/external-editor.en.js"></script><link rel="prefetch" href="https://tpc.googlesyndication.com/safeframe/1-0-32/html/container.html"></head>
+        <body class="question-page unified-theme">
+    <div id="notify-container"></div>
+    <div id="custom-header"></div>
+
+
+
+
+<header class="top-bar js-top-bar top-bar__network _fixed">
+    <div class="-container">
+        <div class="-main">
+                <a href="https://stackoverflow.com/questions/43317967/handle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors#" class="left-sidebar-toggle p0 ai-center jc-center js-left-sidebar-toggle"><span class="ps-relative"></span></a>
+                                <a href="https://stackoverflow.com/" class="-logo js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:8})">
+                        <span class="-img _glyph">Stack Overflow</span>
+                    </a>
+
+
+
+        </div>
+
+            <form id="search" action="https://stackoverflow.com/search" method="get" class="searchbar js-searchbar " autocomplete="off" role="search">
+                    <div class="ps-relative">
+                        <input name="q" type="text" placeholder="Search…" value="" autocomplete="off" maxlength="240" class="s-input js-search-field ">
+                        <button type="submit" aria-label="Search…" class="s-btn s-btn__primary s-btn__icon btn-topbar-primary js-search-submit"><svg aria-hidden="true" class="svg-icon iconSearch" width="18" height="18" viewBox="0 0 18 18"><path d="M12.86 11.32L18 16.5 16.5 18l-5.18-5.14v-.35a7 7 0 1 1 1.19-1.19h.35zM7 12A5 5 0 1 0 7 2a5 5 0 0 0 0 10z"></path></svg></button>
+                    </div>
+            </form>
+
+        
+
+
+
+
+
+<ol class="-secondary js-secondary-topbar-links drop-icons-responsively user-logged-out the-js-is-handling-responsiveness">
+        <li class="-item searchbar-trigger js-searchbar-trigger"><a href="https://stackoverflow.com/questions/43317967/handle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors#" class="-link"><svg aria-hidden="true" class="svg-icon iconSearch" width="18" height="18" viewBox="0 0 18 18"><path d="M12.86 11.32L18 16.5 16.5 18l-5.18-5.14v-.35a7 7 0 1 1 1.19-1.19h.35zM7 12A5 5 0 1 0 7 2a5 5 0 0 0 0 10z"></path></svg></a></li>
+            <li class="-item inbox-button-item" data-remove-order="1">
+        <a href="https://stackexchange.com/users/?tab=inbox" class="-link js-inbox-button" title="Recent inbox messages">
+            <svg aria-hidden="true" class="svg-icon iconInbox" width="20" height="18" viewBox="0 0 20 18"><path d="M15.19 1H4.63c-.85 0-1.6.54-1.85 1.35L0 10.79V15c0 1.1.9 2 2 2h16a2 2 0 0 0 2-2v-4.21l-2.87-8.44A2 2 0 0 0 15.19 1zm-.28 10l-2 2h-6l-2-2H1.96L4.4 3.68A1 1 0 0 1 5.35 3h9.12a1 1 0 0 1 .95.68L17.86 11h-2.95z"></path></svg>
+            <span class="indicator-badge js-unread-count _important" style="display: none;"></span>
+        </a>
+    </li>
+    <li class="-item achievements-button-item" data-remove-order="2">
+        <a href="https://stackexchange.com/users/?tab=reputation" class="-link js-achievements-button" title="Recent achievements: reputation, badges, and privileges earned" data-unread-class="_highlighted-positive">
+            <svg aria-hidden="true" class="svg-icon iconAchievements" width="18" height="18" viewBox="0 0 18 18"><path d="M15 2V1H3v1H0v4c0 1.6 1.4 3 3 3v1c.4 1.5 3 2.6 5 3v2H5s-1 1.5-1 2h10c0-.4-1-2-1-2h-3v-2c2-.4 4.6-1.5 5-3V9c1.6-.2 3-1.4 3-3V2h-3zM3 7c-.5 0-1-.5-1-1V4h1v3zm8.4 2.5L9 8 6.6 9.4l1-2.7L5 5h3l1-2.7L10 5h2.8l-2.3 1.8 1 2.7h-.1zM16 6c0 .5-.5 1-1 1V4h1v2z"></path></svg>
+            <span class="indicator-badge js-unread-count _positive" style="display: none;"></span>
+        </a>
+    </li>
+
+    <li class="-item help-button-item"><a href="https://stackoverflow.com/questions/43317967/handle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors#" class="-link js-help-button" title="Help Center and other resources">
+        <svg aria-hidden="true" class="svg-icon iconHelp" width="18" height="18" viewBox="0 0 18 18"><path d="M9 1a8 8 0 1 0 0 16A8 8 0 0 0 9 1zm.81 12.13c-.02.71-.55 1.15-1.24 1.13-.66-.02-1.17-.49-1.15-1.2.02-.72.56-1.18 1.22-1.16.7.03 1.2.51 1.17 1.23zM11.77 8a5.8 5.8 0 0 1-1.02.91l-.53.37c-.26.2-.42.43-.5.69a4 4 0 0 0-.09.75c0 .05-.03.16-.18.16H7.88c-.16 0-.18-.1-.18-.15.03-.66.12-1.21.4-1.66a5.29 5.29 0 0 1 1.43-1.22c.16-.12.28-.25.38-.39a1.34 1.34 0 0 0 .02-1.71c-.24-.31-.51-.46-1.03-.46-.51 0-.8.26-1.02.6-.21.33-.18.73-.18 1.1H5.75c0-1.38.35-2.25 1.1-2.76.52-.35 1.17-.5 1.93-.5 1 0 1.79.18 2.49.71.64.5.98 1.18.98 2.12 0 .57-.2 1.05-.48 1.44z"></path></svg>
+    </a></li>
+
+    <li class="-item site-switcher-item">
+        <a href="https://stackexchange.com/" class="-link js-site-switcher-button js-gps-track" data-gps-track="site_switcher.show" title="A list of all 175 Stack Exchange sites">
+            <svg aria-hidden="true" class="svg-icon iconStackExchange" width="18" height="18" viewBox="0 0 18 18"><path d="M1 13c0 1.1.9 2 2 2h8v3l3-3h1a2 2 0 0 0 2-2v-2H1v2zM15 1H3a2 2 0 0 0-2 2v2h16V3a2 2 0 0 0-2-2zM1 6h16v4H1V6z"></path></svg>
+        </a>
+    </li>
+
+            <li class="-ctas">
+                        <a href="https://stackoverflow.com/users/login?ssrc=head&amp;returnurl=https%3a%2f%2fstackoverflow.com%2fquestions%2f43317967%2fhandle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors" class="login-link s-btn btn-topbar-clear py8" rel="nofollow">Log In</a>
+                        <a href="https://stackoverflow.com/users/signup?ssrc=head&amp;returnurl=%2fusers%2fstory%2fcurrent" class="login-link s-btn s-btn__primary py8 btn-topbar-primary" rel="nofollow" data-ga="[&quot;sign up&quot;,&quot;Sign Up Navigation&quot;,&quot;Header&quot;,null,null]">Sign Up</a>
+
+            </li>
+
+    <li class="-dialog-container js-topbar-dialog-corral">
+
+
+    <div class="topbar-dialog siteSwitcher-dialog dno">
+        <div class="header">
+            <h3><a href="https://stackoverflow.com/">current community</a>
+            </h3>
+        </div>
+        <div class="modal-content current-site-container">
+            <ul class="current-site">
+                    <li class="grid">
+                            <div class="fl1">
+            <a href="https://stackoverflow.com/" class="current-site-link site-link js-gps-track grid gs8 gsx" data-id="1" data-gps-track="site_switcher.click({ item_type:3 })">
+        <div class="favicon favicon-stackoverflow site-icon grid--cell" title="Stack Overflow"></div>
+        <span class="grid--cell fl1">
+            Stack Overflow
+        </span>
+    </a>
+
+    </div>
+    <div class="related-links">
+            <a href="https://stackoverflow.com/help" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:14 })">help</a>
+                    <a href="https://chat.stackoverflow.com/" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:6 })">chat</a>
+            </div>
+
+                    </li>
+                    <li class="related-site grid">
+                            <div class="L-shaped-icon-container">
+        <span class="L-shaped-icon"></span>
+    </div>
+
+                            <a href="https://meta.stackoverflow.com/" class="site-link js-gps-track grid gs8 gsx" data-id="552" data-gps-track="site.switch({ target_site:552, item_type:3 }),site_switcher.click({ item_type:4 })">
+        <div class="favicon favicon-stackoverflowmeta site-icon grid--cell" title="Meta Stack Overflow"></div>
+        <span class="grid--cell fl1">
+            Meta Stack Overflow
+        </span>
+    </a>
+
+                    </li>
+            </ul>
+        </div>
+
+        <div class="header" id="your-communities-header">
+            <h3>
+your communities            </h3>
+
+        </div>
+        <div class="modal-content" id="your-communities-section">
+
+                <div class="call-to-login">
+<a href="https://stackoverflow.com/users/signup?ssrc=site_switcher&amp;returnurl=%2fusers%2fstory%2fcurrent" class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:10 })">Sign up</a> or <a href="https://stackoverflow.com/users/login?ssrc=site_switcher&amp;returnurl=https%3a%2f%2fstackoverflow.com%2fquestions%2f43317967%2fhandle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors" class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:11 })">log in</a> to customize your list.
+                </div>
+        </div>
+
+        <div class="header">
+            <h3><a href="https://stackexchange.com/sites">more stack exchange communities</a>
+            </h3>
+            <a href="https://stackoverflow.blog/" class="fr">company blog</a>
+        </div>
+        <div class="modal-content">
+                <div class="child-content"></div>
+        </div>        
+    </div>
+            <div class="topbar-dialog help-dialog js-help-dialog dno">
+        <div class="modal-content">
+            <ul>
+                                    <li>
+                        <a href="https://stackoverflow.com/tour" class="js-gps-track" data-gps-track="help_popup.click({ item_type:1 })">
+                            Tour
+                            <span class="item-summary">
+                                Start here for a quick overview of the site
+                            </span>
+                        </a>
+                    </li>
+                <li>
+                    <a href="https://stackoverflow.com/help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:4 })">
+                        Help Center
+                        <span class="item-summary">
+                            Detailed answers to any questions you might have
+                        </span>
+                    </a>
+                </li>
+                        <li>
+                            <a href="https://meta.stackoverflow.com/" class="js-gps-track" data-gps-track="help_popup.click({ item_type:2 })">
+                                Meta
+                                <span class="item-summary">
+                                    Discuss the workings and policies of this site
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://stackoverflow.com/company/about" class="js-gps-track" data-gps-track="help_popup.click({ item_type:6 })">
+                                About Us
+                                <span class="item-summary">
+                                    Learn more about Stack Overflow the company
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.stackoverflowbusiness.com/?ref=topbar_help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:7 })">
+                                Business
+                                <span class="item-summary">
+                                    Learn more about hiring developers or posting ads with us
+                                </span>
+                            </a>
+                        </li>
+            </ul>
+        </div>
+    </div>
+                    <div class="topbar-dialog leftnav-dialog js-leftnav-dialog dno">
+                <div class="left-sidebar js-unpinned-left-sidebar" data-can-be="left-sidebar" data-is-here-when="sm"></div>
+            </div>
+    </li>
+</ol>
+
+    </div>
+</header>
+    <div id="js-gdpr-consent-banner" class="p16 bg-black-700 ff-sans fc-white ps-fixed b0 l0 r0 z-banner" role="banner" aria-hidden="false">
+        <div class="wmx8 mx-auto grid jc-center" role="alertdialog" aria-describedby="notice-message">
+            <div class="grid--cell mr12" aria-label="notice-message">
+                <p class="mb0 lh-lg">
+                    By using our site, you acknowledge that you have read and understand our <a class="s-link s-link__inherit td-underline fc-white" target="_blank" href="https://stackoverflow.com/legal/cookie-policy">Cookie Policy</a>, <a class="s-link s-link__inherit td-underline fc-white" target="_blank" href="https://stackoverflow.com/legal/privacy-policy">Privacy Policy</a>, and our <a class="s-link s-link__inherit td-underline fc-white" target="_blank" href="https://stackoverflow.com/legal/terms-of-service/public">Terms of Service</a>.
+                </p>
+            </div>
+            <a class="grid--cell fc-white js-notice-close" aria-label="notice-dismiss">
+                <svg aria-hidden="true" class="svg-icon m0 iconClear" width="18" height="18" viewBox="0 0 18 18"><path d="M15 4.41L13.59 3 9 7.59 4.41 3 3 4.41 7.59 9 3 13.59 4.41 15 9 10.41 13.59 15 15 13.59 10.41 9z"></path></svg>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        StackExchange.ready(function () { StackExchange.topbar.init({ observeSize: true }); });
+        StackExchange.scrollPadding.setPaddingTop(50, 10);     </script>
+
+
+
+
+
+
+    <div class="container">
+
+
+
+
+
+<div id="left-sidebar" data-is-here-when="md lg" class="left-sidebar js-pinned-left-sidebar">
+    <div class="left-sidebar--sticky-container js-sticky-leftnav">
+            <nav role="navigation">
+                <ol class="nav-links">
+                    <li>    </li><li>
+        <a href="https://stackoverflow.com/" class="pl8 js-gps-track nav-links--link" data-gps-track="top_nav.click({is_current:false, location:2, destination:8})">
+Home        </a>
+    </li>
+
+                    <li>
+                        <ol class="nav-links">
+                                <li class="fs-fine tt-uppercase ml8 mt16 mb4 fc-light">Public</li>
+                                <li class=" youarehere">
+        <a id="nav-questions" href="https://stackoverflow.com/questions" class="pl8 js-gps-track nav-links--link -link__with-icon" data-gps-track="top_nav.click({is_current:true, location:2, destination:1})">
+<svg aria-hidden="true" class="svg-icon iconGlobe" width="18" height="18" viewBox="0 0 18 18"><path d="M9 1a8 8 0 1 0 0 16A8 8 0 0 0 9 1zM8 15.32a6.4 6.4 0 0 1-5.23-7.75L7 11.68v.8c0 .88.12 1.32 1 1.32v1.52zm5.72-2c-.2-.66-1-1.32-1.72-1.32h-1v-2c0-.44-.56-1-1-1H6V7h1c.44 0 1-.56 1-1V5h2c.88 0 1.4-.72 1.4-1.6v-.33a6.4 6.4 0 0 1 2.32 10.24z"></path></svg>                <span class="-link--channel-name">Stack Overflow</span>
+        </a>
+    </li>
+
+    <li>
+        <a id="nav-tags" href="https://stackoverflow.com/tags" class=" js-gps-track nav-links--link" data-gps-track="top_nav.click({is_current:false, location:2, destination:2})">
+Tags        </a>
+    </li>
+    <li>
+        <a id="nav-users" href="https://stackoverflow.com/users" class=" js-gps-track nav-links--link" data-gps-track="top_nav.click({is_current:false, location:2, destination:3})">
+Users        </a>
+    </li>
+    <li>
+        <a id="nav-jobs" href="https://stackoverflow.com/jobs?med=site-ui&amp;ref=jobs-tab" class=" js-gps-track nav-links--link" data-gps-track="top_nav.click({is_current:false, location:2, destination:6})">
+Jobs        </a>
+    </li>
+                                                    </ol>
+                    </li>
+                        <li>
+                            <ol class="nav-links">
+                                        <li class="p6">
+                                            <div class="ba bc-black-2 bar-sm p16 grid fd-column ps-relative overflow-hidden">
+                                                <strong class="grid--cell">Teams</strong>
+                                                <span class="grid--cell mt2 fs-caption fc-medium">Q&amp;A for work </span>
+                                                <a href="https://stackoverflow.com/teams" class="js-gps-track s-btn s-btn__outlined ta-center grid--cell mt12" data-gps-track="teams.create.left-sidenav.click({ CampaignType: None})" data-ga="[&quot;teams traffic&quot;,&quot;left nav cta&quot;,&quot;stackoverflow.com/teams&quot;,null,{&quot;dimension4&quot;:&quot;teams&quot;}]">
+                                                    Learn More
+                                                </a>
+
+                                                <div class="ps-absolute t4 rn6">
+                                                    <svg width="53" height="49" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M49 11l.2 31H18.9L9 49v-7H4V8h31" fill="#CCEAFF"></path><path d="M44.5 19v-.3l-.2-.1-18-13-.1-.1H.5v33h4V46l.8-.6 9.9-6.9h29.3V19z" stroke="#1060E1" stroke-miterlimit="10"></path><path d="M31 2l6-1.5 7 2V38H14.9L5 45v-7H1V6h25l5-4z" fill="#fff"></path><path d="M7 16.5h13m-13 6h14m-14 6h18" stroke="#1060E1" stroke-miterlimit="10"></path><path d="M39 30a14 14 0 1 0 0-28 14 14 0 0 0 0 28z" fill="#FFB935"></path><path d="M50.5 14a13.5 13.5 0 1 1-27 0 13.5 13.5 0 0 1 27 0z" stroke="#F48024" stroke-miterlimit="10"></path><path d="M32.5 21.5v-8h9v8h-9zm2-9.5V9.3A2.5 2.5 0 0 1 37 6.8a2.5 2.5 0 0 1 2.5 2.5V12h-5zm2 3v2m1-2v2" stroke="#fff" stroke-miterlimit="10"></path></svg>
+                                                </div>
+                                            </div>
+                                        </li>
+                            </ol>
+                        </li>
+                </ol>
+            </nav>
+    </div>
+</div>
+   
+
+        <div id="content" class="snippet-hidden">
+
+
+            
+
+
+<div itemprop="mainEntity" itemscope="" itemtype="http://schema.org/Question">
+    <link itemprop="image" href="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a">
+
+    <div class="inner-content clearfix">
+    
+    
+
+            <div id="question-header" class="grid">
+                    <h1 itemprop="name" class="grid--cell fs-headline1 fl1 ow-break-word"><a href="https://stackoverflow.com/questions/43317967/handle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors" class="question-hyperlink">Handle response - SyntaxError: Unexpected end of input when using mode: 'no-cors'</a></h1>
+
+            
+<div class="pl8 aside-cta grid--cell" role="navigation" aria-label="ask new question">
+        <a href="https://stackoverflow.com/questions/ask" class="d-inline-flex ai-center ws-nowrap s-btn s-btn__primary">
+            Ask Question
+        </a>
+</div>
+
+        </div>
+            <div id="mainbar" role="main" aria-label="question and answers">
+
+            
+
+<div class="question" data-questionid="43317967" id="question">
+
+    <style>.everyoneloves__top-leaderboard:empty,.everyoneloves__mid-leaderboard:empty,.everyoneloves__bot-mid-leaderboard:empty{                height:90px;width:728px;box-sizing:border-box;
+}</style>
+        <div id="dfp-tlb" class="everyonelovesstackoverflow everyoneloves__top-leaderboard" style="min-height: auto; height: auto; display: none;"></div>
+    <div class="post-layout">
+            <div class="votecell post-layout--left">
+                
+
+<div class="js-voting-container grid fd-column ai-stretch gs4 fc-black-200" data-post-id="43317967">
+        <button class="js-vote-up-btn grid--cell s-btn s-btn__unset c-pointer" title="This question shows research effort; it is useful and clear" aria-pressed="false" aria-label="up vote" data-selected-classes="fc-theme-primary"><svg aria-hidden="true" class="svg-icon m0 iconArrowUpLg" width="36" height="36" viewBox="0 0 36 36"><path d="M2 26h32L18 10z"></path></svg></button>
+        <div class="js-vote-count grid--cell fc-black-500 fs-title grid fd-column ai-center" itemprop="upvoteCount" data-value="19">19</div>
+        <button class="js-vote-down-btn grid--cell s-btn s-btn__unset c-pointer" title="This question does not show any research effort; it is unclear or not useful" aria-pressed="false" aria-label="down vote" data-selected-classes="fc-theme-primary"><svg aria-hidden="true" class="svg-icon m0 iconArrowDownLg" width="36" height="36" viewBox="0 0 36 36"><path d="M2 10h32L18 26z"></path></svg></button>
+
+        <button class="js-favorite-btn s-btn s-btn__unset c-pointer py8" aria-pressed="false" aria-label="favorite (4)" data-selected-classes="fc-yellow-600">
+            <svg aria-hidden="true" class="svg-icon iconStar" width="18" height="18" viewBox="0 0 18 18"><path d="M9 12.65l-5.29 3.63 1.82-6.15L.44 6.22l6.42-.17L9 0l2.14 6.05 6.42.17-5.1 3.9 1.83 6.16z"></path></svg>
+            <div class="js-favorite-count mt8" data-value="4">4</div>
+        </button>
+
+
+</div>
+
+            </div>
+
+            
+<div class="postcell post-layout--right">
+    
+    <div class="post-text" itemprop="text">
+
+<p>I tried a ReactJS fetch call to a REST-API and want to handle the response. The call works, i get a response, which i can see in Chrome Dev Tools:</p>
+
+<pre class="lang-js prettyprint prettyprinted" style=""><code><span class="kwd">function</span><span class="pln"> getAllCourses</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+fetch</span><span class="pun">(</span><span class="str">'http://localhost:8080/course'</span><span class="pun">,</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    method</span><span class="pun">:</span><span class="pln"> </span><span class="str">'POST'</span><span class="pun">,</span><span class="pln">
+    mode</span><span class="pun">:</span><span class="pln"> </span><span class="str">'no-cors'</span><span class="pun">,</span><span class="pln">
+    credentials</span><span class="pun">:</span><span class="pln"> </span><span class="str">'same-origin'</span><span class="pun">,</span><span class="pln">
+    headers</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="str">'Accept'</span><span class="pun">:</span><span class="pln"> </span><span class="str">'application/json'</span><span class="pun">,</span><span class="pln">
+        </span><span class="str">'Content-Type'</span><span class="pun">:</span><span class="pln"> </span><span class="str">'application/json'</span><span class="pun">,</span><span class="pln">
+    </span><span class="pun">},</span><span class="pln">
+    body</span><span class="pun">:</span><span class="pln"> JSON</span><span class="pun">.</span><span class="pln">stringify</span><span class="pun">({</span><span class="pln">
+        objectClass</span><span class="pun">:</span><span class="pln"> </span><span class="str">'course'</span><span class="pun">,</span><span class="pln">
+        crud</span><span class="pun">:</span><span class="pln"> </span><span class="str">'2'</span><span class="pln">
+    </span><span class="pun">})</span><span class="pln">
+</span><span class="pun">}).</span><span class="pln">then</span><span class="pun">(</span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">response</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">response</span><span class="pun">);</span><span class="pln">
+    </span><span class="kwd">return</span><span class="pln"> response</span><span class="pun">.</span><span class="pln">json</span><span class="pun">();</span><span class="pln">
+
+</span><span class="pun">}).</span><span class="kwd">catch</span><span class="pun">(</span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">err</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">err</span><span class="pun">)</span><span class="pln">
+</span><span class="pun">});</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+
+<p>When i try to handle the response, i got a "SyntaxError: Unexpected end of input" at</p>
+
+<pre class="lang-js prettyprint prettyprinted" style=""><code><span class="kwd">return</span><span class="pln"> response</span><span class="pun">.</span><span class="pln">json</span><span class="pun">();</span></code></pre>
+
+<p>The console.log looks like this:</p>
+
+<p><a href="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/tr01h.png" rel="noreferrer"><img src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/tr01h.png" alt="Console.log(response)"></a></p>
+
+<p>My Response JSON looks like this, it is valid, i checked it with jsonlint:</p>
+
+<pre class="lang-js prettyprint prettyprinted" style=""><code><span class="pun">[</span><span class="pln">
+  </span><span class="pun">{</span><span class="pln">
+    </span><span class="str">"0x1"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="str">"users"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[],</span><span class="pln">
+      </span><span class="str">"lectures"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[],</span><span class="pln">
+      </span><span class="str">"owner"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"0x2"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"title"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"WWI 14 SEA"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"description"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"objectClass"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"course"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"course_00001"</span><span class="pln">
+    </span><span class="pun">},</span><span class="pln">
+    </span><span class="str">"0x2"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="str">"username"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"system"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"lectures"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[],</span><span class="pln">
+      </span><span class="str">"course"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"solutions"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[],</span><span class="pln">
+      </span><span class="str">"exercises"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[],</span><span class="pln">
+      </span><span class="str">"roles"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="pln">
+        </span><span class="str">"0x3"</span><span class="pun">,</span><span class="pln">
+        </span><span class="str">"0x4"</span><span class="pun">,</span><span class="pln">
+        </span><span class="str">"0x5"</span><span class="pln">
+      </span><span class="pun">],</span><span class="pln">
+      </span><span class="str">"objectClass"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"user"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"user_00001"</span><span class="pln">
+    </span><span class="pun">},</span><span class="pln">
+    </span><span class="str">"0x3"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="str">"roleName"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"ROLE_ADMIN"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"objectClass"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"role"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"role_00001"</span><span class="pln">
+    </span><span class="pun">},</span><span class="pln">
+    </span><span class="str">"0x4"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="str">"roleName"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"ROLE_STUDENT"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"objectClass"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"role"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"role_00002"</span><span class="pln">
+    </span><span class="pun">},</span><span class="pln">
+    </span><span class="str">"0x5"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="str">"roleName"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"ROLE_DOCENT"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"objectClass"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"role"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"role_00003"</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">]</span></code></pre>
+    </div>
+
+        <div class="post-taglist grid gs4 gsy fd-column">
+            <div class="grid ps-relative d-block">
+                <a href="https://stackoverflow.com/questions/tagged/javascript" class="post-tag js-gps-track" title="show questions tagged &#39;javascript&#39;" rel="tag">javascript</a> <a href="https://stackoverflow.com/questions/tagged/json" class="post-tag js-gps-track" title="show questions tagged &#39;json&#39;" rel="tag">json</a> <a href="https://stackoverflow.com/questions/tagged/reactjs" class="post-tag js-gps-track" title="show questions tagged &#39;reactjs&#39;" rel="tag">reactjs</a> <a href="https://stackoverflow.com/questions/tagged/cors" class="post-tag js-gps-track" title="show questions tagged &#39;cors&#39;" rel="tag">cors</a> <a href="https://stackoverflow.com/questions/tagged/fetch-api" class="post-tag js-gps-track" title="show questions tagged &#39;fetch-api&#39;" rel="tag">fetch-api</a> 
+            </div>
+        </div>
+
+    <div class="mb0 ">
+        <div class="mt16 pt4 grid gs8 gsy fw-wrap jc-end ai-start">
+            <div class="grid--cell mr16" style="flex: 1 1 100px;">
+<div class="post-menu"><a href="https://stackoverflow.com/q/43317967" title="short permalink to this question" class="short-link" itemprop="url" id="link-post-43317967">share</a><span class="lsep">|</span><a href="https://stackoverflow.com/posts/43317967/edit" class="suggest-edit-post" title="">improve this question</a></div>
+            </div>
+
+                <div class="post-signature grid--cell">
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        <a href="https://stackoverflow.com/posts/43317967/revisions" title="show all edits to this post">edited <span title="2018-06-13 22:43:23Z" class="relativetime">Jun 13 '18 at 22:43</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stackoverflow.com/users/441757/sideshowbarker"><div class="gravatar-wrapper-32"><img src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/921df025d1d7c99fad4553ac83bd8bdf.jpeg" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stackoverflow.com/users/441757/sideshowbarker">sideshowbarker</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score 34,324" dir="ltr">34.3k</span><span title="16 gold badges"><span class="badge1"></span><span class="badgecount">16</span></span><span title="84 silver badges"><span class="badge2"></span><span class="badgecount">84</span></span><span title="100 bronze badges"><span class="badge3"></span><span class="badgecount">100</span></span>
+        </div>
+    </div>
+</div>                </div>
+            <div class="post-signature owner grid--cell">
+<div class="user-info ">
+    <div class="user-action-time">
+        asked <span title="2017-04-10 08:14:02Z" class="relativetime">Apr 10 '17 at 8:14</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stackoverflow.com/users/5648846/chilliggo"><div class="gravatar-wrapper-32"><img src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/7be75ed89baf2cc3fdafc2bdea892bf3" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <a href="https://stackoverflow.com/users/5648846/chilliggo">Chilliggo</a><span class="d-none" itemprop="name">Chilliggo</span>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">120</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="9 bronze badges"><span class="badge3"></span><span class="badgecount">9</span></span>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+    </div>
+    
+</div>
+                
+    <div class="post-layout--right">
+	    <div id="comments-43317967" class="comments js-comments-container  dno" data-post-id="43317967">
+            <ul class="comments-list js-comments-list" data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+            </ul>
+	    </div>
+
+        <div id="comments-link-43317967" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="https://stackoverflow.com/questions/43317967/handle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors#" onclick=""></a>
+        </div>         
+    </div>        </div>
+</div>
+
+
+<div id="dfp-isb" class="everyonelovesstackoverflow everyoneloves__inline-sidebar" style="min-height: auto; height: auto; display: none;"></div>
+            <div id="answers">
+
+                <a name="tab-top"></a>
+                <div id="answers-header">
+                    <div class="subheader answers-subheader">
+                        <h2 data-answercount="5">
+                                5 Answers
+                            <span style="display:none;" itemprop="answerCount">5</span>
+                        </h2>
+                        <div>
+                            
+<div id="tabs">
+        <a href="https://stackoverflow.com/questions/43317967/handle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors?answertab=active#tab-top" data-nav-xhref="" title="Answers with the latest activity first" data-value="active" data-shortcut="A">
+            active</a>
+        <a href="https://stackoverflow.com/questions/43317967/handle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors?answertab=oldest#tab-top" data-nav-xhref="" title="Answers in the order they were provided" data-value="oldest" data-shortcut="O">
+            oldest</a>
+        <a class="youarehere is-selected " href="https://stackoverflow.com/questions/43317967/handle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors?answertab=votes#tab-top" data-nav-xhref="" title="Answers with the highest score first" data-value="votes" data-shortcut="V">
+            votes</a>
+    </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+  
+<a name="43319482"></a>
+<div id="answer-43319482" class="answer accepted-answer" data-answerid="43319482" itemprop="acceptedAnswer" itemscope="" itemtype="http://schema.org/Answer">
+    <div class="post-layout">
+            <div class="votecell post-layout--left">
+                
+
+<div class="js-voting-container grid fd-column ai-stretch gs4 fc-black-200" data-post-id="43319482">
+        <button class="js-vote-up-btn grid--cell s-btn s-btn__unset c-pointer" title="This answer is useful" aria-pressed="false" aria-label="up vote" data-selected-classes="fc-theme-primary"><svg aria-hidden="true" class="svg-icon m0 iconArrowUpLg" width="36" height="36" viewBox="0 0 36 36"><path d="M2 26h32L18 10z"></path></svg></button>
+        <div class="js-vote-count grid--cell fc-black-500 fs-title grid fd-column ai-center" itemprop="upvoteCount" data-value="41">41</div>
+        <button class="js-vote-down-btn grid--cell s-btn s-btn__unset c-pointer" title="This answer is not useful" aria-pressed="false" aria-label="down vote" data-selected-classes="fc-theme-primary"><svg aria-hidden="true" class="svg-icon m0 iconArrowDownLg" width="36" height="36" viewBox="0 0 36 36"><path d="M2 10h32L18 26z"></path></svg></button>
+
+
+                <div class="js-accepted-answer-indicator grid--item fc-green-500 ta-center p4" title="The question owner accepted this as the best answer Apr 10 &#39;17 at 11:16." tabindex="0" role="note" aria-label="accepted"><svg aria-hidden="true" class="svg-icon iconCheckmarkLg" width="36" height="36" viewBox="0 0 36 36"><path d="M6 14l8 8L30 6v8L14 30l-8-8z"></path></svg></div>
+
+</div>
+
+            </div>
+            
+
+<div class="answercell post-layout--right">
+    
+    <div class="post-text" itemprop="text">
+<p>You need to remove the <code>mode: 'no-cors'</code> setting from your request. That <code>mode: 'no-cors'</code> is exactly the cause of the problem you’re having.</p>
+
+<p>A <code>mode: 'no-cors'</code> request makes the response type <code>opaque</code>. The console-log snippet in the question clearly shows that. And <code>opaque</code> means your frontend JavaScript code can’t see the response body or headers.</p>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Request/mode" rel="noreferrer">https://developer.mozilla.org/en-US/docs/Web/API/Request/mode</a> explains:</p>
+
+<blockquote>
+  <p><code>no-cors</code> — JavaScript may not access any properties of the resulting <code>Response</code></p>
+</blockquote>
+
+<p>So the effect of setting <code>mode: 'no-cors'</code> is essentially to tell browsers, <em>“Don’t let frontend JavaScript code access the response body or headers under any circumstances.”</em></p>
+
+<p>I imagine you’re setting <code>mode: 'no-cors'</code> for the request because the response from <code>http://localhost:8080/course</code> doesn’t include the <code>Access-Control-Allow-Origin</code> response header or because your browser’s making an <code>OPTIONS</code> request to <code>http://localhost:8080</code> because your request is one that triggers a <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS#Preflighted_requests" rel="noreferrer">CORS preflight</a>.</p>
+
+<p>But setting <code>mode: 'no-cors'</code> is not the solution to those problems. The solution is either to:</p>
+
+<ul>
+<li><p>configure the <code>http://localhost:8080</code> server to send the <code>Access-Control-Allow-Origin</code> response header and to handle the <code>OPTIONS</code> request</p></li>
+<li><p>or set up a CORS proxy using code from <a href="https://github.com/Rob--W/cors-anywhere/" rel="noreferrer">https://github.com/Rob--W/cors-anywhere/</a> or such (see the <em>How to use a CORS proxy to get around “No Access-Control-Allow-Origin header” problems</em> section of the answer at <em><a href="https://stackoverflow.com/questions/43871637/no-access-control-allow-origin-header-is-present-on-the-requested-resource-whe/43881141#43881141">No 'Access-Control-Allow-Origin' header is present on the requested resource—when trying to get data from a REST API</a></em>)</p></li>
+</ul>
+    </div>
+    <div class="grid mb0 fw-wrap ai-start jc-end gs8 gsy">
+        <time itemprop="dateCreated" datetime="2017-04-10T09:27:33"></time>
+    <div class="grid--cell mr16" style="flex: 1 1 100px;">
+<div class="post-menu"><a href="https://stackoverflow.com/a/43319482" title="short permalink to this answer" class="short-link" itemprop="url" id="link-post-43319482">share</a><span class="lsep">|</span><a href="https://stackoverflow.com/posts/43319482/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </div>
+    <div class="post-signature grid--cell fl0">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="https://stackoverflow.com/posts/43319482/revisions" title="show all edits to this post">edited <span title="2018-08-31 16:42:39Z" class="relativetime">Aug 31 '18 at 16:42</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        
+        <div class="-flair">
+            
+        </div>
+    </div>
+</div>    </div>
+            
+
+
+    <div class="post-signature grid--cell fl0">
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2017-04-10 09:27:33Z" class="relativetime">Apr 10 '17 at 9:27</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stackoverflow.com/users/441757/sideshowbarker"><div class="gravatar-wrapper-32"><img src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/921df025d1d7c99fad4553ac83bd8bdf.jpeg" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <a href="https://stackoverflow.com/users/441757/sideshowbarker">sideshowbarker</a><span class="d-none" itemprop="name">sideshowbarker</span>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score 34,324" dir="ltr">34.3k</span><span title="16 gold badges"><span class="badge1"></span><span class="badgecount">16</span></span><span title="84 silver badges"><span class="badge2"></span><span class="badgecount">84</span></span><span title="100 bronze badges"><span class="badge3"></span><span class="badgecount">100</span></span>
+        </div>
+    </div>
+</div>
+
+    </div>
+    </div>
+    
+</div>
+
+    
+    <div class="post-layout--right">
+	    <div id="comments-43319482" class="comments js-comments-container " data-post-id="43319482">
+            <ul class="comments-list js-comments-list" data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+    <li id="comment-86169488" class="comment js-comment " data-comment-id="86169488">
+        <div class="js-comment-actions comment-actions">
+            <div class="comment-score js-comment-edit-hide">
+            </div>
+                    </div>
+        <div class="comment-text js-comment-text-and-form">
+            <div class="comment-body js-comment-edit-hide">
+                
+                <span class="comment-copy">In case of django localhost server install <code>github.com/ottoyiu/django-cors-headers</code> then set settings.py <code>CORS_ORIGIN_ALLOW_ALL = True</code> for development purposes.</span>
+                
+                    –&nbsp;<a href="https://stackoverflow.com/users/1271868/moreno" title="1,127 reputation" class="comment-user">Moreno</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://stackoverflow.com/questions/43317967/handle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors#comment86169488_43319482"><span title="2018-03-30 20:10:32Z" class="relativetime-clean">Mar 30 '18 at 20:10</span></a></span>
+                                                            </div>
+        </div>
+    </li>
+            </ul>
+	    </div>
+
+        <div id="comments-link-43319482" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="https://stackoverflow.com/questions/43317967/handle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors#" onclick=""></a>
+        </div>         
+    </div>    </div>
+</div>
+<div id="dfp-mlb" class="everyonelovesstackoverflow everyoneloves__mid-leaderboard" style="min-height: auto; height: auto; display: none;"></div>
+  
+<a name="43318103"></a>
+<div id="answer-43318103" class="answer" data-answerid="43318103" itemprop="suggestedAnswer" itemscope="" itemtype="http://schema.org/Answer">
+    <div class="post-layout">
+            <div class="votecell post-layout--left">
+                
+
+<div class="js-voting-container grid fd-column ai-stretch gs4 fc-black-200" data-post-id="43318103">
+        <button class="js-vote-up-btn grid--cell s-btn s-btn__unset c-pointer" title="This answer is useful" aria-pressed="false" aria-label="up vote" data-selected-classes="fc-theme-primary"><svg aria-hidden="true" class="svg-icon m0 iconArrowUpLg" width="36" height="36" viewBox="0 0 36 36"><path d="M2 26h32L18 10z"></path></svg></button>
+        <div class="js-vote-count grid--cell fc-black-500 fs-title grid fd-column ai-center" itemprop="upvoteCount" data-value="2">2</div>
+        <button class="js-vote-down-btn grid--cell s-btn s-btn__unset c-pointer" title="This answer is not useful" aria-pressed="false" aria-label="down vote" data-selected-classes="fc-theme-primary"><svg aria-hidden="true" class="svg-icon m0 iconArrowDownLg" width="36" height="36" viewBox="0 0 36 36"><path d="M2 10h32L18 26z"></path></svg></button>
+
+
+                <div class="js-accepted-answer-indicator grid--item fc-green-500 ta-center p4 d-none" title="loading when this answer was accepted..." tabindex="0" role="note" aria-label="accepted"><svg aria-hidden="true" class="svg-icon iconCheckmarkLg" width="36" height="36" viewBox="0 0 36 36"><path d="M6 14l8 8L30 6v8L14 30l-8-8z"></path></svg></div>
+
+</div>
+
+            </div>
+            
+
+<div class="answercell post-layout--right">
+    
+    <div class="post-text" itemprop="text">
+<p>In your <code>then</code> you should check if the response is OK before returning <code>response.json</code>:</p>
+
+<pre class="lang-js prettyprint prettyprinted" style=""><code><span class="pun">.</span><span class="pln">then</span><span class="pun">(</span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">response</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(!</span><span class="pln">response</span><span class="pun">.</span><span class="pln">ok</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="kwd">return</span><span class="pln"> </span><span class="typ">Promise</span><span class="pun">.</span><span class="pln">reject</span><span class="pun">(</span><span class="str">'some reason'</span><span class="pun">);</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+    </span><span class="kwd">return</span><span class="pln"> response</span><span class="pun">.</span><span class="pln">json</span><span class="pun">();</span><span class="pln">
+
+</span><span class="pun">})</span></code></pre>
+
+<p>If you want to have the error message in your rejected promise, you can do something like:</p>
+
+<pre class="lang-js prettyprint prettyprinted" style=""><code><span class="pun">.</span><span class="pln">then</span><span class="pun">(</span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">response</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(!</span><span class="pln">response</span><span class="pun">.</span><span class="pln">ok</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+       </span><span class="kwd">return</span><span class="pln"> response</span><span class="pun">.</span><span class="pln">text</span><span class="pun">().</span><span class="pln">then</span><span class="pun">(</span><span class="pln">result </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="typ">Promise</span><span class="pun">.</span><span class="pln">reject</span><span class="pun">(</span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Error</span><span class="pun">(</span><span class="pln">result</span><span class="pun">)));</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+    </span><span class="kwd">return</span><span class="pln"> response</span><span class="pun">.</span><span class="pln">json</span><span class="pun">();</span><span class="pln">
+</span><span class="pun">})</span></code></pre>
+    </div>
+    <div class="grid mb0 fw-wrap ai-start jc-end gs8 gsy">
+        <time itemprop="dateCreated" datetime="2017-04-10T08:21:52"></time>
+    <div class="grid--cell mr16" style="flex: 1 1 100px;">
+<div class="post-menu"><a href="https://stackoverflow.com/a/43318103" title="short permalink to this answer" class="short-link" itemprop="url" id="link-post-43318103">share</a><span class="lsep">|</span><a href="https://stackoverflow.com/posts/43318103/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </div>
+            
+
+
+    <div class="post-signature grid--cell fl0">
+<div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2017-04-10 08:21:52Z" class="relativetime">Apr 10 '17 at 8:21</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stackoverflow.com/users/3868326/kmaschta"><div class="gravatar-wrapper-32"><img src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/iWcgl.png" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <a href="https://stackoverflow.com/users/3868326/kmaschta">Kmaschta</a><span class="d-none" itemprop="name">Kmaschta</span>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">1,550</span><span title="11 silver badges"><span class="badge2"></span><span class="badgecount">11</span></span><span title="26 bronze badges"><span class="badge3"></span><span class="badgecount">26</span></span>
+        </div>
+    </div>
+</div>
+
+    </div>
+    </div>
+    
+</div>
+
+    
+    <div class="post-layout--right">
+	    <div id="comments-43318103" class="comments js-comments-container " data-post-id="43318103">
+            <ul class="comments-list js-comments-list" data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+    <li id="comment-73700875" class="comment js-comment " data-comment-id="73700875">
+        <div class="js-comment-actions comment-actions">
+            <div class="comment-score js-comment-edit-hide">
+            </div>
+                    </div>
+        <div class="comment-text js-comment-text-and-form">
+            <div class="comment-body js-comment-edit-hide">
+                
+                <span class="comment-copy">Thank you, but in my case this is not helpful. I want to know why it does not work? Is my JSON not valid? Why is my response not ok?</span>
+                
+                    –&nbsp;<a href="https://stackoverflow.com/users/5648846/chilliggo" title="120 reputation" class="comment-user owner">Chilliggo</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://stackoverflow.com/questions/43317967/handle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors#comment73700875_43318103"><span title="2017-04-10 08:30:29Z" class="relativetime-clean">Apr 10 '17 at 8:30</span></a></span>
+                                                            </div>
+        </div>
+    </li>
+    <li id="comment-73701038" class="comment js-comment " data-comment-id="73701038">
+        <div class="js-comment-actions comment-actions">
+            <div class="comment-score js-comment-edit-hide">
+            </div>
+                    </div>
+        <div class="comment-text js-comment-text-and-form">
+            <div class="comment-body js-comment-edit-hide">
+                
+                <span class="comment-copy">Your request can fail for various reasons, you can use the response API to find out why: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Response/Response" rel="nofollow noreferrer">developer.mozilla.org/en-US/docs/Web/API/Response/Response</a>  Log <code>response.status</code>, <code>response.statusText</code> and so on. The error message will be printed.  Your JSON is fine, it is the client which cannot find your server. You can also open the browser console to have a helpful message.</span>
+                
+                    –&nbsp;<a href="https://stackoverflow.com/users/3868326/kmaschta" title="1,550 reputation" class="comment-user">Kmaschta</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://stackoverflow.com/questions/43317967/handle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors#comment73701038_43318103"><span title="2017-04-10 08:35:06Z" class="relativetime-clean">Apr 10 '17 at 8:35</span></a></span>
+                        <span title="this comment was edited 1 time">
+                            <svg aria-hidden="true" class="svg-icon va-text-bottom o50 iconPencilSm" width="14" height="14" viewBox="0 0 14 14"><path d="M8.37 3.7L2 10.11V12h1.88l6.37-6.43zM12.23 2.83L11.1 1.71a.5.5 0 0 0-.7 0L9.2 2.86l1.88 1.84 1.14-1.16a.5.5 0 0 0 0-.71z"></path></svg>
+                        </span>
+                                                            </div>
+        </div>
+    </li>
+            </ul>
+	    </div>
+
+        <div id="comments-link-43318103" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="https://stackoverflow.com/questions/43317967/handle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors#" onclick=""></a>
+        </div>         
+    </div>    </div>
+</div>
+
+  
+<a name="52685343"></a>
+<div id="answer-52685343" class="answer" data-answerid="52685343" itemprop="suggestedAnswer" itemscope="" itemtype="http://schema.org/Answer">
+    <div class="post-layout">
+            <div class="votecell post-layout--left">
+                
+
+<div class="js-voting-container grid fd-column ai-stretch gs4 fc-black-200" data-post-id="52685343">
+        <button class="js-vote-up-btn grid--cell s-btn s-btn__unset c-pointer" title="This answer is useful" aria-pressed="false" aria-label="up vote" data-selected-classes="fc-theme-primary"><svg aria-hidden="true" class="svg-icon m0 iconArrowUpLg" width="36" height="36" viewBox="0 0 36 36"><path d="M2 26h32L18 10z"></path></svg></button>
+        <div class="js-vote-count grid--cell fc-black-500 fs-title grid fd-column ai-center" itemprop="upvoteCount" data-value="1">1</div>
+        <button class="js-vote-down-btn grid--cell s-btn s-btn__unset c-pointer" title="This answer is not useful" aria-pressed="false" aria-label="down vote" data-selected-classes="fc-theme-primary"><svg aria-hidden="true" class="svg-icon m0 iconArrowDownLg" width="36" height="36" viewBox="0 0 36 36"><path d="M2 10h32L18 26z"></path></svg></button>
+
+
+                <div class="js-accepted-answer-indicator grid--item fc-green-500 ta-center p4 d-none" title="loading when this answer was accepted..." tabindex="0" role="note" aria-label="accepted"><svg aria-hidden="true" class="svg-icon iconCheckmarkLg" width="36" height="36" viewBox="0 0 36 36"><path d="M6 14l8 8L30 6v8L14 30l-8-8z"></path></svg></div>
+
+</div>
+
+            </div>
+            
+
+<div class="answercell post-layout--right">
+    
+    <div class="post-text" itemprop="text">
+<p>I know this answer might be super late and might have been resolved but i just had the same issue today and I just needed to add a ',' at the end of the headers hash and i stopped getting the error</p>
+
+<pre class="lang-js prettyprint prettyprinted" style=""><code><span class="kwd">export</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> addContacts</span><span class="pun">(</span><span class="pln">formData</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  </span><span class="kwd">return</span><span class="pun">(</span><span class="pln">dispatch</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    dispatch</span><span class="pun">({</span><span class="pln">type</span><span class="pun">:</span><span class="pln"> </span><span class="str">'POSTING_CONTACTS'</span><span class="pun">});</span><span class="pln">
+    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">formData</span><span class="pun">)</span><span class="pln">
+    </span><span class="kwd">return</span><span class="pln"> fetch</span><span class="pun">(</span><span class="pln">uri</span><span class="pun">,</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      method</span><span class="pun">:</span><span class="pln"> </span><span class="str">'POST'</span><span class="pun">,</span><span class="pln">
+      body</span><span class="pun">:</span><span class="pln"> JSON</span><span class="pun">.</span><span class="pln">stringify</span><span class="pun">({</span><span class="pln">contact</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">name</span><span class="pun">:</span><span class="pln"> formData</span><span class="pun">.</span><span class="pln">name</span><span class="pun">,</span><span class="pln"> phone_number</span><span class="pun">:</span><span class="pln"> formData</span><span class="pun">.</span><span class="pln">phoneNumber</span><span class="pun">}}),</span><span class="pln">
+      headers</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="typ">Accept</span><span class="pun">:</span><span class="pln"> </span><span class="str">'application/json'</span><span class="pun">,</span><span class="pln">
+        </span><span class="str">'Content-Type'</span><span class="pun">:</span><span class="pln"> </span><span class="str">'application/json'</span><span class="pln">
+      </span><span class="pun">},</span><span class="pln">
+    </span><span class="pun">})</span><span class="pln">
+    </span><span class="pun">.</span><span class="pln">then</span><span class="pun">(</span><span class="pln">response </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="kwd">return</span><span class="pln"> response</span><span class="pun">.</span><span class="pln">json</span><span class="pun">()</span><span class="pln">
+      </span><span class="pun">}).</span><span class="pln">then</span><span class="pun">(</span><span class="pln">responseJSON </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">responseJSON</span><span class="pun">)</span><span class="pln">
+        </span><span class="kwd">return</span><span class="pln"> dispatch</span><span class="pun">({</span><span class="pln">type</span><span class="pun">:</span><span class="pln"> </span><span class="str">'ADD_CONTACT'</span><span class="pun">,</span><span class="pln"> payload</span><span class="pun">:</span><span class="pln"> responseJSON</span><span class="pun">});</span><span class="pln">
+      </span><span class="pun">})</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">     </span></code></pre>
+    </div>
+    <div class="grid mb0 fw-wrap ai-start jc-end gs8 gsy">
+        <time itemprop="dateCreated" datetime="2018-10-07T04:01:37"></time>
+    <div class="grid--cell mr16" style="flex: 1 1 100px;">
+<div class="post-menu"><a href="https://stackoverflow.com/a/52685343" title="short permalink to this answer" class="short-link" itemprop="url" id="link-post-52685343">share</a><span class="lsep">|</span><a href="https://stackoverflow.com/posts/52685343/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </div>
+            
+
+
+    <div class="post-signature grid--cell fl0">
+<div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2018-10-07 04:01:37Z" class="relativetime">Oct 7 '18 at 4:01</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stackoverflow.com/users/10443385/temitope-ruth-elodimuor"><div class="gravatar-wrapper-32"><img src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/photo.jpg" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <a href="https://stackoverflow.com/users/10443385/temitope-ruth-elodimuor">Temitope Ruth Elodimuor</a><span class="d-none" itemprop="name">Temitope Ruth Elodimuor</span>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">11</span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">2</span></span>
+        </div>
+    </div>
+</div>
+
+    </div>
+    </div>
+    
+</div>
+
+    
+    <div class="post-layout--right">
+	    <div id="comments-52685343" class="comments js-comments-container  dno" data-post-id="52685343">
+            <ul class="comments-list js-comments-list" data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+            </ul>
+	    </div>
+
+        <div id="comments-link-52685343" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="https://stackoverflow.com/questions/43317967/handle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors#" onclick=""></a>
+        </div>         
+    </div>    </div>
+</div>
+
+  
+<a name="49868751"></a>
+<div id="answer-49868751" class="answer" data-answerid="49868751" itemprop="suggestedAnswer" itemscope="" itemtype="http://schema.org/Answer">
+    <div class="post-layout">
+            <div class="votecell post-layout--left">
+                
+
+<div class="js-voting-container grid fd-column ai-stretch gs4 fc-black-200" data-post-id="49868751">
+        <button class="js-vote-up-btn grid--cell s-btn s-btn__unset c-pointer" title="This answer is useful" aria-pressed="false" aria-label="up vote" data-selected-classes="fc-theme-primary"><svg aria-hidden="true" class="svg-icon m0 iconArrowUpLg" width="36" height="36" viewBox="0 0 36 36"><path d="M2 26h32L18 10z"></path></svg></button>
+        <div class="js-vote-count grid--cell fc-black-500 fs-title grid fd-column ai-center" itemprop="upvoteCount" data-value="0">0</div>
+        <button class="js-vote-down-btn grid--cell s-btn s-btn__unset c-pointer" title="This answer is not useful" aria-pressed="false" aria-label="down vote" data-selected-classes="fc-theme-primary"><svg aria-hidden="true" class="svg-icon m0 iconArrowDownLg" width="36" height="36" viewBox="0 0 36 36"><path d="M2 10h32L18 26z"></path></svg></button>
+
+
+                <div class="js-accepted-answer-indicator grid--item fc-green-500 ta-center p4 d-none" title="loading when this answer was accepted..." tabindex="0" role="note" aria-label="accepted"><svg aria-hidden="true" class="svg-icon iconCheckmarkLg" width="36" height="36" viewBox="0 0 36 36"><path d="M6 14l8 8L30 6v8L14 30l-8-8z"></path></svg></div>
+
+</div>
+
+            </div>
+            
+
+<div class="answercell post-layout--right">
+    
+    <div class="post-text" itemprop="text">
+<p>You can avoid the problem with CORS policy by adding in the header of php or another server endpoint the row:</p>
+
+<pre class="lang-js prettyprint prettyprinted" style=""><code><span class="pun">&lt;?</span><span class="pln">php
+header</span><span class="pun">(</span><span class="str">'Access-Control-Allow-Origin: *'</span><span class="pun">);</span><span class="pln">
+</span><span class="com">//or</span><span class="pln">
+header</span><span class="pun">(</span><span class="str">'Access-Control-Allow-Origin: http://example.com'</span><span class="pun">);</span><span class="pln">
+
+</span><span class="com">// Reading JSON POST using PHP</span><span class="pln">
+$json </span><span class="pun">=</span><span class="pln"> file_get_contents</span><span class="pun">(</span><span class="str">'php://input'</span><span class="pun">);</span><span class="pln">
+$jsonObj </span><span class="pun">=</span><span class="pln"> json_decode</span><span class="pun">(</span><span class="pln">$json</span><span class="pun">);</span><span class="pln">
+
+</span><span class="com">// Use $jsonObj</span><span class="pln">
+print_r</span><span class="pun">(</span><span class="pln">$jsonObj</span><span class="pun">-&gt;</span><span class="pln">message</span><span class="pun">);</span><span class="pln">
+
+</span><span class="pun">...</span><span class="pln">
+</span><span class="com">// End php</span><span class="pln">
+</span><span class="pun">?&gt;</span></code></pre>
+
+<p>Model of working fetch code with POST request is:</p>
+
+<pre class="lang-js prettyprint prettyprinted" style=""><code><span class="kwd">const</span><span class="pln"> data </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        optPost</span><span class="pun">:</span><span class="pln"> </span><span class="str">'myAPI'</span><span class="pun">,</span><span class="pln">
+        message</span><span class="pun">:</span><span class="pln"> </span><span class="str">'We make a research of fetch'</span><span class="pln">
+    </span><span class="pun">};</span><span class="pln">
+</span><span class="kwd">const</span><span class="pln"> endpoint </span><span class="pun">=</span><span class="pln"> </span><span class="str">'http://example.com/php/phpGetPost.php'</span><span class="pun">;</span><span class="pln">
+
+fetch</span><span class="pun">(</span><span class="pln">endpoint</span><span class="pun">,</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    method</span><span class="pun">:</span><span class="pln"> </span><span class="str">'POST'</span><span class="pun">,</span><span class="pln">
+    body</span><span class="pun">:</span><span class="pln"> JSON</span><span class="pun">.</span><span class="pln">stringify</span><span class="pun">(</span><span class="pln">data</span><span class="pun">)</span><span class="pln">
+</span><span class="pun">})</span><span class="pln">
+</span><span class="pun">.</span><span class="pln">then</span><span class="pun">((</span><span class="pln">resp</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> resp</span><span class="pun">.</span><span class="pln">json</span><span class="pun">())</span><span class="pln">
+</span><span class="pun">.</span><span class="pln">then</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">response</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    console</span><span class="pun">.</span><span class="pln">info</span><span class="pun">(</span><span class="str">'fetch()'</span><span class="pun">,</span><span class="pln"> response</span><span class="pun">);</span><span class="pln">
+    </span><span class="kwd">return</span><span class="pln"> response</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">});</span></code></pre>
+    </div>
+    <div class="grid mb0 fw-wrap ai-start jc-end gs8 gsy">
+        <time itemprop="dateCreated" datetime="2018-04-17T02:02:54"></time>
+    <div class="grid--cell mr16" style="flex: 1 1 100px;">
+<div class="post-menu"><a href="https://stackoverflow.com/a/49868751" title="short permalink to this answer" class="short-link" itemprop="url" id="link-post-49868751">share</a><span class="lsep">|</span><a href="https://stackoverflow.com/posts/49868751/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </div>
+    <div class="post-signature grid--cell fl0">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="https://stackoverflow.com/posts/49868751/revisions" title="show all edits to this post">edited <span title="2018-04-17 16:44:11Z" class="relativetime">Apr 17 '18 at 16:44</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        
+        <div class="-flair">
+            
+        </div>
+    </div>
+</div>    </div>
+            
+
+
+    <div class="post-signature grid--cell fl0">
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2018-04-17 02:02:54Z" class="relativetime">Apr 17 '18 at 2:02</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stackoverflow.com/users/4791116/roman"><div class="gravatar-wrapper-32"><img src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/IFVjd.png" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <a href="https://stackoverflow.com/users/4791116/roman">Roman</a><span class="d-none" itemprop="name">Roman</span>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">3,320</span><span title="22 silver badges"><span class="badge2"></span><span class="badgecount">22</span></span><span title="34 bronze badges"><span class="badge3"></span><span class="badgecount">34</span></span>
+        </div>
+    </div>
+</div>
+
+    </div>
+    </div>
+    
+</div>
+
+    
+    <div class="post-layout--right">
+	    <div id="comments-49868751" class="comments js-comments-container  dno" data-post-id="49868751">
+            <ul class="comments-list js-comments-list" data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+            </ul>
+	    </div>
+
+        <div id="comments-link-49868751" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="https://stackoverflow.com/questions/43317967/handle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors#" onclick=""></a>
+        </div>         
+    </div>    </div>
+</div>
+
+  
+<a name="54273645"></a>
+<div id="answer-54273645" class="answer" data-answerid="54273645" itemprop="suggestedAnswer" itemscope="" itemtype="http://schema.org/Answer">
+    <div class="post-layout">
+            <div class="votecell post-layout--left">
+                
+
+<div class="js-voting-container grid fd-column ai-stretch gs4 fc-black-200" data-post-id="54273645">
+        <button class="js-vote-up-btn grid--cell s-btn s-btn__unset c-pointer" title="This answer is useful" aria-pressed="false" aria-label="up vote" data-selected-classes="fc-theme-primary"><svg aria-hidden="true" class="svg-icon m0 iconArrowUpLg" width="36" height="36" viewBox="0 0 36 36"><path d="M2 26h32L18 10z"></path></svg></button>
+        <div class="js-vote-count grid--cell fc-black-500 fs-title grid fd-column ai-center" itemprop="upvoteCount" data-value="0">0</div>
+        <button class="js-vote-down-btn grid--cell s-btn s-btn__unset c-pointer" title="This answer is not useful" aria-pressed="false" aria-label="down vote" data-selected-classes="fc-theme-primary"><svg aria-hidden="true" class="svg-icon m0 iconArrowDownLg" width="36" height="36" viewBox="0 0 36 36"><path d="M2 10h32L18 26z"></path></svg></button>
+
+
+                <div class="js-accepted-answer-indicator grid--item fc-green-500 ta-center p4 d-none" title="loading when this answer was accepted..." tabindex="0" role="note" aria-label="accepted"><svg aria-hidden="true" class="svg-icon iconCheckmarkLg" width="36" height="36" viewBox="0 0 36 36"><path d="M6 14l8 8L30 6v8L14 30l-8-8z"></path></svg></div>
+
+</div>
+
+            </div>
+            
+
+<div class="answercell post-layout--right">
+    
+    <div class="post-text" itemprop="text">
+<p>Simply copy the following code and paste it on your <strong>web.config</strong> file under <code>&lt;system.webServer&gt;</code> tag.</p>
+
+<pre class="lang-js prettyprint prettyprinted" style=""><code><span class="pun">&lt;</span><span class="pln">httpProtocol</span><span class="pun">&gt;</span><span class="pln">  
+    </span><span class="pun">&lt;</span><span class="pln">customHeaders</span><span class="pun">&gt;</span><span class="pln">  
+     </span><span class="pun">&lt;</span><span class="pln">add name</span><span class="pun">=</span><span class="str">"Access-Control-Allow-Origin"</span><span class="pln"> value</span><span class="pun">=</span><span class="str">"*"</span><span class="pln"> </span><span class="pun">/&gt;</span><span class="pln">  
+     </span><span class="pun">&lt;</span><span class="pln">add name</span><span class="pun">=</span><span class="str">"Access-Control-Allow-Headers"</span><span class="pln"> value</span><span class="pun">=</span><span class="str">"Content-Type"</span><span class="pln"> </span><span class="pun">/&gt;</span><span class="pln">  
+     </span><span class="pun">&lt;</span><span class="pln">add name</span><span class="pun">=</span><span class="str">"Access-Control-Allow-Methods"</span><span class="pln"> value</span><span class="pun">=</span><span class="str">"GET, POST, PUT, DELETE, OPTIONS"</span><span class="pln"> </span><span class="pun">/&gt;</span><span class="pln">  
+    </span><span class="pun">&lt;/</span><span class="pln">customHeaders</span><span class="pun">&gt;</span><span class="pln">  
+  </span><span class="pun">&lt;/</span><span class="pln">httpProtocol</span><span class="pun">&gt;</span><span class="pln">  </span></code></pre>
+    </div>
+    <div class="grid mb0 fw-wrap ai-start jc-end gs8 gsy">
+        <time itemprop="dateCreated" datetime="2019-01-20T04:44:01"></time>
+    <div class="grid--cell mr16" style="flex: 1 1 100px;">
+<div class="post-menu"><a href="https://stackoverflow.com/a/54273645" title="short permalink to this answer" class="short-link" itemprop="url" id="link-post-54273645">share</a><span class="lsep">|</span><a href="https://stackoverflow.com/posts/54273645/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </div>
+            
+
+
+    <div class="post-signature grid--cell fl0">
+<div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2019-01-20 04:44:01Z" class="relativetime">Jan 20 at 4:44</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stackoverflow.com/users/6426633/juboraj-sarker"><div class="gravatar-wrapper-32"><img src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/0EBCa.jpg" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <a href="https://stackoverflow.com/users/6426633/juboraj-sarker">Juboraj Sarker</a><span class="d-none" itemprop="name">Juboraj Sarker</span>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">542</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="4 silver badges"><span class="badge2"></span><span class="badgecount">4</span></span><span title="12 bronze badges"><span class="badge3"></span><span class="badgecount">12</span></span>
+        </div>
+    </div>
+</div>
+
+    </div>
+    </div>
+    
+</div>
+
+    
+    <div class="post-layout--right">
+	    <div id="comments-54273645" class="comments js-comments-container  dno" data-post-id="54273645">
+            <ul class="comments-list js-comments-list" data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+            </ul>
+	    </div>
+
+        <div id="comments-link-54273645" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="https://stackoverflow.com/questions/43317967/handle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors#" onclick=""></a>
+        </div>         
+    </div>    </div>
+</div>
+                                    <a name="new-answer"></a>
+                        <form id="post-form" action="https://stackoverflow.com/questions/43317967/answer/submit" method="post" class="post-form">
+                            <input type="hidden" id="post-id" value="43317967">
+                            <input type="hidden" id="qualityBanWarningShown" name="qualityBanWarningShown" value="false">
+                            <input type="hidden" name="referrer" value="https://www.google.com/">
+                            <h2 class="space">
+                                Your Answer
+                            </h2>
+
+
+
+            <script>
+            StackExchange.ifUsing("editor", function () {
+                StackExchange.using("externalEditor", function () {
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.init();
+                    });
+                });
+            }, "code-snippets");
+        </script>
+    
+
+<script>
+    StackExchange.ready(function() {
+        var channelOptions = {
+            tags: "".split(" "),
+            id: "1"
+        };
+        initTagRenderer("".split(" "), "".split(" "), channelOptions);
+       
+        StackExchange.using("externalEditor", function() {
+                // Have to fire editor after snippets, if snippets enabled
+                if (StackExchange.settings.snippets.snippetsEnabled) {
+                    StackExchange.using("snippets", function() {
+                        createEditor();
+                    });
+                }
+                else {
+                    createEditor();
+                }
+            });
+
+            function createEditor() {
+                StackExchange.prepareEditor({
+                    heartbeatType: 'answer',
+                    autoActivateHeartbeat: false,
+                    convertImagesToLinks: true,
+                noModals: true,
+                showLowRepImageUploadWarning: true,
+                reputationToPostImages: 10,
+                bindNavPrevention: true,
+                postfix: "",
+                imageUploader: {
+                    brandingHtml: "Powered by \u003ca class=\"icon-imgur-white\" href=\"https://imgur.com/\"\u003e\u003c/a\u003e",
+                    contentPolicyHtml: "User contributions licensed under \u003ca href=\"https://creativecommons.org/licenses/by-sa/3.0/\"\u003ecc by-sa 3.0 with attribution required\u003c/a\u003e \u003ca href=\"https://stackoverflow.com/legal/content-policy\"\u003e(content policy)\u003c/a\u003e",
+                    allowUrls: true
+                },
+                    onDemand: true,
+                    discardSelector: ".discard-answer"
+                    ,immediatelyShowMarkdownHelp:true
+                    });
+                
+
+        }
+    });
+</script>
+
+
+<div id="post-editor" class="post-editor js-post-editor js-wz-element" data-wz-state="8,16,32,64,128,256">
+
+    <div class="ps-relative"> 
+        <div class="wmd-container mb8">
+            <div id="wmd-button-bar" class="wmd-button-bar btr-sm"><ul id="wmd-button-row" class="wmd-button-row"><li id="wmd-bold-button" class="wmd-button" style="left: 0px;"><span style="background-position: 0px -20px;"></span></li><li id="wmd-italic-button" class="wmd-button" style="left: 25px;"><span style="background-position: -20px -20px;"></span></li><li id="wmd-spacer1" class="wmd-spacer" style="left: 50px;"><span style="background-position: -40px -20px;"></span></li><li id="wmd-link-button" class="wmd-button" style="left: 75px;"><span style="background-position: -40px -20px;"></span></li><li id="wmd-quote-button" class="wmd-button" style="left: 100px;"><span style="background-position: -60px -20px;"></span></li><li id="wmd-code-button" class="wmd-button" style="left: 125px;"><span style="background-position: -80px -20px;"></span></li><li id="wmd-image-button" class="wmd-button" style="left: 150px;"><span style="background-position: -100px -20px;"></span></li><li id="wmd-spacer2" class="wmd-spacer" style="left: 175px;"><span style="background-position: -120px -20px;"></span></li><li id="wmd-olist-button" class="wmd-button" style="left: 200px;"><span style="background-position: -120px -20px;"></span></li><li id="wmd-ulist-button" class="wmd-button" style="left: 225px;"><span style="background-position: -140px -20px;"></span></li><li id="wmd-heading-button" class="wmd-button" style="left: 250px;"><span style="background-position: -160px -20px;"></span></li><li id="wmd-hr-button" class="wmd-button" style="left: 275px;"><span style="background-position: -180px -20px;"></span></li><li id="wmd-spacer3" class="wmd-spacer" style="left: 300px;"><span style="background-position: -200px -20px;"></span></li><li id="wmd-undo-button" class="wmd-button" style="left: 325px;"><span style="background-position: -200px -20px;"></span></li><li id="wmd-redo-button" class="wmd-button" style="left: 350px;"><span style="background-position: -220px -20px;"></span></li><li class="wmd-spacer wmd-spacer-max"></li></ul></div>
+                        <div class="js-stacks-validation">
+                <div class="ps-relative">
+                    <textarea id="wmd-input" class="wmd-input js-wz-element s-input bar0" name="post-text" cols="92" rows="15" tabindex="101" data-wz-state="256" data-min-length=""></textarea>
+                </div>
+                <div class="s-input-message mt4 d-none js-stacks-validation-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <aside class="grid ai-start jc-space-between js-answer-help s-notice s-notice__warning pb0 pr4 pt4 mb8 d-none" role="status" aria-hidden="true">
+    <div class="grid--cell pt8">
+        <p>Thanks for contributing an answer to Stack Overflow!</p><ul><li>Please be sure to <em>answer the question</em>. Provide details and share your research!</li></ul><p>But <em>avoid</em> …</p><ul><li>Asking for help, clarification, or responding to other answers.</li><li>Making statements based on opinion; back them up with references or personal experience.</li></ul><p>To learn more, see our <a href="https://stackoverflow.com/help/how-to-answer">tips on writing great answers</a>.</p>
+    </div>
+    <button class="grid--cell js-answer-help-close-btn s-btn s-btn__muted fc-dark">
+        <svg aria-hidden="true" class="svg-icon iconClear" width="18" height="18" viewBox="0 0 18 18"><path d="M15 4.41L13.59 3 9 7.59 4.41 3 3 4.41 7.59 9 3 13.59 4.41 15 9 10.41 13.59 15 15 13.59 10.41 9z"></path></svg>
+    </button>
+</aside>
+
+
+    <div id="draft-saved" class="draft-saved community-option fl" style="height:24px; display:none;">draft saved</div>
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f81af1515860bbcd9a0f72e4d563f320325f1b5e3826779068f47ffa7bfb33d3">
+        <input id="author" name="author" type="text">
+    </div>
+
+
+
+</div>
+
+                            <div class="ps-relative">
+                                
+                                            <div class="form-item new-post-login p0 my16">
+                <div class="grid gs16 md:fd-column new-login-form">
+                    <div class="grid fd-column w50 md:w-auto gsy gs8 jc-space-between new-login-left">
+                        <h3 class="grid--cell fs-title">Sign up or <a id="login-link" href="https://stackoverflow.com/users/login?ssrc=question_page&amp;returnurl=https%3a%2f%2fstackoverflow.com%2fquestions%2f43317967%2fhandle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors%23new-answer">log in</a></h3>
+                        <script>
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="grid--cell ta-center s-btn s-btn__muted s-btn__outlined s-btn__icon google-login" data-ga="[&quot;sign up&quot;,&quot;Sign Up Started - Google&quot;,&quot;New Post&quot;,null,null]">
+                            <svg aria-hidden="true" class="svg-icon native iconGoogle" width="18" height="18" viewBox="0 0 18 18"><g><path d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 0 0 2.38-5.88c0-.57-.05-.66-.15-1.18z" fill="#4285F4"></path><path d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2a4.8 4.8 0 0 1-7.18-2.54H1.83v2.07A8 8 0 0 0 8.98 17z" fill="#34A853"></path><path d="M4.5 10.52a4.8 4.8 0 0 1 0-3.04V5.41H1.83a8 8 0 0 0 0 7.18l2.67-2.07z" fill="#FBBC05"></path><path d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 0 0 1.83 5.4L4.5 7.49a4.77 4.77 0 0 1 4.48-3.3z" fill="#EA4335"></path></g></svg> Sign up using Google
+                        </div>
+                        <div class="grid--cell ta-center s-btn s-btn__muted s-btn__icon facebook-login" data-ga="[&quot;sign up&quot;,&quot;Sign Up Started - Facebook&quot;,&quot;New Post&quot;,null,null]">
+                            <svg aria-hidden="true" class="svg-icon iconFacebook" width="18" height="18" viewBox="0 0 18 18"><path d="M1.88 1C1.4 1 1 1.4 1 1.88v14.24c0 .48.4.88.88.88h7.67v-6.2H7.46V8.4h2.09V6.61c0-2.07 1.26-3.2 3.1-3.2.88 0 1.64.07 1.87.1v2.16h-1.29c-1 0-1.19.48-1.19 1.18V8.4h2.39l-.31 2.42h-2.08V17h4.08c.48 0 .88-.4.88-.88V1.88c0-.48-.4-.88-.88-.88H1.88z" fill="#3C5A96"></path></svg> Sign up using Facebook
+                        </div>
+                        <div class="grid--cell ta-center s-btn s-btn__muted s-btn__outlined s-btn__icon stackexchange-login" data-ga="[&quot;sign up&quot;,&quot;Sign Up Navigation&quot;,&quot;New Post&quot;,null,null]">
+                            <svg aria-hidden="true" class="svg-icon native iconLogoGlyphXSm" width="18" height="18" viewBox="0 0 18 18"><g><path fill="#BCBBBB" d="M14 16v-5h2v7H2v-7h2v5z"></path><path d="M5 15v-2h8v2H5zM12.09.72l4.5 6.06-1.2.9-4.51-6.06 1.21-.9zM8.34 4.3l.97-1.16 5.8 4.83-.96 1.16-5.8-4.83zm-1.9 3.36l.64-1.37 6.85 3.19-.63 1.37-6.85-3.2zM5.4 11.39l.38-1.67 7.42 1.48-.22 1.46-7.58-1.27z" fill="#F48024"></path></g></svg> Sign up using Email and Password
+                        </div>
+                    </div>
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false">
+                    <input type="hidden" name="use-google" class="use-google" value="false">
+                    <input type="button" class="submit-openid" value="Submit" style="display:none">
+                    <div class="grid gsy gs8 fd-column w50 md:w-auto new-login-right form-item p0">
+                                <h3 class="grid--cell fs-title">Post as a guest</h3>
+            <div class="grid--cell">
+                <div class="grid gs4 gsy fd-column">
+                    <label class="s-label" for="display-name">Name</label>
+                    <div class="grid ps-relative">
+                        <input class="s-input" id="display-name" name="display-name" maxlength="30" type="text" value="" tabindex="105" placeholder="">
+                    </div>
+                </div>
+            </div>
+            <div class="grid--cell">
+                <div class="grid gs4 gsy fd-column">
+                    <div class="grid--cell">
+                        <div class="grid gs2 gsy fd-column">
+                            <label class="grid--cell s-label" for="m-address">Email</label>
+                            <p class="grid--cell s-description">Required, but never shown</p>
+                        </div>
+                    </div>
+                    <div class="grid ps-relative">
+                        <input class="s-input" id="m-address" name="m-address" type="text" value="" size="40" tabindex="106" placeholder="">
+                    </div>
+                </div>
+            </div>
+
+                    </div>
+                </div>
+            </div>
+            <script>
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', 'https%3a%2f%2fstackoverflow.com%2fquestions%2f43317967%2fhandle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors%23new-answer', 'question_page');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3 class="grid--cell fs-title">Post as a guest</h3>
+            <div class="grid--cell">
+                <div class="grid gs4 gsy fd-column">
+                    <label class="s-label" for="display-name">Name</label>
+                    <div class="grid ps-relative">
+                        <input class="s-input" id="display-name" name="display-name" maxlength="30" type="text" value="" tabindex="105" placeholder="" />
+                    </div>
+                </div>
+            </div>
+            <div class="grid--cell">
+                <div class="grid gs4 gsy fd-column">
+                    <div class="grid--cell">
+                        <div class="grid gs2 gsy fd-column">
+                            <label class="grid--cell s-label" for="m-address">Email</label>
+                            <p class="grid--cell s-description">Required, but never shown</p>
+                        </div>
+                    </div>
+                    <div class="grid ps-relative">
+                        <input class="s-input" id="m-address" name="m-address" type="text" value="" size="40" tabindex="106" placeholder="" />
+                    </div>
+                </div>
+            </div>
+
+            </noscript>
+
+                            </div>
+
+                                                            <div class="form-submit cbt grid gsx gs4">
+                                    <button id="submit-button" class="grid--cell s-btn s-btn__primary s-btn__icon" type="submit" tabindex="120" autocomplete="off">
+Post Your Answer                                    </button>
+                                    <button class="grid--cell s-btn s-btn__danger discard-answer dno">
+                                        Discard
+                                    </button>
+                                        <p class="privacy-policy-agreement">
+                                            By clicking “Post Your Answer”, you agree to our <a href="https://stackoverflow.com/legal/terms-of-service/public" name="tos" target="_blank" class="-link">terms of service</a>, <a href="https://stackoverflow.com/legal/privacy-policy" name="privacy" target="_blank" class="-link">privacy policy</a> and <a href="https://stackoverflow.com/legal/cookie-policy" name="cookie" target="_blank" class="-link">cookie policy</a><input type="hidden" name="legalLinksShown" value="1">
+                                        </p>
+                                </div>
+                        </form>
+
+
+
+                        <h2 class="bottom-notice" data-loc="1">
+Not the answer you're looking for?                            Browse other questions tagged <a href="https://stackoverflow.com/questions/tagged/javascript" class="post-tag" title="show questions tagged &#39;javascript&#39;" rel="tag">javascript</a> <a href="https://stackoverflow.com/questions/tagged/json" class="post-tag" title="show questions tagged &#39;json&#39;" rel="tag">json</a> <a href="https://stackoverflow.com/questions/tagged/reactjs" class="post-tag" title="show questions tagged &#39;reactjs&#39;" rel="tag">reactjs</a> <a href="https://stackoverflow.com/questions/tagged/cors" class="post-tag" title="show questions tagged &#39;cors&#39;" rel="tag">cors</a> <a href="https://stackoverflow.com/questions/tagged/fetch-api" class="post-tag" title="show questions tagged &#39;fetch-api&#39;" rel="tag">fetch-api</a>  or <a href="https://stackoverflow.com/questions/ask">ask your own question</a>.                        </h2>
+            </div>
+        </div>
+                <div id="sidebar" class="show-votes" role="complementary" aria-label="sidebar">
+                            <div class="module question-stats">
+                    <table id="qinfo">
+                        <tbody><tr>
+                            <td>
+                                <p class="label-key">asked</p>
+                            </td>
+                            <td style="padding-left: 10px">
+                                <p class="label-key" title="2017-04-10 08:14:02Z">
+                                    <b>
+                                        <time itemprop="dateCreated" datetime="2017-04-10T08:14:02">2 years ago</time>
+                                    </b>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="label-key">viewed</p>
+                            </td>
+
+                            <td style="padding-left: 10px">
+                                <p class="label-key">
+                                    <b>16,428 times</b>
+                                </p>
+                            </td>
+                        </tr>
+                            <tr>
+                                <td>
+                                    <p class="label-key">active</p>
+                                </td>
+                                <td style="padding-left: 10px">
+                                    <p class="label-key"><b><a href="https://stackoverflow.com/questions/43317967/handle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors?lastactivity" class="lastactivity-link" title="2019-01-20 04:44:01Z">3 months ago</a></b></p>
+                                </td>
+                            </tr>
+                    </tbody></table>
+                </div>
+            <div class="module community-bulletin" data-tracker="cb=1">
+    <div class="related">
+                <div class="bulletin-title">
+                    Featured on Meta
+                </div>
+                <hr>
+    <div class="spacer">
+        <div class="bulletin-item-type">
+                <a href="https://meta.stackexchange.com/questions/326611/announcing-the-arrival-of-valued-associate-679-cesar-manara?cb=1" class="question-hyperlink" data-ga="[&quot;community bulletin board&quot;,&quot;Featured on Meta&quot;,&quot;https://meta.stackexchange.com/questions/326611/announcing-the-arrival-of-valued-associate-679-cesar-manara&quot;,null,null]">
+<div class="favicon favicon-stackexchangemeta" title="Meta Stack Exchange"></div>                </a>
+        </div>
+        <div class="bulletin-item-content">
+            <a href="https://meta.stackexchange.com/questions/326611/announcing-the-arrival-of-valued-associate-679-cesar-manara?cb=1" class="question-hyperlink" data-ga="[&quot;community bulletin board&quot;,&quot;Featured on Meta&quot;,&quot;https://meta.stackexchange.com/questions/326611/announcing-the-arrival-of-valued-associate-679-cesar-manara&quot;,null,null]">Announcing the arrival of Valued Associate #679: Cesar Manara</a>
+        </div>
+        <br class="cbt">
+    </div>
+    <div class="spacer">
+        <div class="bulletin-item-type">
+                <a href="https://meta.stackexchange.com/questions/326718/planned-maintenance-scheduled-april-23-2019-at-2330-utc-730pm-us-eastern?cb=1" class="question-hyperlink" data-ga="[&quot;community bulletin board&quot;,&quot;Featured on Meta&quot;,&quot;https://meta.stackexchange.com/questions/326718/planned-maintenance-scheduled-april-23-2019-at-2330-utc-730pm-us-eastern&quot;,null,null]">
+<div class="favicon favicon-stackexchangemeta" title="Meta Stack Exchange"></div>                </a>
+        </div>
+        <div class="bulletin-item-content">
+            <a href="https://meta.stackexchange.com/questions/326718/planned-maintenance-scheduled-april-23-2019-at-2330-utc-730pm-us-eastern?cb=1" class="question-hyperlink" data-ga="[&quot;community bulletin board&quot;,&quot;Featured on Meta&quot;,&quot;https://meta.stackexchange.com/questions/326718/planned-maintenance-scheduled-april-23-2019-at-2330-utc-730pm-us-eastern&quot;,null,null]">Planned maintenance scheduled April 23, 2019 at 23:30 UTC (7:30pm US/Eastern)</a>
+        </div>
+        <br class="cbt">
+    </div>
+    <div class="spacer">
+        <div class="bulletin-item-type">
+                <a href="https://meta.stackoverflow.com/questions/382721/data-science-time-april-2019-and-salary-with-experience?cb=1" class="question-hyperlink" data-ga="[&quot;community bulletin board&quot;,&quot;Featured on Meta&quot;,&quot;https://meta.stackoverflow.com/questions/382721/data-science-time-april-2019-and-salary-with-experience&quot;,null,null]">
+<div class="favicon favicon-stackoverflowmeta" title="Meta Stack Overflow"></div>                </a>
+        </div>
+        <div class="bulletin-item-content">
+            <a href="https://meta.stackoverflow.com/questions/382721/data-science-time-april-2019-and-salary-with-experience?cb=1" class="question-hyperlink" data-ga="[&quot;community bulletin board&quot;,&quot;Featured on Meta&quot;,&quot;https://meta.stackoverflow.com/questions/382721/data-science-time-april-2019-and-salary-with-experience&quot;,null,null]">Data science time! April 2019 and salary with experience</a>
+        </div>
+        <br class="cbt">
+    </div>
+    <div class="spacer">
+        <div class="bulletin-item-type">
+                <a href="https://meta.stackoverflow.com/questions/381671/the-ask-question-wizard-is-live?cb=1" class="question-hyperlink" data-ga="[&quot;community bulletin board&quot;,&quot;Featured on Meta&quot;,&quot;https://meta.stackoverflow.com/questions/381671/the-ask-question-wizard-is-live&quot;,null,null]">
+<div class="favicon favicon-stackoverflowmeta" title="Meta Stack Overflow"></div>                </a>
+        </div>
+        <div class="bulletin-item-content">
+            <a href="https://meta.stackoverflow.com/questions/381671/the-ask-question-wizard-is-live?cb=1" class="question-hyperlink" data-ga="[&quot;community bulletin board&quot;,&quot;Featured on Meta&quot;,&quot;https://meta.stackoverflow.com/questions/381671/the-ask-question-wizard-is-live&quot;,null,null]">The Ask Question Wizard is Live!</a>
+        </div>
+        <br class="cbt">
+    </div>
+    </div>
+</div>
+<div id="dfp-tsb" class="everyonelovesstackoverflow everyoneloves__top-sidebar" data-google-query-id="CK_-qKPA4-ECFeIg0woddpEEpA" data-clc-prefilled="true" data-clc-ready="true" style=""><div id="google_ads_iframe_/248424177/stackoverflow.com/sb/question-pages_0__container__" style="border: 0pt none; display: inline-block; width: 300px; height: 250px;"><iframe frameborder="0" src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/container.html" id="google_ads_iframe_/248424177/stackoverflow.com/sb/question-pages_0" title="3rd party ad content" name="" scrolling="no" marginwidth="0" marginheight="0" width="300" height="250" data-is-safeframe="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" data-google-container-id="1" style="border: 0px; vertical-align: bottom;" data-load-complete="true"></iframe></div></div>
+            <div id="hireme" class="tex2jax_ignore clc-cp-container"><div class="clc-cp-sb--short _benefits "><div class="-wrapper clc-g-column"><div class="clc-g-col clc-g-column -header"><div class="clc-g-col clc-g-center fl-none -logo"><img src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/gaNx7.png" alt="Zonal Retail Data Systems"></div><div class="clc-g-col clc-g-column -company-info"><h2 class="clc-g-col fl-none -company">Zonal Retail Data Systems</h2><span class="clc-g-col fl-none -meta-info _muted">Information Technology</span></div></div><div class="clc-g-column -content"><a href="https://stackoverflow.com/jobs/companies/zonal-retail-data-systems" data-clc-click="https://clc.stackoverflow.com/click?an=ATgAx_8KwiEMJA7H1kgFeC9CRwICEM_10xQbA6r_CveCEKP0GAoSAADA0xcWOkLWUj8AfQNWlzwoWiRSbg&amp;cr=408099&amp;ct=0&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%2Fcompanies%2Fzonal-retail-data-systems%3Fmed=clc&amp;sig=O1LAO9Q-gXBezQ" class="clc-cp-link" target="_blank"></a><h2 class="clc-g-col jc-center -headline">We have great benefits!</h2><ul class="clc-g-col clc-g-column -list"><li class="g-row -item"><i class="clc-g-col fl-none g-center -icon benefit-icon clock" alt="Generous company pension scheme"><svg viewBox="0 0 25.3 25.3"><path d="M12.7 1.4c-6.2 0-11.2 5-11.2 11.3S6.5 24 12.7 24c6.2 0 11.2-5.1 11.2-11.3S18.8 1.4 12.7 1.4zm0 20.3c-4.9 0-8.9-4.1-8.9-9.1s4-9.1 8.9-9.1 8.9 4.1 8.9 9.1-4 9.1-8.9 9.1z"></path><path d="M13.2 7h-1.7v6.8l5.9 3.6.8-1.4-5-3V7z"></path></svg></i><span class="clc-g-col ai-center -label">Generous company pension scheme</span></li><li class="g-row -item"><i class="clc-g-col fl-none g-center -icon benefit-icon utensils" alt="Free breakfast, fruit, tea &amp; coffee and endless soft drinks"><svg viewBox="0 0 25.3 25.3"><path d="M15 5.7h-1.2V2.2h-1.2v3.5h-1.2V2.2h-1.2v5.2c0 .9.5 1.8 1.2 2.3v11.7c0 1 .8 1.7 1.7 1.7s1.7-.8 1.7-1.7V9.7c.7-.5 1.2-1.4 1.2-2.3V2.2h-1v3.5zM5.1 2.2a2.9 2.9 0 0 0-2.9 2.9v2.3c0 .9.5 1.8 1.2 2.3v11.7c0 1 .8 1.7 1.7 1.7s1.7-.8 1.7-1.7V9.7C7.6 9.2 8 8.4 8 7.4V5.1c0-1.6-1.3-2.9-2.9-2.9zm16.3 0a2.9 2.9 0 0 0-2.9 2.9v5.8c0 .9.5 1.8 1.2 2.3v8.2c0 1 .8 1.7 1.7 1.7 1 0 1.7-.8 1.7-1.7V2.8c-.4-.4-1-.6-1.7-.6z"></path></svg></i><span class="clc-g-col ai-center -label">Free breakfast, fruit, tea &amp; coffee and endless soft drinks</span></li><li class="g-row -item"><i class="clc-g-col fl-none g-center -icon benefit-icon beach" alt="33 days holidays per year (Includes public holidays) Buy &amp; Sell 5 days"><svg viewBox="0 0 25.3 25.3"><circle cx="5.8" cy="9.2" r="1.9"></circle><path d="M14.8 14.9l1.9-7.1c1.1.4 1.8.9 1.7 1.3.1-.5 1.3-.5 2.7-.1 1.4.4 2.4 1 2.2 1.5.8-2.7-2-5.8-6-7-4.1-1.1-8 .2-8.8 2.9.3-.4 1.5-.4 2.8-.1 1.4.4 2.4 1 2.2 1.5.1-.4 1-.5 2.2-.3l-2 7.2h-1.1c-5.6 0-10.3 2.8-11 6.4.4.5 1.8 1 3.6 1 2 0 3.7-.6 3.7-1.2 0 .7 1.7 1.2 3.7 1.2s3.7-.6 3.7-1.2c0 .7 1.7 1.2 3.7 1.2 1.8 0 3.2-.4 3.6-1-.6-3-4.2-5.6-8.8-6.2z"></path></svg></i><span class="clc-g-col ai-center -label">33 days holidays per year (Includes public holidays) Buy &amp; Sell 5 days</span></li><li class="g-row -item"><i class="clc-g-col fl-none g-center -icon benefit-icon health" alt="Corporate Healthcare Cash Plan"><svg viewBox="0 0 25.3 25.3"><path d="M21 1.9H4.3C3 1.9 1.9 3 1.9 4.3V21c0 1.3 1.1 2.4 2.4 2.4H21c1.3 0 2.4-1.1 2.4-2.4V4.3c0-1.3-1.1-2.4-2.4-2.4zm-1.2 13.2H15v4.8h-4.8v-4.8H5.5v-4.8h4.8V5.5h4.8v4.8h4.8v4.8z"></path></svg></i><span class="clc-g-col ai-center -label">Corporate Healthcare Cash Plan</span></li><li class="g-row -item -more-benefits">+ 6 more benefits</li></ul></div><div class="clc-g-col g-row -footer"><a href="https://stackoverflow.com/jobs/companies/zonal-retail-data-systems" data-clc-click="https://clc.stackoverflow.com/click?an=ATgAx_8KwiEMJA7H1kgFeC9CRwICEM_10xQbA6r_CveCEKP0GAoSAADA0xcWOkLWUj8AfQNWlzwoWiRSbg&amp;cr=408099&amp;ct=0&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%2Fcompanies%2Fzonal-retail-data-systems%3Fmed=clc&amp;sig=O1LAO9Q-gXBezQ" class="clc-g-center clc-btn-secondary -learn-more" target="_blank">Learn more</a></div></div></div><img src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/impression.gif" class="impression" style="display: none;"></div>
+<script>;try{(function(a){function b(a){return'string'==typeof a?document.getElementById(a):a}function c(a){return a=b(a),!!a&&'none'===getComputedStyle(a).display}function d(a){return!c(a)}function e(a){return!!a}function f(a){return /^\s*$/.test(b(a).innerHTML)}function g(a){var b=a.style;b.height=b.maxHeight=b.minHeight='auto',b.display='none',[].forEach.call(a.children,g)}function h(a,b){var c;return function(){return a&&(c=a.call(b||this,arguments),a=null),c}}function i(a){var b=document.createElement('script');b.src=a,document.body.appendChild(b)}function j(a){return k([],a)}function k(a,b){return a.push=function(a){return b(),delete this.push,this.push(a)},a}function l(){try{return!new Function('return async()=>{};')}catch(a){return!0}}function m(){return'undefined'!=typeof googletag&&!!googletag.apiReady}function n(){m()||(googletag={cmd:j(A)})}function o(){var a=document.createElement('div');a.className='adsbox',a.id='clc-abd',a.style.position='absolute',a.style.pointerEvents='none',a.innerHTML='&nbsp;',document.body.appendChild(a)}function p(a){var b=a.serviceName,c=a.slot,d=a.lineItemId;try{var e=c.getSlotElementId(),f=[];e||f.push('id=0');var h=document.getElementById(e);if(!e||h?h.hasAttribute('data-clc-stalled')&&f.push('st=1'):f.push('el=0'),0!==f.length)return void B(f.join('&'));-1===x.dh.indexOf(d)?h.setAttribute('data-clc-prefilled','true'):g(h),h.setAttribute('data-clc-ready','true')}catch(a){var i=document.querySelector('#dfp-tsb, #dfp-isb, #clc-tsb');i&&i.setAttribute('data-clc-ready','true'),B('e=1')}}function q(){return Object.keys(F.ids)}function r(a){var b=F.ids[a],c=F.slots[b];'function'==typeof c&&(c=c(a));return{path:'/'+C+'/'+E+'/'+b+'/'+D,sizes:c,zone:b}}function s(a){return!(clc.collapse&&void 0!==clc.collapse[a])||!!clc.collapse[a]}function t(a,b){'dfp-isb'===a&&b.setTargeting('Sidebar',['Inline']),'dfp-tsb'===a&&b.setTargeting('Sidebar',['Right']);var c=r(a),d=c.path,e=c.sizes,f=c.zone,g=googletag.defineSlot(d,e,a);s(f)&&g.setCollapseEmptyDiv(!0,!0),g.addService(b),!1}function u(b){var c=a.dfp&&a.dfp.targeting||{};Object.keys(c).forEach(function(a){b.setTargeting(a,c[a])})}function v(a){var g=a.map(b).filter(e);return{eligible:g.filter(f).filter(d).map(function(a){return a.id}),ineligible:g.filter(c)}}function w(b){if(void 0===b&&(b=q()),!m())return n(),void googletag.cmd.push(function(){return w(b)});var c=v(b),d=c.eligible,e=c.ineligible;if(e.forEach(g),0!==d.length){o(),googletag.destroySlots();var f=googletag.pubads();f.enableSingleRequest(),a.sreEvent||(f.addEventListener('slotRenderEnded',p),a.sreEvent=!0),u(f),d.forEach(function(a){return t(a,f)}),googletag.enableServices(),d.forEach(function(a){googletag.display(a)})}}var x=function(a){for(var b=[],c=1;c<arguments.length;c++)b[c-1]=arguments[c];for(var d,e=0,f=b;e<f.length;e++)for(var g in d=f[e],d)a[g]=d[g];return a}({"lib":"https://cdn.sstatic.net/clc/clc.min.js?v=04d772c81312","style":"https://cdn.sstatic.net/clc/styles/clc.min.css?v=768595a6d237","u":"https://clc.stackoverflow.com/markup.js","wa":true,"kt":2000,"tto":true,"h":"clc.stackoverflow.com","allowed":"^(((talent\\.)?stackoverflow)|(blog\\.codinghorror)|(serverfault|askubuntu)|([^\\.]+\\.stackexchange))\\.com$","wv":true,"al":false,"dh":[4385506061,4386578282,4386579572]},a.options||{}),y=h(function(){var a=x.lib;l()&&(a=a.replace(/(\.min)?\.js(\?v=[0-9a-fA-F]+)?$/,'.ie$1.js$2')),i(a)}),z=a.cmd||[];Array.isArray(z)&&(0<z.length?y():k(z,y));var A=h(function(){i('https://www.googletagservices.com/tag/js/gpt.js')}),B=function(a){new Image().src='https://'+x.h+'/stalled.gif?'+a},C='248424177',D=/^\/tags\//.test(location.pathname)||/^\/questions\/tagged\//.test(location.pathname)?'tag-pages':/^\/$/.test(location.pathname)||/^\/home/.test(location.pathname)?'home-page':'question-pages',E=location.hostname;var F={slots:{lb:[[728,90]],mlb:[[728,90]],smlb:[[728,90]],bmlb:[[728,90]],sb:function(a){return'dfp-tsb'===a?[[300,250],[300,600]]:[[300,250]]},"tag-sponsorship":[[730,135]],"mobile-below-question":[[320,50],[300,250]]},ids:{"dfp-tlb":'lb',"dfp-mlb":'mlb',"dfp-smlb":'smlb',"dfp-bmlb":'bmlb',"dfp-tsb":'sb',"dfp-isb":'sb',"dfp-tag":'tag-sponsorship',"dfp-m-aq":'mobile-below-question',"clc-tlb":'lb',"clc-mlb":'mlb',"clc-tsb":'sb'}};(function(){var b=x.al;b&&z.push(function(){return a.load()})})(),n(),a.dfp={load:w},a.options=x,a.cmd=z})(this.clc=this.clc||{})}catch(a){window.console.error(a)}</script>            <script>
+                var clc = clc || {};
+                clc.collapse = { sb: !0,'tag-sponsorship':!0,lb:!1,mlb:!1,smlb:!1,bmlb:!1,'mobile-below-question':!0};
+                clc.cmd = clc.cmd || [];
+                clc.cmd.push(function () { window.clc_request='AnscWyMOx9YIAAAAAM_6lAICAAAAAgAAAAAoAAAAfGphdmFzY3JpcHR8anNvbnxyZWFjdGpzfGNvcnN8ZmV0Y2gtYXBpfAB18iTl_Twd8LjL'; clc.load(); });
+                                clc.dfp = clc.dfp || {};
+                clc.dfp.targeting = {Registered:['false'],'so-tag':['javascript','json','reactjs','cors','fetch-api']};
+                
+                var googletag = googletag || {};
+                googletag.cmd = googletag.cmd || [];
+                googletag.cmd.push(function () { clc.dfp.load(); });
+            </script>
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+
+<div class="spacer">
+	<a href="https://stackoverflow.com/q/51774942?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">0</div>
+	</a>
+	<a href="https://stackoverflow.com/questions/51774942/uncaught-in-promise-syntaxerror-unexpected-end-of-input-after-json-fetch?noredirect=1&amp;lq=1" class="question-hyperlink">Uncaught (in promise) SyntaxError: Unexpected end of input after json fetch</a>
+</div>
+<div class="spacer">
+	<a href="https://stackoverflow.com/q/50492919?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">-1</div>
+	</a>
+	<a href="https://stackoverflow.com/questions/50492919/unhandled-rejection-syntaxerror-unexpected-end-of-input?noredirect=1&amp;lq=1" class="question-hyperlink">Unhandled Rejection (SyntaxError): Unexpected end of input</a>
+</div>
+<div class="spacer">
+	<a href="https://stackoverflow.com/q/53442236?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">-1</div>
+	</a>
+	<a href="https://stackoverflow.com/questions/53442236/error-when-accessing-api-with-fetch-while-setting-mode-to-no-cors?noredirect=1&amp;lq=1" class="question-hyperlink">Error when accessing API with fetch while setting mode to 'no-cors'</a>
+</div>
+<div class="spacer">
+	<a href="https://stackoverflow.com/q/54322840?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">0</div>
+	</a>
+	<a href="https://stackoverflow.com/questions/54322840/how-to-fix-unexpected-end-of-input-error-when-fetching-json-string-output-from?noredirect=1&amp;lq=1" class="question-hyperlink">How to fix “unexpected end of input” error when fetching json string output from PHP script</a>
+</div>
+<div class="spacer">
+	<a href="https://stackoverflow.com/q/55198262?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">0</div>
+	</a>
+	<a href="https://stackoverflow.com/questions/55198262/trying-to-access-the-behance-api-via-fetch-doesnt-work-but-works-via-browser-ur?noredirect=1&amp;lq=1" class="question-hyperlink">Trying to access the Behance API via fetch doesn't work but works via browser url</a>
+</div>
+<div class="spacer">
+	<a href="https://stackoverflow.com/q/53422551?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">0</div>
+	</a>
+	<a href="https://stackoverflow.com/questions/53422551/how-to-set-up-fetch-and-cors-so-that-a-post-from-the-frontend-to-a-server-will-a?noredirect=1&amp;lq=1" class="question-hyperlink">How to set up fetch and cors so that a post from the frontend to a server will allow request.status to be read</a>
+</div>
+<div class="spacer">
+	<a href="https://stackoverflow.com/q/54631475?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">-1</div>
+	</a>
+	<a href="https://stackoverflow.com/questions/54631475/how-to-consume-an-fetch-api-with-reactjs?noredirect=1&amp;lq=1" class="question-hyperlink">How to consume an fetch api with reactjs?</a>
+</div>
+<div class="spacer">
+	<a href="https://stackoverflow.com/q/43871637?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted large">216</div>
+	</a>
+	<a href="https://stackoverflow.com/questions/43871637/no-access-control-allow-origin-header-is-present-on-the-requested-resource-whe?noredirect=1&amp;lq=1" class="question-hyperlink">No 'Access-Control-Allow-Origin' header is present on the requested resource—when trying to get data from a REST API</a>
+</div>
+<div class="spacer">
+	<a href="https://stackoverflow.com/q/45483759?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">5</div>
+	</a>
+	<a href="https://stackoverflow.com/questions/45483759/cannot-load-deezer-api-resources-from-localhost-with-the-fetch-api?noredirect=1&amp;lq=1" class="question-hyperlink">Cannot load Deezer API resources from localhost with the Fetch API</a>
+</div>
+<div class="spacer">
+	<a href="https://stackoverflow.com/q/51204735?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">2</div>
+	</a>
+	<a href="https://stackoverflow.com/questions/51204735/react-js-fetch-api?noredirect=1&amp;lq=1" class="question-hyperlink">React js fetch API</a>
+</div>					<div class="spacer more">
+				<a href="https://stackoverflow.com/questions/linked/43317967?lq=1">see more linked questions…</a>
+			</div>
+	</div>
+</div>
+
+                <div class="module sidebar-related">
+                    <h4 id="h-related">Related</h4>
+                    <div class="related js-gps-related-questions" data-tracker="rq=1">
+                        <div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/1219860?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted large">712</div></a><a href="https://stackoverflow.com/questions/1219860/html-encoding-lost-when-attribute-read-from-input-field?rq=1" class="question-hyperlink">HTML-encoding lost when attribute read from input field</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/3983088?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted large">181</div></a><a href="https://stackoverflow.com/questions/3983088/javascript-error-uncaught-syntaxerror-unexpected-end-of-input?rq=1" class="question-hyperlink">JavaScript error (Uncaught SyntaxError: Unexpected end of input)</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/8081701?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted large">297</div></a><a href="https://stackoverflow.com/questions/8081701/i-keep-getting-uncaught-syntaxerror-unexpected-token-o?rq=1" class="question-hyperlink">I keep getting “Uncaught SyntaxError: Unexpected token o”</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/13022178?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes large">258</div></a><a href="https://stackoverflow.com/questions/13022178/uncaught-syntaxerror-unexpected-token-u-json?rq=1" class="question-hyperlink">uncaught syntaxerror unexpected token U JSON</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/33460420?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted large">284</div></a><a href="https://stackoverflow.com/questions/33460420/babel-loader-jsx-syntaxerror-unexpected-token?rq=1" class="question-hyperlink">babel-loader jsx SyntaxError: Unexpected token</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/45696999?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">18</div></a><a href="https://stackoverflow.com/questions/45696999/fetch-unexpected-end-of-input?rq=1" class="question-hyperlink">fetch() unexpected end of input</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/46152774?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">0</div></a><a href="https://stackoverflow.com/questions/46152774/uncaught-in-promise-syntaxerror-unexpected-end-of-input?rq=1" class="question-hyperlink">Uncaught (in promise) SyntaxError: Unexpected end of input</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/49339400?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">0</div></a><a href="https://stackoverflow.com/questions/49339400/issue-with-react-ui-communicating-with-node?rq=1" class="question-hyperlink">issue with react ui communicating with node</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/51156278?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">0</div></a><a href="https://stackoverflow.com/questions/51156278/getting-local-json-data-with-reactjs?rq=1" class="question-hyperlink">Getting local json data with reactjs</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/52757338?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">2</div></a><a href="https://stackoverflow.com/questions/52757338/how-to-handle-this-fetch-typeerror?rq=1" class="question-hyperlink">How to handle this fetch() TypeError?</a></div>
+                    </div>
+                </div>
+
+<div id="hot-network-questions" class="module tex2jax_ignore">
+    <h4>
+        <a href="https://stackexchange.com/questions?tab=hot" class="js-gps-track s-link s-link__inherit" data-gps-track="posts_hot_network.click({ item_type:1, location:11 })">
+            Hot Network Questions
+        </a>
+    </h4>
+    <ul>
+            <li>
+                <div class="favicon favicon-law" title="Law Stack Exchange"></div><a href="https://law.stackexchange.com/questions/39295/is-a-copyright-notice-with-a-non-existent-name-be-invalid" class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:617 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is a copyright notice with a non-existent name be invalid?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-academia" title="Academia Stack Exchange"></div><a href="https://academia.stackexchange.com/questions/128469/pointing-to-problems-without-suggesting-solutions" class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:415 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Pointing to problems without suggesting solutions
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-rpg" title="Role-playing Games Stack Exchange"></div><a href="https://rpg.stackexchange.com/questions/145595/can-i-cut-the-hair-of-a-conjured-korred-with-a-blade-made-of-precious-material-t" class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:122 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Can I cut the hair of a conjured korred with a blade made of precious material to harvest that material from the korred?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-travel" title="Travel Stack Exchange"></div><a href="https://travel.stackexchange.com/questions/136103/no-invitation-for-tourist-visa-but-i-want-to-visit" class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:273 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    No Invitation for Tourist Visa, But i want to visit
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-quantumcomputing" title="Quantum Computing Stack Exchange"></div><a href="https://quantumcomputing.stackexchange.com/questions/5952/how-to-show-a-density-matrix-is-in-a-pure-mixed-state" class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:694 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to show a density matrix is in a pure/mixed state?
+                </a>
+
+            </li>
+            <li class="js-hidden" style="">
+                <div class="favicon favicon-mathematica" title="Mathematica Stack Exchange"></div><a href="https://mathematica.stackexchange.com/questions/195737/combining-list-in-a-cartesian-product-format-with-addition-operation" class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:387 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Combining list in a Cartesian product format with addition operation?
+                </a>
+
+            </li>
+            <li class="js-hidden" style="">
+                <div class="favicon favicon-latin" title="Latin Language Stack Exchange"></div><a href="https://latin.stackexchange.com/questions/9526/how-do-i-say-this-must-not-happen" class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:644 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How do I say "this must not happen"?
+                </a>
+
+            </li>
+            <li class="js-hidden" style="">
+                <div class="favicon favicon-security" title="Information Security Stack Exchange"></div><a href="https://security.stackexchange.com/questions/207771/why-does-bitlocker-not-use-rsa" class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:162 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why does BitLocker not use RSA?
+                </a>
+
+            </li>
+            <li class="js-hidden" style="">
+                <div class="favicon favicon-codegolf" title="Programming Puzzles &amp; Code Golf Stack Exchange"></div><a href="https://codegolf.stackexchange.com/questions/183528/new-order-6-easter-egg" class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:200 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    New Order #6: Easter Egg
+                </a>
+
+            </li>
+            <li class="js-hidden" style="">
+                <div class="favicon favicon-history" title="History Stack Exchange"></div><a href="https://history.stackexchange.com/questions/52223/did-pre-columbian-americans-know-the-spherical-shape-of-the-earth" class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:324 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Did pre-Columbian Americans know the spherical shape of the Earth?
+                </a>
+
+            </li>
+            <li class="js-hidden" style="">
+                <div class="favicon favicon-mathematica" title="Mathematica Stack Exchange"></div><a href="https://mathematica.stackexchange.com/questions/195750/how-to-create-a-button-that-adds-inputfields-when-clicked" class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:387 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to create a button that adds InputFields when clicked?
+                </a>
+
+            </li>
+            <li class="js-hidden" style="">
+                <div class="favicon favicon-movies" title="Movies &amp; TV Stack Exchange"></div><a href="https://movies.stackexchange.com/questions/98522/how-does-billy-russo-acquire-his-jigsaw-mask" class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:367 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How does Billy Russo acquire his 'Jigsaw' mask?
+                </a>
+
+            </li>
+            <li class="js-hidden" style="">
+                <div class="favicon favicon-stackoverflow" title="Stack Overflow"></div><a href="https://stackoverflow.com/questions/55783615/why-do-c-and-c-allow-the-expression-int-45" class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:1 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why do C and C++ allow the expression (int) + 4*5?
+                </a>
+
+            </li>
+            <li class="js-hidden" style="">
+                <div class="favicon favicon-mathematica" title="Mathematica Stack Exchange"></div><a href="https://mathematica.stackexchange.com/questions/195724/plotting-a-maclaurin-series" class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:387 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Plotting a Maclaurin series
+                </a>
+
+            </li>
+            <li class="js-hidden" style="">
+                <div class="favicon favicon-sqa" title="Software Quality Assurance &amp; Testing Stack Exchange"></div><a href="https://sqa.stackexchange.com/questions/38832/the-test-team-as-an-enemy-of-development-and-how-can-this-be-avoided" class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:244 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    The test team as an enemy of development? And how can this be avoided?
+                </a>
+
+            </li>
+            <li class="js-hidden" style="">
+                <div class="favicon favicon-tex" title="TeX - LaTeX Stack Exchange"></div><a href="https://tex.stackexchange.com/questions/485927/table-formatting-with-tabularx" class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:85 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Table formatting with tabularx?
+                </a>
+
+            </li>
+            <li class="js-hidden" style="">
+                <div class="favicon favicon-travel" title="Travel Stack Exchange"></div><a href="https://travel.stackexchange.com/questions/135978/flight-departed-from-the-gate-5-min-before-scheduled-departure-time-refund-opti" class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:273 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Flight departed from the gate 5 min before scheduled departure time. Refund options
+                </a>
+
+            </li>
+            <li class="js-hidden" style="">
+                <div class="favicon favicon-dsp" title="Signal Processing Stack Exchange"></div><a href="https://dsp.stackexchange.com/questions/56860/cost-function-for-lti-system-identification" class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:295 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Cost function for LTI system identification
+                </a>
+
+            </li>
+            <li class="js-hidden" style="">
+                <div class="favicon favicon-stackoverflow" title="Stack Overflow"></div><a href="https://stackoverflow.com/questions/55780860/how-do-java-8-default-methods-h%d0%b5lp-with-lambdas" class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:1 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How do Java 8 default methods hеlp with lambdas?
+                </a>
+
+            </li>
+            <li class="js-hidden" style="">
+                <div class="favicon favicon-askubuntu" title="Ask Ubuntu"></div><a href="https://askubuntu.com/questions/1135728/bashrc-alias-for-a-command-with-fixed-second-parameter" class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:89 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    .bashrc alias for a command with fixed second parameter
+                </a>
+
+            </li>
+            <li class="js-hidden" style="">
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="https://math.stackexchange.com/questions/3196600/proving-that-any-solution-to-the-differential-equation-of-an-oscillator-can-be-w" class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Proving that any solution to the differential equation of an oscillator can be written as a sum of sinusoids.
+                </a>
+
+            </li>
+            <li class="js-hidden" style="">
+                <div class="favicon favicon-electronics" title="Electrical Engineering Stack Exchange"></div><a href="https://electronics.stackexchange.com/questions/433674/why-are-current-probes-so-expensive" class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:135 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why are current probes so expensive?
+                </a>
+
+            </li>
+            <li class="js-hidden" style="">
+                <div class="favicon favicon-photo" title="Photography Stack Exchange"></div><a href="https://photo.stackexchange.com/questions/106705/my-mentor-says-to-set-image-to-fine-instead-of-raw-how-is-this-different-from" class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:61 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    My mentor says to set image to Fine instead of RAW — how is this different from JPG?
+                </a>
+
+            </li>
+            <li class="js-hidden" style="">
+                <div class="favicon favicon-physics" title="Physics Stack Exchange"></div><a href="https://physics.stackexchange.com/questions/473932/can-two-people-see-the-same-photon" class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:151 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Can two people see the same photon?
+                </a>
+
+            </li>
+    </ul>
+
+        
+</div>
+
+<div id="feed-link">
+    <a href="https://stackoverflow.com/feeds/question/43317967" title="feed of this question and its answers">
+        <svg aria-hidden="true" class="svg-icon fc-orange-400 iconRss" width="18" height="18" viewBox="0 0 18 18"><path d="M1 3c0-1.1.9-2 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3zm14.5 12C15.5 8.1 9.9 2.5 3 2.5V5a10 10 0 0 1 10 10h2.5zm-5 0A7.5 7.5 0 0 0 3 7.5V10a5 5 0 0 1 5 5h2.5zm-5 0A2.5 2.5 0 0 0 3 12.5V15h2.5z"></path></svg>
+        question feed
+    </a>
+</div>
+        </div>
+    </div>
+<script>StackExchange.ready(function(){$.get('/posts/43317967/ivc/23db');});</script>
+<noscript><div><img src="/posts/43317967/ivc/23db" class="dno" alt="" width="0" height="0"></div></noscript><div style="display:none" id="prettify-lang">lang-js</div></div>
+
+
+        </div>
+    </div><script src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/clc.min.js"></script><script src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/gpt.js"></script>
+
+    <footer id="footer" class="site-footer js-footer" role="contentinfo">
+        <div class="site-footer--container">
+                <div class="site-footer--logo">
+
+                    
+                    <a href="https://stackoverflow.com/"><svg aria-hidden="true" class="svg-icon native iconLogoGlyphMd" width="32" height="37" viewBox="0 0 32 37"><g><path fill="#BCBBBB" d="M26 33v-9h4v13H0V24h4v9z"></path><path d="M23.1 25.99l.68-2.95-16.1-3.35L7 23l16.1 2.99zM9.1 15.2l15 7 1.4-3-15-7-1.4 3zm4.2-7.4L26 18.4l2.1-2.5L15.4 5.3l-2.1 2.5zM21.5 0l-2.7 2 9.9 13.3 2.7-2L21.5 0zM7 30h16v-3H7v3z" fill="#F48024"></path></g></svg></a>
+                </div>
+            
+            <nav class="site-footer--nav">
+                    <div class="site-footer--col site-footer--col__visible js-footer-col" data-name="default">
+                        <h5 class="-title"><a href="https://stackoverflow.com/" class="js-gps-track" data-gps-track="footer.click({ location: 2, link: 15})">Stack Overflow</a></h5>
+                        <ul class="-list js-primary-footer-links">
+                            <li class="-item"><a href="https://stackoverflow.com/questions" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 16})">Questions</a></li>
+                                <li class="-item"><a href="https://stackoverflow.com/jobs" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 17})">Jobs</a></li>
+                                <li class="-item"><a href="https://stackoverflow.com/jobs/directory/developer-jobs" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 11})">Developer Jobs Directory</a></li>
+                                     <li class="-item"><a href="https://stackoverflow.com/jobs/salary" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 28})">Salary Calculator</a></li>
+                                                            <li class="-item"><a href="https://stackoverflow.com/help" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 3 })">Help</a></li>
+                                <li class="-item"><a onclick="StackExchange.switchMobile(&quot;on&quot;)" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 12 })">Mobile</a></li>
+                        <li class="-item"><a class="-link" role="button">Disable Responsiveness</a></li></ul>
+                    </div>
+                    <div class="site-footer--col site-footer--col__visible js-footer-col" data-name="default">
+                        <h5 class="-title"><a href="https://www.stackoverflowbusiness.com/" class="js-gps-track" data-gps-track="footer.click({ location: 2, link: 19 })">Products</a></h5>
+                        <ul class="-list">
+                            <li class="-item"><a href="https://stackoverflow.com/teams" class="js-gps-track -link" data-ga="[&quot;teams traffic&quot;,&quot;footer - site nav&quot;,&quot;stackoverflow.com/teams&quot;,null,{&quot;dimension4&quot;:&quot;teams&quot;}]" data-gps-track="footer.click({ location: 2, link: 29 })">Teams</a></li>
+                            <li class="-item"><a href="https://www.stackoverflowbusiness.com/talent" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 20 })">Talent</a></li>
+                            <li class="-item"><a href="https://www.stackoverflowbusiness.com/advertising" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 21 })">Advertising</a></li>
+                            <li class="-item"><a href="https://stackoverflow.com/enterprise" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 22 })">Enterprise</a></li>
+                        </ul>
+                    </div>
+                <div class="site-footer--col site-footer--col__visible js-footer-col" data-name="default">
+                    <h5 class="-title"><a class="js-gps-track" data-gps-track="footer.click({ location: 2, link: 1 })" href="https://stackoverflow.com/company/about">Company</a></h5>
+                    <ul class="-list">
+                            <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 1 })" href="https://stackoverflow.com/company/about">About</a></li>
+                                                <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 27 })" href="https://stackoverflow.com/company/press">Press</a></li>
+                            <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 9 })" href="https://stackoverflow.com/company/work-here">Work Here</a></li>
+                        <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 7 })" href="https://stackoverflow.com/legal">Legal</a></li>
+                        <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 8 })" href="https://stackoverflow.com/legal/privacy-policy">Privacy Policy</a></li>
+                            <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 13 })" href="https://stackoverflow.com/company/contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="site-footer--col site-footer--categories-nav site-footer--col__visible">
+                    <a href="https://stackoverflow.com/questions/43317967/handle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors#" class="site-footer--back js-footer-back"><svg aria-hidden="true" class="svg-icon iconArrowLeftAlt" width="18" height="18" viewBox="0 0 18 18"><path d="M10.58 16L12 14.59 6.4 9 12 3.41 10.57 2l-7 7z"></path></svg></a>
+                    <div>
+                        <h5 class="-title"><a href="https://stackexchange.com/">Stack Exchange<br> Network</a></h5>
+                        <ul class="-list">
+                            <li class="-item"><a href="https://stackoverflow.com/questions/43317967/handle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors#" class="-link _expandable js-footer-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Technology">Technology</a></li>
+                            <li class="-item"><a href="https://stackoverflow.com/questions/43317967/handle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors#" class="-link _expandable js-footer-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Life / Arts">Life / Arts</a></li>
+                            <li class="-item"><a href="https://stackoverflow.com/questions/43317967/handle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors#" class="-link _expandable js-footer-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Culture / Recreation">Culture / Recreation</a></li>
+                            <li class="-item"><a href="https://stackoverflow.com/questions/43317967/handle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors#" class="-link _expandable js-footer-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Science">Science</a></li>
+                            <li class="-item"><a href="https://stackoverflow.com/questions/43317967/handle-response-syntaxerror-unexpected-end-of-input-when-using-mode-no-cors#" class="-link _expandable js-footer-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Other">Other</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="site-footer--categories">
+                    <div class="site-footer--col site-footer--category js-footer-col" data-name="Technology">
+        <ul class="-list">
+                <li class="-item"><a href="https://stackoverflow.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                <li class="-item"><a href="https://serverfault.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="system and network administrators">Server Fault</a></li>
+                <li class="-item"><a href="https://superuser.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="computer enthusiasts and power users">Super User</a></li>
+                <li class="-item"><a href="https://webapps.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="power users of web applications">Web Applications</a></li>
+                <li class="-item"><a href="https://askubuntu.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                <li class="-item"><a href="https://webmasters.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="pro webmasters">Webmasters</a></li>
+                <li class="-item"><a href="https://gamedev.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="professional and independent game developers">Game Development</a></li>
+                    </ul></div><div class="site-footer--col site-footer--category js-footer-col" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://tex.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                <li class="-item"><a href="https://softwareengineering.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="professionals, academics, and students working within the systems development life cycle">Software Engineering</a></li>
+                <li class="-item"><a href="https://unix.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="users of Linux, FreeBSD and other Un*x-like operating systems">Unix &amp; Linux</a></li>
+                <li class="-item"><a href="https://apple.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                <li class="-item"><a href="https://wordpress.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="WordPress developers and administrators">WordPress Development</a></li>
+                <li class="-item"><a href="https://gis.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                <li class="-item"><a href="https://electronics.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                    </ul></div><div class="site-footer--col site-footer--category js-footer-col" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://android.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                <li class="-item"><a href="https://security.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="information security professionals">Information Security</a></li>
+                <li class="-item"><a href="https://dba.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                <li class="-item"><a href="https://drupal.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="Drupal developers and administrators">Drupal Answers</a></li>
+                <li class="-item"><a href="https://sharepoint.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="SharePoint enthusiasts">SharePoint</a></li>
+                <li class="-item"><a href="https://ux.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="user experience researchers and experts">User Experience</a></li>
+                <li class="-item"><a href="https://mathematica.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="users of Wolfram Mathematica">Mathematica</a></li>
+                    </ul></div><div class="site-footer--col site-footer--category js-footer-col" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://salesforce.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="Salesforce administrators, implementation experts, developers and anybody in-between">Salesforce</a></li>
+                <li class="-item"><a href="https://expressionengine.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="administrators, end users, developers and designers for ExpressionEngine® CMS">ExpressionEngine® Answers</a></li>
+                <li class="-item"><a href="https://pt.stackoverflow.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="programadores profissionais e entusiastas">Stack Overflow em Português</a></li>
+                <li class="-item"><a href="https://blender.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="people who use Blender to create 3D graphics, animations, or games">Blender</a></li>
+                <li class="-item"><a href="https://networkengineering.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="network engineers">Network Engineering</a></li>
+                <li class="-item"><a href="https://crypto.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="software developers, mathematicians and others interested in cryptography">Cryptography</a></li>
+                <li class="-item"><a href="https://codereview.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="peer programmer code reviews">Code Review</a></li>
+                    </ul></div><div class="site-footer--col site-footer--category js-footer-col" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://magento.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="users of the Magento e-Commerce platform">Magento</a></li>
+                <li class="-item"><a href="https://softwarerecs.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="people seeking specific software recommendations">Software Recommendations</a></li>
+                <li class="-item"><a href="https://dsp.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="practitioners of the art and science of signal, image and video processing">Signal Processing</a></li>
+                <li class="-item"><a href="https://emacs.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="those using, extending or developing Emacs">Emacs</a></li>
+                <li class="-item"><a href="https://raspberrypi.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="users and developers of hardware and software for Raspberry Pi">Raspberry Pi</a></li>
+                <li class="-item"><a href="https://ru.stackoverflow.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="программистов">Stack Overflow на русском</a></li>
+                <li class="-item"><a href="https://codegolf.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="programming puzzle enthusiasts and code golfers">Programming Puzzles &amp; Code Golf</a></li>
+                    </ul></div><div class="site-footer--col site-footer--category js-footer-col" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://es.stackoverflow.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="programadores y profesionales de la informática">Stack Overflow en español</a></li>
+                <li class="-item"><a href="https://ethereum.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="users of Ethereum, the decentralized application platform and smart contract enabled blockchain">Ethereum</a></li>
+                <li class="-item"><a href="https://datascience.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="Data science professionals, Machine Learning specialists, and those interested in learning more about the field">Data Science</a></li>
+                <li class="-item"><a href="https://arduino.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="developers of open-source hardware and software that is compatible with Arduino">Arduino</a></li>
+                <li class="-item"><a href="https://bitcoin.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="Bitcoin crypto-currency enthusiasts">Bitcoin</a></li>
+                            <li class="-item">
+                    <a href="https://stackexchange.com/sites#technology" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 26 })">
+                        <strong>
+                            more (31)
+                        </strong>
+                    </a>
+                </li>
+        </ul>
+    </div>
+    <div class="site-footer--col site-footer--category js-footer-col" data-name="Life / Arts">
+        <ul class="-list">
+                <li class="-item"><a href="https://photo.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                <li class="-item"><a href="https://scifi.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                <li class="-item"><a href="https://graphicdesign.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="Graphic Design professionals, students, and enthusiasts">Graphic Design</a></li>
+                <li class="-item"><a href="https://movies.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="movie and tv enthusiasts">Movies &amp; TV</a></li>
+                <li class="-item"><a href="https://music.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="musicians, students, and enthusiasts">Music: Practice &amp; Theory</a></li>
+                <li class="-item"><a href="https://worldbuilding.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="writers/artists using science, geography and culture to construct imaginary worlds and settings">Worldbuilding</a></li>
+                <li class="-item"><a href="https://cooking.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                    </ul></div><div class="site-footer--col site-footer--category js-footer-col" data-name="Life / Arts"><ul class="-list">
+                <li class="-item"><a href="https://diy.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="contractors and serious DIYers">Home Improvement</a></li>
+                <li class="-item"><a href="https://money.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="people who want to be financially literate">Personal Finance &amp; Money</a></li>
+                <li class="-item"><a href="https://academia.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="academics and those enrolled in higher education">Academia</a></li>
+                <li class="-item"><a href="https://law.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="legal professionals, students, and others with experience or interest in law">Law</a></li>
+                            <li class="-item">
+                    <a href="https://stackexchange.com/sites#lifearts" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 26 })">
+                        <strong>
+                            more (15)
+                        </strong>
+                    </a>
+                </li>
+        </ul>
+    </div>
+    <div class="site-footer--col site-footer--category js-footer-col" data-name="Culture / Recreation">
+        <ul class="-list">
+                <li class="-item"><a href="https://english.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                <li class="-item"><a href="https://skeptics.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="scientific skepticism">Skeptics</a></li>
+                <li class="-item"><a href="https://judaism.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                <li class="-item"><a href="https://travel.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="road warriors and seasoned travelers">Travel</a></li>
+                <li class="-item"><a href="https://christianity.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                <li class="-item"><a href="https://ell.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="speakers of other languages learning English">English Language Learners</a></li>
+                <li class="-item"><a href="https://japanese.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="students, teachers, and linguists wanting to discuss the finer points of the Japanese language">Japanese Language</a></li>
+                    </ul></div><div class="site-footer--col site-footer--category js-footer-col" data-name="Culture / Recreation"><ul class="-list">
+                <li class="-item"><a href="https://gaming.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                <li class="-item"><a href="https://bicycles.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                <li class="-item"><a href="https://rpg.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                <li class="-item"><a href="https://anime.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="anime and manga fans">Anime &amp; Manga</a></li>
+                <li class="-item"><a href="https://puzzling.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="those who create, solve, and study puzzles">Puzzling</a></li>
+                <li class="-item"><a href="https://mechanics.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="mechanics and DIY enthusiast owners of cars, trucks, and motorcycles">Motor Vehicle Maintenance &amp; Repair</a></li>
+                            <li class="-item">
+                    <a href="https://stackexchange.com/sites#culturerecreation" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 26 })">
+                        <strong>
+                            more (33)
+                        </strong>
+                    </a>
+                </li>
+        </ul>
+    </div>
+    <div class="site-footer--col site-footer--category js-footer-col" data-name="Science">
+        <ul class="-list">
+                <li class="-item"><a href="https://mathoverflow.net/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="professional mathematicians">MathOverflow</a></li>
+                <li class="-item"><a href="https://math.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                <li class="-item"><a href="https://stats.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="people interested in statistics, machine learning, data analysis, data mining, and data visualization">Cross Validated (stats)</a></li>
+                <li class="-item"><a href="https://cstheory.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                <li class="-item"><a href="https://physics.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="active researchers, academics and students of physics">Physics</a></li>
+                <li class="-item"><a href="https://chemistry.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="scientists, academics, teachers, and students in the field of chemistry">Chemistry</a></li>
+                <li class="-item"><a href="https://biology.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="biology researchers, academics, and students">Biology</a></li>
+                    </ul></div><div class="site-footer--col site-footer--category js-footer-col" data-name="Science"><ul class="-list">
+                <li class="-item"><a href="https://cs.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="students, researchers and practitioners of computer science">Computer Science</a></li>
+                <li class="-item"><a href="https://philosophy.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="those interested in the study of the fundamental nature of knowledge, reality, and existence">Philosophy</a></li>
+                            <li class="-item">
+                    <a href="https://stackexchange.com/sites#science" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 26 })">
+                        <strong>
+                            more (10)
+                        </strong>
+                    </a>
+                </li>
+        </ul>
+    </div>
+    <div class="site-footer--col site-footer--category js-footer-col" data-name="Other">
+        <ul class="-list">
+                <li class="-item"><a href="https://meta.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Exchange</a></li>
+                <li class="-item"><a href="https://stackapps.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                <li class="-item"><a href="https://api.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="programmatic interaction with Stack Exchange sites">API</a></li>
+                <li class="-item"><a href="https://data.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 4, link: 25 })" title="querying Stack Exchange data using SQL">Data</a></li>
+                    </ul>
+    </div>
+                </div>
+            </nav>
+            <div class="site-footer--copyright fs-fine">
+                <ul class="-list">
+                    <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link:4 })" href="https://stackoverflow.blog/?blb=1">Blog</a></li>
+                    <li class="-item"><a href="https://www.facebook.com/officialstackoverflow/" class="-link">Facebook</a></li>
+                    <li class="-item"><a href="https://twitter.com/stackoverflow" class="-link">Twitter</a></li>
+                    <li class="-item"><a href="https://linkedin.com/company/stack-overflow" class="-link">LinkedIn</a></li>
+                </ul>
+
+                <p class="mt-auto mb24">
+site design / logo © 2019 Stack Exchange Inc; user contributions licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc by-sa 3.0</a>
+                            with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" rel="license">attribution required</a>.
+                    <span id="svnrev">rev&nbsp;1.0.0.0</span>
+                </p>
+            </div>
+        </div>
+
+            </footer>
+            <script>StackExchange.ready(function () { StackExchange.responsiveness.addSwitcher(); })</script>
+    <noscript>
+        <div id="noscript-warning">Stack Overflow works best with JavaScript enabled
+            <img src="https://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno">
+        </div>
+    </noscript>
+
+<script>
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function() { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m);
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+            StackExchange.ready(function () {
+
+                StackExchange.ga.init({
+                    sendTitles: true,
+                    tracker: window.ga,
+                    trackingCodes: [
+                        'UA-108242619-1'
+                    ]
+                });
+
+
+
+                    StackExchange.ga.setDimension('dimension2', '|javascript|json|reactjs|cors|fetch-api|');
+
+                    StackExchange.ga.setDimension('dimension3', 'Questions/Show');
+
+
+                StackExchange.ga.trackPageView();
+            });
+            
+/**/
+            
+            var _qevents = _qevents || [],
+            _comscore = _comscore || [];
+            (function() {
+                var ssl = 'https:' == document.location.protocol,
+                    s = document.getElementsByTagName('script')[0],
+                    qc = document.createElement('script');
+                 qc.async = true;
+                    qc.src = (ssl ? 'https://secure' : 'http://edge') + '.quantserve.com/quant.js';
+                    s.parentNode.insertBefore(qc, s);
+                    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+/**/
+                 var sc = document.createElement('script');
+                    sc.async = true;
+                    sc.src = (ssl ? 'https://sb' : 'http://b') + '.scorecardresearch.com/beacon.js';
+                    s.parentNode.insertBefore(sc, s);
+                    _comscore.push({ c1: "2", c2: "17440561" });
+            })();
+            
+
+</script>
+            
+    
+    
+<div class="adsbox" id="clc-abd" style="position: absolute; pointer-events: none;">&nbsp;</div><script src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/markup.js"></script><iframe id="google_osd_static_frame_1076632404484" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;" src="./javascript - Handle response - SyntaxError_ Unexpected end of input when using mode_ &#39;no-cors&#39; - Stack Overflow_files/saved_resource(1).html"></iframe></body></html>

@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)https://javascript.info/promise-chaining -->
+<html lang="en" class="working-hover"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script>window.currentUser = null;</script><script>window.rateUsdToNative = 1;</script><title itemprop="name">Promises chaining</title><link href="./Promises chaining_files/styles.5c8793b5ad1c5a73c4c5.css" rel="stylesheet"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0"><meta name="apple-mobile-web-app-capable" content="yes"><script>if (window.devicePixelRatio > 1) document.cookie = 'pixelRatio=' + window.devicePixelRatio + ';path=/;expires=Tue, 19 Jan 2038 03:14:07 GMT';</script><link href="./Promises chaining_files/css" rel="stylesheet"><link rel="apple-touch-icon-precomposed" href="https://javascript.info/img/favicon/apple-touch-icon-precomposed.png"><link rel="canonical" href="https://javascript.info/promise-chaining"><meta name="msapplication-TileColor" content="#222A2C"><meta name="msapplication-TileImage" content="/img/favicon/tileicon.png"><link rel="icon" href="https://javascript.info/img/favicon/favicon.png"><meta itemprop="image" content="https://javascript.info/img/site_preview_en_512x512.png"><meta property="og:title" content="Promises chaining"><meta property="og:image" content="https://javascript.info/img/site_preview_en_1200x630.png"><meta property="og:image:type" content="image/png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="fb:admins" content="100001562528165"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Promises chaining"><meta name="twitter:site" content="@iliakan"><meta name="twitter:creator" content="@iliakan"><meta name="twitter:image" content="https://javascript.info/img/site_preview_en_512x512.png"><link rel="prev" href="https://javascript.info/promise-basics"><link rel="next" href="https://javascript.info/promise-error-handling"><script>window.GA_ID = "UA-2056213-15";</script><script>window.YANDEX_METRIKA_ID = 32184394;</script><script>window.GoogleAnalyticsObject="ga",window.ga=function(){window.ga.q.push(arguments)},window.ga.q=[],window.ga.l=Date.now(),ga("create",GA_ID,"auto"),window.GTM_ID&&ga("require",GTM_ID),window.currentUser?ga("set","&uid",currentUser.id):ga("set","anonymizeIp",!0),window.addEventListener("error",function(e){var r=(e.filename||e.errorUrl)+": "+(e.lineno||e.errorLine),n=e.stack||e.error&&e.error.stack;ga("send","exception",{exDescription:e.message+" "+r+" "+n,exFatal:!0})});</script><script src="./Promises chaining_files/analytics.js" async=""></script><script>ga('send', 'pageview');</script><script>window.metrika={reachGoal:function(){}},window.yandex_metrika_callbacks=[function(){try{window.metrika=new Ya.Metrika({id:YANDEX_METRIKA_ID,webvisor:!0,clickmap:!0,params:{user:window.currentUser&&window.currentUser.id}}),metrika.trackLinks({delay:150}),window.addEventListener("error",function(r){window.metrika.reachGoal("JSERROR",{src:(r.filename||r.errorUrl)+": "+(r.lineno||r.errorLine),stack:r.stack||r.error&&r.error.stack,message:r.message})})}catch(r){}}];</script><script src="./Promises chaining_files/watch.js" async=""></script><script>window.RECAPTCHA_ID = "6Lf9NyETAAAAACZlg-a9Us2SxvYbeVC1ROWaWv4O";</script><script src="./Promises chaining_files/init.5c8793b5ad1c5a73c4c5.js"></script><script src="./Promises chaining_files/head.5c8793b5ad1c5a73c4c5.js" defer=""></script><script>
+function loadScript(src) {
+  return new Promise(function(resolve, reject) {
+    let script = document.createElement('script');
+    script.src = src;
+
+    script.onload = () => resolve(script);
+    script.onerror = () => reject(new Error("Script load error: " + src));
+
+    document.head.append(script);
+  });
+}
+
+class HttpError extends Error {
+  constructor(response) {
+    super(`${response.status} for ${response.url}`);
+    this.name = 'HttpError';
+    this.response = response;
+  }
+}
+
+function loadJson(url) {
+  return fetch(url)
+    .then(response => {
+      if (response.status == 200) {
+        return response.json();
+      } else {
+        throw new HttpError(response);
+      }
+    })
+}
+</script>
+
+<style>
+.promise-avatar-example {
+  border-radius: 50%;
+  position: fixed;
+  left: 10px;
+  top: 10px;
+}
+</style>
+<meta property="og:title" content="Promises chaining"><meta property="og:type" content="article"><script src="./Promises chaining_files/tutorial.5c8793b5ad1c5a73c4c5.js" defer="" data-manual="1"></script><script src="./Promises chaining_files/footer.5c8793b5ad1c5a73c4c5.js" defer=""></script></head><body class=""><script>window.fontTest();</script><span class="font-test" style=""></span><div class="page-wrapper page-wrapper_sidebar_on"><!--[if lt IE 10]><div style="color:red;text-align:center">Sorry, IE&lt;10 is not supported, please use a newer browser.</div><![endif]--><div class="sitetoolbar sitetoolbar_tutorial"><div class="notification notification_top notification_info sitetoolbar__notification" style="" id="notify-en-tutorial"><div class="notification__content">The tutorial was recently rewritten from scratch. There may be typos, please use the "Edit on Github" link (in left sidebar in an article, at the bottom) to propose fixes.
+Thank you!</div><button class="notification__close" title="Close"></button></div><script>showTopNotification();
+</script><div class="sitetoolbar__content"><div class="sitetoolbar__lang-switcher"><button class="sitetoolbar__dropdown-button" data-dropdown-toggler="">EN</button><div class="sitetoolbar__dropdown-wrap"><div class="sitetoolbar__dropdown-body"><div class="sitetoolbar__lang-switcher-body"><div class="supported-langs supported-langs_toolbar"><div class="supported-langs__container"><ul class="supported-langs__list" style="height:128px"><li class="supported-langs__item supported-langs__item_current"><a class="supported-langs__link" href="https://javascript.info/promise-chaining"><span class="supported-langs__brief">EN</span><span class="supported-langs__title">English</span></a></li><li class="supported-langs__item"><a class="supported-langs__link" href="https://learn.javascript.ru/"><span class="supported-langs__brief">RU</span><span class="supported-langs__title">Русский</span></a></li><li class="supported-langs__item"><a class="supported-langs__link" href="https://zh.javascript.info/"><span class="supported-langs__brief">ZH</span><span class="supported-langs__title">简体中文</span></a></li><li class="supported-langs__item"><a class="supported-langs__link" href="https://ja.javascript.info/promise-chaining"><span class="supported-langs__brief">JA</span><span class="supported-langs__title">日本語</span></a></li></ul></div><div class="supported-langs__text"><p>We want to make this open-source project available for people all around the world.</p> <p><a href="https://github.com/javascript-tutorial/translate" rel="noopener noreferrer" target="_blank">Help us to translate</a> the content of this tutorial to your language!</p>
+</div></div></div></div></div></div><div class="sitetoolbar__logo-wrap"><a class="sitetoolbar__link sitetoolbar__link_logo" href="https://javascript.info/"><object type="image/svg+xml" class="sitetoolbar__logo sitetoolbar__logo_normal" data="./Promises chaining_files/sitetoolbar__logo_en.svg" style="left: 0px; top: 0px; position: absolute;"></object><img class="sitetoolbar__logo sitetoolbar__logo_normal" src="./Promises chaining_files/sitetoolbar__logo_en.svg" width="200" alt="" role="presentation" style="visibility: hidden;"><object type="image/svg+xml" class="sitetoolbar__logo sitetoolbar__logo_small" data="./Promises chaining_files/sitetoolbar__logo_small_en.svg" style="left: 0px; top: 0px; position: absolute;"></object><img class="sitetoolbar__logo sitetoolbar__logo_small" src="./Promises chaining_files/sitetoolbar__logo_small_en.svg" width="70" alt="" role="presentation"><script>Array.prototype.forEach.call(document.querySelectorAll("img.sitetoolbar__logo"),function(e){let t=document.createElement("object");t.type="image/svg+xml",t.className=e.className,t.style.cssText="left:0;top:0;position:absolute",t.onload=function(){t.onload=null,e.style.visibility="hidden"},t.data=e.src,e.parentNode.insertBefore(t,e)});</script></a></div><div class="sitetoolbar__nav-toggle-wrap"><button class="sitetoolbar__nav-toggle" type="button"></button></div><nav class="sitetoolbar__sections"><ul class="sitetoolbar__sections-list"></ul></nav><div class="sitetoolbar__book-wrap"><a class="buy-book-button" href="https://javascript.info/ebook"><span class="buy-book-button__extra-text">Buy</span>EPUB/PDF</a></div><div class="sitetoolbar__login-wrap"><button class="sitetoolbar__login" data-action-login=""></button></div><div class="sitetoolbar__search-wrap"><div class="sitetoolbar__search-content"><form class="sitetoolbar__search" method="GET" action="https://javascript.info/search"><button class="sitetoolbar__search-toggle" type="button"></button><div class="sitetoolbar__search-input"><div class="text-input"><input class="text-input__control" name="query" placeholder="Search on Javascript.info" required="required" type="text"></div><button class="sitetoolbar__find" type="submit">Search</button></div></form></div></div></div><div class="tablet-menu"><div class="tablet-menu__line"><div class="tablet-menu__content"><form class="tablet-menu-search" action="https://javascript.info/search/"><input class="tablet-menu-search__input" type="search" name="query" placeholder="Search in the tutorial" required="required"><button class="tablet-menu-search__button" type="submit" name="type" value="articles">Search</button></form></div></div><div class="tablet-menu__line"><div class="tablet-menu__content"><a class="map" href="https://javascript.info/tutorial/map" data-action="tutorial-map"><span class="map__text">Tutorial map</span></a></div></div><div class="tablet-menu__line"><div class="tablet-menu__content"><div class="share-icons"><span class="share-icons__title">Share</span><a class="share share_tw" href="https://twitter.com/share?url=https%3A%2F%2Fjavascript.info%2Fpromise-chaining"></a><a class="share share_fb" href="https://www.facebook.com/sharer/sharer.php?s=100&amp;p%5Burl%5D=https%3A%2F%2Fjavascript.info%2Fpromise-chaining"></a><a class="share share_gp" href="https://plus.google.com/share?url=https%3A%2F%2Fjavascript.info%2Fpromise-chaining"></a><a class="share share_vk" href="https://vkontakte.ru/share.php?url=https%3A%2F%2Fjavascript.info%2Fpromise-chaining"></a></div></div></div><div class="tablet-menu__line"><div class="tablet-menu__content"><select class="tablet-menu__nav input-select input-select input-select_small" onchange="if(this.value) window.location.href=this.value"><option value="https://javascript.info/promise-chaining" selected="">English</option><option value="https://learn.javascript.ru/">Русский</option><option value="https://zh.javascript.info/">简体中文</option><option value="https://ja.javascript.info/promise-chaining">日本語</option></select></div></div></div><div style="width: 1262px; margin: 0px; position: static; height: 4px;"></div></div><div class="page page_sidebar_on page_inner_padding page_sidebar-animation-on"><script>if(localStorage.noSidebar){document.querySelector(".page").classList.remove("page_sidebar_on");var pageWrapper=document.querySelector(".page-wrapper");pageWrapper&&pageWrapper.classList.remove("page-wrapper_sidebar_on")}setTimeout(function(){document.querySelector(".page").classList.add("page_sidebar-animation-on")},0);</script><div class="page__inner"><main class="main main_width-limit"><header class="main__header"><div class="main__header-inner"><ol class="breadcrumbs"><li class="breadcrumbs__item breadcrumbs__item_home" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb" itemref="breadcrumb-1"><a class="breadcrumbs__link" href="https://javascript.info/" itemprop="url"><span class="breadcrumbs__hidden-text" itemprop="title">Tutorial</span></a></li><li class="breadcrumbs__item" id="breadcrumb-1" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb" itemref="breadcrumb-2" itemprop="child"><a class="breadcrumbs__link" href="https://javascript.info/js" itemprop="url"><span itemprop="title">The JavaScript language</span></a></li><li class="breadcrumbs__item" id="breadcrumb-2" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb" itemprop="child"><a class="breadcrumbs__link" href="https://javascript.info/async" itemprop="url"><span itemprop="title">Promises, async/await</span></a></li></ol><h1 class="main__header-title">Promises chaining</h1></div></header><div class="content"><article class="formatted" itemscope="" itemtype="http://schema.org/TechArticle"><meta itemprop="name" content="Promises chaining"><div itemprop="author" itemscope="" itemtype="http://schema.org/Person"><meta itemprop="email" content="iliakan@gmail.com"><meta itemprop="name" content="Ilya Kantor"></div><div itemprop="articleBody"><p>Let’s return to the problem mentioned in the chapter <a href="https://javascript.info/callbacks">Introduction: callbacks</a>: we have a sequence of asynchronous tasks to be done one after another. For instance, loading scripts. How can we code it well?</p>
+<p>Promises provide a couple of recipes to do that.</p>
+<p>In this chapter we cover promise chaining.</p>
+<p>It looks like this:</p>
+<div data-trusted="1" class="code-example" data-prism-highlighted="1">
+      <div class="codebox code-example__codebox">
+        
+        <div class="toolbar codebox__toolbar">
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="run" data-action="run" class="toolbar__button toolbar__button_run"></a>
+          </div>
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="open in sandbox" target="_blank" data-action="edit" class="toolbar__button toolbar__button_edit"></a>
+          </div>
+        </div>
+        <div class="codebox__code" data-code="1">
+          <pre class="line-numbers  language-javascript"><code class=" language-javascript"><code class="token keyword">new</code> <code class="token class-name">Promise</code><code class="token punctuation">(</code><code class="token keyword">function</code><code class="token punctuation">(</code>resolve<code class="token punctuation">,</code> reject<code class="token punctuation">)</code> <code class="token punctuation">{</code>
+
+  <code class="token function">setTimeout</code><code class="token punctuation">(</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token operator">=&gt;</code> <code class="token function">resolve</code><code class="token punctuation">(</code><code class="token number">1</code><code class="token punctuation">)</code><code class="token punctuation">,</code> <code class="token number">1000</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// (*)</code>
+
+<code class="token punctuation">}</code><code class="token punctuation">)</code><code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code><code class="token keyword">function</code><code class="token punctuation">(</code>result<code class="token punctuation">)</code> <code class="token punctuation">{</code> <code class="token comment">// (**)</code>
+
+  <code class="token function">alert</code><code class="token punctuation">(</code>result<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 1</code>
+  <code class="token keyword">return</code> result <code class="token operator">*</code> <code class="token number">2</code><code class="token punctuation">;</code>
+
+<code class="token punctuation">}</code><code class="token punctuation">)</code><code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code><code class="token keyword">function</code><code class="token punctuation">(</code>result<code class="token punctuation">)</code> <code class="token punctuation">{</code> <code class="token comment">// (***)</code>
+
+  <code class="token function">alert</code><code class="token punctuation">(</code>result<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 2</code>
+  <code class="token keyword">return</code> result <code class="token operator">*</code> <code class="token number">2</code><code class="token punctuation">;</code>
+
+<code class="token punctuation">}</code><code class="token punctuation">)</code><code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code><code class="token keyword">function</code><code class="token punctuation">(</code>result<code class="token punctuation">)</code> <code class="token punctuation">{</code>
+
+  <code class="token function">alert</code><code class="token punctuation">(</code>result<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 4</code>
+  <code class="token keyword">return</code> result <code class="token operator">*</code> <code class="token number">2</code><code class="token punctuation">;</code>
+
+<code class="token punctuation">}</code><code class="token punctuation">)</code><code class="token punctuation">;</code></code><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre>
+        </div>
+      </div>
+      
+      </div><p>The idea is that the result is passed through the chain of <code>.then</code> handlers.</p>
+<p>Here the flow is:</p>
+<ol>
+<li>The initial promise resolves in 1 second <code>(*)</code>,</li>
+<li>Then the <code>.then</code> handler is called <code>(**)</code>.</li>
+<li>The value that it returns is passed to the next <code>.then</code> handler <code>(***)</code></li>
+<li>…and so on.</li>
+</ol>
+<p>As the result is passed along the chain of handlers, we can see a sequence of <code>alert</code> calls: <code>1</code> → <code>2</code> → <code>4</code>.</p>
+<figure><div class="image" style="width:141px">
+      <div class="image__ratio" style="padding-top:225.531914893617%"></div>
+      <img src="./Promises chaining_files/promise-then-chain.png" alt="" width="141" height="318" class="image__image">
+      </div></figure><p>The whole thing works, because a call to <code>promise.then</code> returns a promise, so that we can call the next <code>.then</code> on it.</p>
+<p>When a handler returns a value, it becomes the result of that promise, so the next <code>.then</code> is called with it.</p>
+<p>To make these words more clear, here’s the start of the chain:</p>
+<div data-trusted="1" class="code-example" data-prism-highlighted="1">
+      <div class="codebox code-example__codebox">
+        
+        <div class="toolbar codebox__toolbar">
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="run" data-action="run" class="toolbar__button toolbar__button_run"></a>
+          </div>
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="open in sandbox" target="_blank" data-action="edit" class="toolbar__button toolbar__button_edit"></a>
+          </div>
+        </div>
+        <div class="codebox__code" data-code="1">
+          <pre class="line-numbers  language-javascript"><code class=" language-javascript"><code class="token keyword">new</code> <code class="token class-name">Promise</code><code class="token punctuation">(</code><code class="token keyword">function</code><code class="token punctuation">(</code>resolve<code class="token punctuation">,</code> reject<code class="token punctuation">)</code> <code class="token punctuation">{</code>
+
+  <code class="token function">setTimeout</code><code class="token punctuation">(</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token operator">=&gt;</code> <code class="token function">resolve</code><code class="token punctuation">(</code><code class="token number">1</code><code class="token punctuation">)</code><code class="token punctuation">,</code> <code class="token number">1000</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+<code class="token punctuation">}</code><code class="token punctuation">)</code><code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code><code class="token keyword">function</code><code class="token punctuation">(</code>result<code class="token punctuation">)</code> <code class="token punctuation">{</code>
+
+  <code class="token function">alert</code><code class="token punctuation">(</code>result<code class="token punctuation">)</code><code class="token punctuation">;</code>
+  <code class="token keyword">return</code> result <code class="token operator">*</code> <code class="token number">2</code><code class="token punctuation">;</code> <code class="token comment">// &lt;-- (1)</code>
+
+<code class="token punctuation">}</code><code class="token punctuation">)</code> <code class="token comment">// &lt;-- (2)</code>
+<code class="token comment">// .then…</code></code><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre>
+        </div>
+      </div>
+      
+      </div><p>The value returned by <code>.then</code> is a promise, that’s why we are able to add another <code>.then</code> at <code>(2)</code>. When the value is returned in <code>(1)</code>, that promise becomes resolved, so the next handler runs with the value.</p>
+<p><strong>A classic newbie error: technically we can also add many <code>.then</code> to a single promise. This is not chaining.</strong></p>
+<p>For example:</p>
+<div data-trusted="1" class="code-example" data-prism-highlighted="1">
+      <div class="codebox code-example__codebox">
+        
+        <div class="toolbar codebox__toolbar">
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="run" data-action="run" class="toolbar__button toolbar__button_run"></a>
+          </div>
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="open in sandbox" target="_blank" data-action="edit" class="toolbar__button toolbar__button_edit"></a>
+          </div>
+        </div>
+        <div class="codebox__code" data-code="1">
+          <pre class="line-numbers  language-javascript"><code class=" language-javascript"><code class="token keyword">let</code> promise <code class="token operator">=</code> <code class="token keyword">new</code> <code class="token class-name">Promise</code><code class="token punctuation">(</code><code class="token keyword">function</code><code class="token punctuation">(</code>resolve<code class="token punctuation">,</code> reject<code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token function">setTimeout</code><code class="token punctuation">(</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token operator">=&gt;</code> <code class="token function">resolve</code><code class="token punctuation">(</code><code class="token number">1</code><code class="token punctuation">)</code><code class="token punctuation">,</code> <code class="token number">1000</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+<code class="token punctuation">}</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+promise<code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code><code class="token keyword">function</code><code class="token punctuation">(</code>result<code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token function">alert</code><code class="token punctuation">(</code>result<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 1</code>
+  <code class="token keyword">return</code> result <code class="token operator">*</code> <code class="token number">2</code><code class="token punctuation">;</code>
+<code class="token punctuation">}</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+promise<code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code><code class="token keyword">function</code><code class="token punctuation">(</code>result<code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token function">alert</code><code class="token punctuation">(</code>result<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 1</code>
+  <code class="token keyword">return</code> result <code class="token operator">*</code> <code class="token number">2</code><code class="token punctuation">;</code>
+<code class="token punctuation">}</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+promise<code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code><code class="token keyword">function</code><code class="token punctuation">(</code>result<code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token function">alert</code><code class="token punctuation">(</code>result<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 1</code>
+  <code class="token keyword">return</code> result <code class="token operator">*</code> <code class="token number">2</code><code class="token punctuation">;</code>
+<code class="token punctuation">}</code><code class="token punctuation">)</code><code class="token punctuation">;</code></code><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre>
+        </div>
+      </div>
+      
+      </div><p>What we did here is just several handlers to one promise. They don’t pass the result to each other, instead they process it independently.</p>
+<p>Here’s the picture (compare it with the chaining above):</p>
+<figure><div class="image" style="width:355px">
+      <div class="image__ratio" style="padding-top:41.12676056338028%"></div>
+      <img src="./Promises chaining_files/promise-then-many.png" alt="" width="355" height="146" class="image__image">
+      </div></figure><p>All <code>.then</code> on the same promise get the same result – the result of that promise. So in the code above all <code>alert</code> show the same: <code>1</code>.</p>
+<p>In practice we rarely need multiple handlers for one promise. Chaining is used much more often.</p>
+<h2><a class="main__anchor" name="returning-promises" href="https://javascript.info/promise-chaining#returning-promises">Returning promises</a></h2><p>Normally, a value returned by a <code>.then</code> handler is immediately passed to the next handler. But there’s an exception.</p>
+<p>If the returned value is a promise, then the further execution is suspended until it settles. After that, the result of that promise is given to the next <code>.then</code> handler.</p>
+<p>For instance:</p>
+<div data-trusted="1" class="code-example" data-highlight="[{&quot;start&quot;:8,&quot;end&quot;:10}]" data-prism-highlighted="1">
+      <div class="codebox code-example__codebox">
+        
+        <div class="toolbar codebox__toolbar">
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="run" data-action="run" class="toolbar__button toolbar__button_run"></a>
+          </div>
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="open in sandbox" target="_blank" data-action="edit" class="toolbar__button toolbar__button_edit"></a>
+          </div>
+        </div>
+        <div class="codebox__code" data-code="1">
+          <pre class="line-numbers  language-javascript"><code class="block-highlight" data-start="8">
+
+
+
+
+
+
+
+<code class="mask">
+
+
+</code></code><code class=" language-javascript"><code class="token keyword">new</code> <code class="token class-name">Promise</code><code class="token punctuation">(</code><code class="token keyword">function</code><code class="token punctuation">(</code>resolve<code class="token punctuation">,</code> reject<code class="token punctuation">)</code> <code class="token punctuation">{</code>
+
+  <code class="token function">setTimeout</code><code class="token punctuation">(</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token operator">=&gt;</code> <code class="token function">resolve</code><code class="token punctuation">(</code><code class="token number">1</code><code class="token punctuation">)</code><code class="token punctuation">,</code> <code class="token number">1000</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+<code class="token punctuation">}</code><code class="token punctuation">)</code><code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code><code class="token keyword">function</code><code class="token punctuation">(</code>result<code class="token punctuation">)</code> <code class="token punctuation">{</code>
+
+  <code class="token function">alert</code><code class="token punctuation">(</code>result<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 1</code>
+
+  <code class="token keyword">return</code> <code class="token keyword">new</code> <code class="token class-name">Promise</code><code class="token punctuation">(</code><code class="token punctuation">(</code>resolve<code class="token punctuation">,</code> reject<code class="token punctuation">)</code> <code class="token operator">=&gt;</code> <code class="token punctuation">{</code> <code class="token comment">// (*)</code>
+    <code class="token function">setTimeout</code><code class="token punctuation">(</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token operator">=&gt;</code> <code class="token function">resolve</code><code class="token punctuation">(</code>result <code class="token operator">*</code> <code class="token number">2</code><code class="token punctuation">)</code><code class="token punctuation">,</code> <code class="token number">1000</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+  <code class="token punctuation">}</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+<code class="token punctuation">}</code><code class="token punctuation">)</code><code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code><code class="token keyword">function</code><code class="token punctuation">(</code>result<code class="token punctuation">)</code> <code class="token punctuation">{</code> <code class="token comment">// (**)</code>
+
+  <code class="token function">alert</code><code class="token punctuation">(</code>result<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 2</code>
+
+  <code class="token keyword">return</code> <code class="token keyword">new</code> <code class="token class-name">Promise</code><code class="token punctuation">(</code><code class="token punctuation">(</code>resolve<code class="token punctuation">,</code> reject<code class="token punctuation">)</code> <code class="token operator">=&gt;</code> <code class="token punctuation">{</code>
+    <code class="token function">setTimeout</code><code class="token punctuation">(</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token operator">=&gt;</code> <code class="token function">resolve</code><code class="token punctuation">(</code>result <code class="token operator">*</code> <code class="token number">2</code><code class="token punctuation">)</code><code class="token punctuation">,</code> <code class="token number">1000</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+  <code class="token punctuation">}</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+<code class="token punctuation">}</code><code class="token punctuation">)</code><code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code><code class="token keyword">function</code><code class="token punctuation">(</code>result<code class="token punctuation">)</code> <code class="token punctuation">{</code>
+
+  <code class="token function">alert</code><code class="token punctuation">(</code>result<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 4</code>
+
+<code class="token punctuation">}</code><code class="token punctuation">)</code><code class="token punctuation">;</code></code><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre>
+        </div>
+      </div>
+      
+      </div><p>Here the first <code>.then</code> shows <code>1</code> returns <code>new Promise(…)</code> in the line <code>(*)</code>. After one second it resolves, and the result (the argument of <code>resolve</code>, here it’s <code>result*2</code>) is passed on to handler of the second <code>.then</code> in the line <code>(**)</code>. It shows <code>2</code> and does the same thing.</p>
+<p>So the output is again 1 → 2 → 4, but now with 1 second delay between <code>alert</code> calls.</p>
+<p>Returning promises allows us to build chains of asynchronous actions.</p>
+<h2><a class="main__anchor" name="example-loadscript" href="https://javascript.info/promise-chaining#example-loadscript">Example: loadScript</a></h2><p>Let’s use this feature with <code>loadScript</code> to load scripts one by one, in sequence:</p>
+<div data-trusted="1" class="code-example" data-prism-highlighted="1">
+      <div class="codebox code-example__codebox">
+        
+        <div class="toolbar codebox__toolbar">
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="run" data-action="run" class="toolbar__button toolbar__button_run"></a>
+          </div>
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="open in sandbox" target="_blank" data-action="edit" class="toolbar__button toolbar__button_edit"></a>
+          </div>
+        </div>
+        <div class="codebox__code" data-code="1">
+          <pre class="line-numbers  language-javascript"><code class=" language-javascript"><code class="token function">loadScript</code><code class="token punctuation">(</code><code class="token string">"/article/promise-chaining/one.js"</code><code class="token punctuation">)</code>
+  <code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code><code class="token keyword">function</code><code class="token punctuation">(</code>script<code class="token punctuation">)</code> <code class="token punctuation">{</code>
+    <code class="token keyword">return</code> <code class="token function">loadScript</code><code class="token punctuation">(</code><code class="token string">"/article/promise-chaining/two.js"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+  <code class="token punctuation">}</code><code class="token punctuation">)</code>
+  <code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code><code class="token keyword">function</code><code class="token punctuation">(</code>script<code class="token punctuation">)</code> <code class="token punctuation">{</code>
+    <code class="token keyword">return</code> <code class="token function">loadScript</code><code class="token punctuation">(</code><code class="token string">"/article/promise-chaining/three.js"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+  <code class="token punctuation">}</code><code class="token punctuation">)</code>
+  <code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code><code class="token keyword">function</code><code class="token punctuation">(</code>script<code class="token punctuation">)</code> <code class="token punctuation">{</code>
+    <code class="token comment">// use functions declared in scripts</code>
+    <code class="token comment">// to show that they indeed loaded</code>
+    <code class="token function">one</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+    <code class="token function">two</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+    <code class="token function">three</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+  <code class="token punctuation">}</code><code class="token punctuation">)</code><code class="token punctuation">;</code></code><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre>
+        </div>
+      </div>
+      
+      </div><p>This code can be made bit shorter with arrow functions:</p>
+<div data-trusted="1" class="code-example" data-prism-highlighted="1">
+      <div class="codebox code-example__codebox">
+        
+        <div class="toolbar codebox__toolbar">
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="run" data-action="run" class="toolbar__button toolbar__button_run"></a>
+          </div>
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="open in sandbox" target="_blank" data-action="edit" class="toolbar__button toolbar__button_edit"></a>
+          </div>
+        </div>
+        <div class="codebox__code" data-code="1">
+          <pre class="line-numbers  language-javascript"><code class=" language-javascript"><code class="token function">loadScript</code><code class="token punctuation">(</code><code class="token string">"/article/promise-chaining/one.js"</code><code class="token punctuation">)</code>
+  <code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code>script <code class="token operator">=&gt;</code> <code class="token function">loadScript</code><code class="token punctuation">(</code><code class="token string">"/article/promise-chaining/two.js"</code><code class="token punctuation">)</code><code class="token punctuation">)</code>
+  <code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code>script <code class="token operator">=&gt;</code> <code class="token function">loadScript</code><code class="token punctuation">(</code><code class="token string">"/article/promise-chaining/three.js"</code><code class="token punctuation">)</code><code class="token punctuation">)</code>
+  <code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code>script <code class="token operator">=&gt;</code> <code class="token punctuation">{</code>
+    <code class="token comment">// scripts are loaded, we can use functions declared there</code>
+    <code class="token function">one</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+    <code class="token function">two</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+    <code class="token function">three</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+  <code class="token punctuation">}</code><code class="token punctuation">)</code><code class="token punctuation">;</code></code><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre>
+        </div>
+      </div>
+      
+      </div><p>Here each <code>loadScript</code> call returns a promise, and the next <code>.then</code> runs when it resolves. Then it initiates the loading of the next script. So scripts are loaded one after another.</p>
+<p>We can add more asynchronous actions to the chain. Please note that code is still “flat”, it grows down, not to the right. There are no signs of “pyramid of doom”.</p>
+<p>Please note that technically we can add <code>.then</code> directly to each <code>loadScript</code>, like this:</p>
+<div data-trusted="1" class="code-example" data-prism-highlighted="1">
+      <div class="codebox code-example__codebox">
+        
+        <div class="toolbar codebox__toolbar">
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="run" data-action="run" class="toolbar__button toolbar__button_run"></a>
+          </div>
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="open in sandbox" target="_blank" data-action="edit" class="toolbar__button toolbar__button_edit"></a>
+          </div>
+        </div>
+        <div class="codebox__code" data-code="1">
+          <pre class="line-numbers  language-javascript"><code class=" language-javascript"><code class="token function">loadScript</code><code class="token punctuation">(</code><code class="token string">"/article/promise-chaining/one.js"</code><code class="token punctuation">)</code><code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code>script1 <code class="token operator">=&gt;</code> <code class="token punctuation">{</code>
+  <code class="token function">loadScript</code><code class="token punctuation">(</code><code class="token string">"/article/promise-chaining/two.js"</code><code class="token punctuation">)</code><code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code>script2 <code class="token operator">=&gt;</code> <code class="token punctuation">{</code>
+    <code class="token function">loadScript</code><code class="token punctuation">(</code><code class="token string">"/article/promise-chaining/three.js"</code><code class="token punctuation">)</code><code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code>script3 <code class="token operator">=&gt;</code> <code class="token punctuation">{</code>
+      <code class="token comment">// this function has access to variables script1, script2 and script3</code>
+      <code class="token function">one</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+      <code class="token function">two</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+      <code class="token function">three</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+    <code class="token punctuation">}</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+  <code class="token punctuation">}</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+<code class="token punctuation">}</code><code class="token punctuation">)</code><code class="token punctuation">;</code></code><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre>
+        </div>
+      </div>
+      
+      </div><p>This code does the same: loads 3 scripts in sequence. But it “grows to the right”. So we have the same problem as with callbacks.</p>
+<p>People who start to use promises sometimes don’t know about chaining, so they write it this way. Generally, chaining is preferred.</p>
+<p>Sometimes it’s ok to write <code>.then</code> directly, because the nested function has access to the outer scope. In the example above the most nested callback has access to all variables <code>script1</code>, <code>script2</code>, <code>script3</code>. But that’s an exception rather than a rule.</p>
+<div class="important important_smart">
+            <div class="important__header"><span class="important__type">Thenables</span></div>
+            <div class="important__content"><p>To be precise, <code>.then</code> may return an arbitrary “thenable” object, and it will be treated the same way as a promise.</p>
+<p>A “thenable” object is any object with a method <code>.then</code>.</p>
+<p>The idea is that 3rd-party libraries may implement “promise-compatible” objects of their own. They can have extended set of methods, but also be compatible with native promises, because they implement <code>.then</code>.</p>
+<p>Here’s an example of a thenable object:</p>
+<div data-trusted="1" class="code-example" data-prism-highlighted="1">
+      <div class="codebox code-example__codebox">
+        
+        <div class="toolbar codebox__toolbar">
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="run" data-action="run" class="toolbar__button toolbar__button_run"></a>
+          </div>
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="open in sandbox" target="_blank" data-action="edit" class="toolbar__button toolbar__button_edit"></a>
+          </div>
+        </div>
+        <div class="codebox__code" data-code="1">
+          <pre class="line-numbers  language-javascript"><code class=" language-javascript"><code class="token keyword">class</code> <code class="token class-name">Thenable</code> <code class="token punctuation">{</code>
+  <code class="token function">constructor</code><code class="token punctuation">(</code>num<code class="token punctuation">)</code> <code class="token punctuation">{</code>
+    <code class="token keyword">this</code><code class="token punctuation">.</code>num <code class="token operator">=</code> num<code class="token punctuation">;</code>
+  <code class="token punctuation">}</code>
+  <code class="token function">then</code><code class="token punctuation">(</code>resolve<code class="token punctuation">,</code> reject<code class="token punctuation">)</code> <code class="token punctuation">{</code>
+    <code class="token function">alert</code><code class="token punctuation">(</code>resolve<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// function() { native code }</code>
+    <code class="token comment">// resolve with this.num*2 after the 1 second</code>
+    <code class="token function">setTimeout</code><code class="token punctuation">(</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token operator">=&gt;</code> <code class="token function">resolve</code><code class="token punctuation">(</code><code class="token keyword">this</code><code class="token punctuation">.</code>num <code class="token operator">*</code> <code class="token number">2</code><code class="token punctuation">)</code><code class="token punctuation">,</code> <code class="token number">1000</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// (**)</code>
+  <code class="token punctuation">}</code>
+<code class="token punctuation">}</code>
+
+<code class="token keyword">new</code> <code class="token class-name">Promise</code><code class="token punctuation">(</code>resolve <code class="token operator">=&gt;</code> <code class="token function">resolve</code><code class="token punctuation">(</code><code class="token number">1</code><code class="token punctuation">)</code><code class="token punctuation">)</code>
+  <code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code>result <code class="token operator">=&gt;</code> <code class="token punctuation">{</code>
+    <code class="token keyword">return</code> <code class="token keyword">new</code> <code class="token class-name">Thenable</code><code class="token punctuation">(</code>result<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// (*)</code>
+  <code class="token punctuation">}</code><code class="token punctuation">)</code>
+  <code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code>alert<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// shows 2 after 1000ms</code></code><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre>
+        </div>
+      </div>
+      
+      </div><p>JavaScript checks the object returned by <code>.then</code> handler in the line <code>(*)</code>: if it has a callable method named <code>then</code>, then it calls that method providing native functions <code>resolve</code>, <code>reject</code> as arguments (similar to executor) and waits until one of them is called. In the example above <code>resolve(2)</code> is called after 1 second <code>(**)</code>. Then the result is passed further down the chain.</p>
+<p>This feature allows to integrate custom objects with promise chains without having to inherit from <code>Promise</code>.</p>
+</div></div>
+<h2><a class="main__anchor" name="bigger-example-fetch" href="https://javascript.info/promise-chaining#bigger-example-fetch">Bigger example: fetch</a></h2><p>In frontend programming promises are often used for network requests. So let’s see an extended example of that.</p>
+<p>We’ll use the <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch">fetch</a> method to load the information about the user from the remote server. The method is quite complex, it has many optional parameters, but the basic usage is quite simple:</p>
+<div data-trusted="1" class="code-example" data-prism-highlighted="1">
+      <div class="codebox code-example__codebox">
+        
+        <div class="codebox__code" data-code="1">
+          <pre class="line-numbers  language-javascript"><code class=" language-javascript"><code class="token keyword">let</code> promise <code class="token operator">=</code> <code class="token function">fetch</code><code class="token punctuation">(</code>url<code class="token punctuation">)</code><code class="token punctuation">;</code></code><span class="line-numbers-rows"><span></span></span></pre>
+        </div>
+      </div>
+      
+      </div><p>This makes a network request to the <code>url</code> and returns a promise. The promise resolves with a <code>response</code> object when the remote server responds with headers, but <em>before the full response is downloaded</em>.</p>
+<p>To read the full response, we should call a method <code>response.text()</code>: it returns a promise that resolves  when the full text downloaded from the remote server, with that text as a result.</p>
+<p>The code below makes a request to <code>user.json</code> and loads its text from the server:</p>
+<div data-trusted="1" class="code-example" data-prism-highlighted="1">
+      <div class="codebox code-example__codebox">
+        
+        <div class="toolbar codebox__toolbar">
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="run" data-action="run" class="toolbar__button toolbar__button_run"></a>
+          </div>
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="open in sandbox" target="_blank" data-action="edit" class="toolbar__button toolbar__button_edit"></a>
+          </div>
+        </div>
+        <div class="codebox__code" data-code="1">
+          <pre class="line-numbers  language-javascript"><code class=" language-javascript"><code class="token function">fetch</code><code class="token punctuation">(</code><code class="token string">'/article/promise-chaining/user.json'</code><code class="token punctuation">)</code>
+  <code class="token comment">// .then below runs when the remote server responds</code>
+  <code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code><code class="token keyword">function</code><code class="token punctuation">(</code>response<code class="token punctuation">)</code> <code class="token punctuation">{</code>
+    <code class="token comment">// response.text() returns a new promise that resolves with the full response text</code>
+    <code class="token comment">// when we finish downloading it</code>
+    <code class="token keyword">return</code> response<code class="token punctuation">.</code><code class="token function">text</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+  <code class="token punctuation">}</code><code class="token punctuation">)</code>
+  <code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code><code class="token keyword">function</code><code class="token punctuation">(</code>text<code class="token punctuation">)</code> <code class="token punctuation">{</code>
+    <code class="token comment">// ...and here's the content of the remote file</code>
+    <code class="token function">alert</code><code class="token punctuation">(</code>text<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// {"name": "iliakan", isAdmin: true}</code>
+  <code class="token punctuation">}</code><code class="token punctuation">)</code><code class="token punctuation">;</code></code><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre>
+        </div>
+      </div>
+      
+      </div><p>There is also a method <code>response.json()</code> that reads the remote data and parses it as JSON. In our case that’s even more convenient, so let’s switch to it.</p>
+<p>We’ll also use arrow functions for brevity:</p>
+<div data-trusted="1" class="code-example" data-prism-highlighted="1">
+      <div class="codebox code-example__codebox">
+        
+        <div class="toolbar codebox__toolbar">
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="run" data-action="run" class="toolbar__button toolbar__button_run"></a>
+          </div>
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="open in sandbox" target="_blank" data-action="edit" class="toolbar__button toolbar__button_edit"></a>
+          </div>
+        </div>
+        <div class="codebox__code" data-code="1">
+          <pre class="line-numbers  language-javascript"><code class=" language-javascript"><code class="token comment">// same as above, but response.json() parses the remote content as JSON</code>
+<code class="token function">fetch</code><code class="token punctuation">(</code><code class="token string">'/article/promise-chaining/user.json'</code><code class="token punctuation">)</code>
+  <code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code>response <code class="token operator">=&gt;</code> response<code class="token punctuation">.</code><code class="token function">json</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">)</code>
+  <code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code>user <code class="token operator">=&gt;</code> <code class="token function">alert</code><code class="token punctuation">(</code>user<code class="token punctuation">.</code>name<code class="token punctuation">)</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// iliakan</code></code><span class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre>
+        </div>
+      </div>
+      
+      </div><p>Now let’s do something with the loaded user.</p>
+<p>For instance, we can make one more request to github, load the user profile and show the avatar:</p>
+<div data-trusted="1" class="code-example" data-prism-highlighted="1">
+      <div class="codebox code-example__codebox">
+        
+        <div class="toolbar codebox__toolbar">
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="run" data-action="run" class="toolbar__button toolbar__button_run"></a>
+          </div>
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="open in sandbox" target="_blank" data-action="edit" class="toolbar__button toolbar__button_edit"></a>
+          </div>
+        </div>
+        <div class="codebox__code" data-code="1">
+          <pre class="line-numbers  language-javascript"><code class=" language-javascript"><code class="token comment">// Make a request for user.json</code>
+<code class="token function">fetch</code><code class="token punctuation">(</code><code class="token string">'/article/promise-chaining/user.json'</code><code class="token punctuation">)</code>
+  <code class="token comment">// Load it as json</code>
+  <code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code>response <code class="token operator">=&gt;</code> response<code class="token punctuation">.</code><code class="token function">json</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">)</code>
+  <code class="token comment">// Make a request to github</code>
+  <code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code>user <code class="token operator">=&gt;</code> <code class="token function">fetch</code><code class="token punctuation">(</code><code class="token template-string"><code class="token string">`https://api.github.com/users/</code><code class="token interpolation"><code class="token interpolation-punctuation punctuation">${</code>user<code class="token punctuation">.</code>name<code class="token interpolation-punctuation punctuation">}</code></code><code class="token string">`</code></code><code class="token punctuation">)</code><code class="token punctuation">)</code>
+  <code class="token comment">// Load the response as json</code>
+  <code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code>response <code class="token operator">=&gt;</code> response<code class="token punctuation">.</code><code class="token function">json</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">)</code>
+  <code class="token comment">// Show the avatar image (githubUser.avatar_url) for 3 seconds (maybe animate it)</code>
+  <code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code>githubUser <code class="token operator">=&gt;</code> <code class="token punctuation">{</code>
+    <code class="token keyword">let</code> img <code class="token operator">=</code> document<code class="token punctuation">.</code><code class="token function">createElement</code><code class="token punctuation">(</code><code class="token string">'img'</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+    img<code class="token punctuation">.</code>src <code class="token operator">=</code> githubUser<code class="token punctuation">.</code>avatar_url<code class="token punctuation">;</code>
+    img<code class="token punctuation">.</code>className <code class="token operator">=</code> <code class="token string">"promise-avatar-example"</code><code class="token punctuation">;</code>
+    document<code class="token punctuation">.</code>body<code class="token punctuation">.</code><code class="token function">append</code><code class="token punctuation">(</code>img<code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+    <code class="token function">setTimeout</code><code class="token punctuation">(</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token operator">=&gt;</code> img<code class="token punctuation">.</code><code class="token function">remove</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">,</code> <code class="token number">3000</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// (*)</code>
+  <code class="token punctuation">}</code><code class="token punctuation">)</code><code class="token punctuation">;</code></code><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre>
+        </div>
+      </div>
+      
+      </div><p>The code works, see comments about the details, but it should be quite self-descriptive. Although, there’s a potential problem in it, a typical error of those who begin to use promises.</p>
+<p>Look at the line <code>(*)</code>: how can we do something <em>after</em> the avatar has finished showing and gets removed? For instance, we’d like to show a form for editing that user or something else. As of now, there’s no way.</p>
+<p>To make the chain extendable, we need to return a promise that resolves when the avatar finishes showing.</p>
+<p>Like this:</p>
+<div data-trusted="1" class="code-example" data-highlight="[{&quot;start&quot;:12,&quot;end&quot;:12},{&quot;start&quot;:4,&quot;end&quot;:4}]" data-prism-highlighted="1">
+      <div class="codebox code-example__codebox">
+        
+        <div class="toolbar codebox__toolbar">
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="run" data-action="run" class="toolbar__button toolbar__button_run"></a>
+          </div>
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="open in sandbox" target="_blank" data-action="edit" class="toolbar__button toolbar__button_edit"></a>
+          </div>
+        </div>
+        <div class="codebox__code" data-code="1">
+          <pre class="line-numbers  language-javascript"><code class="block-highlight" data-start="12">
+
+
+
+
+
+
+
+
+
+
+
+<code class="mask">
+</code></code><code class="block-highlight" data-start="4">
+
+
+
+<code class="mask">
+</code></code><code class=" language-javascript"><code class="token function">fetch</code><code class="token punctuation">(</code><code class="token string">'/article/promise-chaining/user.json'</code><code class="token punctuation">)</code>
+  <code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code>response <code class="token operator">=&gt;</code> response<code class="token punctuation">.</code><code class="token function">json</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">)</code>
+  <code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code>user <code class="token operator">=&gt;</code> <code class="token function">fetch</code><code class="token punctuation">(</code><code class="token template-string"><code class="token string">`https://api.github.com/users/</code><code class="token interpolation"><code class="token interpolation-punctuation punctuation">${</code>user<code class="token punctuation">.</code>name<code class="token interpolation-punctuation punctuation">}</code></code><code class="token string">`</code></code><code class="token punctuation">)</code><code class="token punctuation">)</code>
+  <code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code>response <code class="token operator">=&gt;</code> response<code class="token punctuation">.</code><code class="token function">json</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">)</code>
+  <code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code>githubUser <code class="token operator">=&gt;</code> <code class="token keyword">new</code> <code class="token class-name">Promise</code><code class="token punctuation">(</code><code class="token keyword">function</code><code class="token punctuation">(</code>resolve<code class="token punctuation">,</code> reject<code class="token punctuation">)</code> <code class="token punctuation">{</code>
+    <code class="token keyword">let</code> img <code class="token operator">=</code> document<code class="token punctuation">.</code><code class="token function">createElement</code><code class="token punctuation">(</code><code class="token string">'img'</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+    img<code class="token punctuation">.</code>src <code class="token operator">=</code> githubUser<code class="token punctuation">.</code>avatar_url<code class="token punctuation">;</code>
+    img<code class="token punctuation">.</code>className <code class="token operator">=</code> <code class="token string">"promise-avatar-example"</code><code class="token punctuation">;</code>
+    document<code class="token punctuation">.</code>body<code class="token punctuation">.</code><code class="token function">append</code><code class="token punctuation">(</code>img<code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+    <code class="token function">setTimeout</code><code class="token punctuation">(</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token operator">=&gt;</code> <code class="token punctuation">{</code>
+      img<code class="token punctuation">.</code><code class="token function">remove</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+      <code class="token function">resolve</code><code class="token punctuation">(</code>githubUser<code class="token punctuation">)</code><code class="token punctuation">;</code>
+    <code class="token punctuation">}</code><code class="token punctuation">,</code> <code class="token number">3000</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+  <code class="token punctuation">}</code><code class="token punctuation">)</code><code class="token punctuation">)</code>
+  <code class="token comment">// triggers after 3 seconds</code>
+  <code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code>githubUser <code class="token operator">=&gt;</code> <code class="token function">alert</code><code class="token punctuation">(</code><code class="token template-string"><code class="token string">`Finished showing </code><code class="token interpolation"><code class="token interpolation-punctuation punctuation">${</code>githubUser<code class="token punctuation">.</code>name<code class="token interpolation-punctuation punctuation">}</code></code><code class="token string">`</code></code><code class="token punctuation">)</code><code class="token punctuation">)</code><code class="token punctuation">;</code></code><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre>
+        </div>
+      </div>
+      
+      </div><p>Now right after <code>setTimeout</code> runs <code>img.remove()</code>, it calls <code>resolve(githubUser)</code>, thus passing the control to the next <code>.then</code> in the chain and passing forward the user data.</p>
+<p>As a rule, an asynchronous action should always return a promise.</p>
+<p>That makes it possible to plan actions after it. Even if we don’t plan to extend the chain now, we may need it later.</p>
+<p>Finally, we can split the code into reusable functions:</p>
+<div data-trusted="1" class="code-example" data-prism-highlighted="1">
+      <div class="codebox code-example__codebox">
+        
+        <div class="toolbar codebox__toolbar">
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="run" data-action="run" class="toolbar__button toolbar__button_run"></a>
+          </div>
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="open in sandbox" target="_blank" data-action="edit" class="toolbar__button toolbar__button_edit"></a>
+          </div>
+        </div>
+        <div class="codebox__code" data-code="1">
+          <pre class="line-numbers  language-javascript"><code class=" language-javascript"><code class="token keyword">function</code> <code class="token function">loadJson</code><code class="token punctuation">(</code>url<code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token keyword">return</code> <code class="token function">fetch</code><code class="token punctuation">(</code>url<code class="token punctuation">)</code>
+    <code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code>response <code class="token operator">=&gt;</code> response<code class="token punctuation">.</code><code class="token function">json</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+<code class="token punctuation">}</code>
+
+<code class="token keyword">function</code> <code class="token function">loadGithubUser</code><code class="token punctuation">(</code>name<code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token keyword">return</code> <code class="token function">fetch</code><code class="token punctuation">(</code><code class="token template-string"><code class="token string">`https://api.github.com/users/</code><code class="token interpolation"><code class="token interpolation-punctuation punctuation">${</code>name<code class="token interpolation-punctuation punctuation">}</code></code><code class="token string">`</code></code><code class="token punctuation">)</code>
+    <code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code>response <code class="token operator">=&gt;</code> response<code class="token punctuation">.</code><code class="token function">json</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+<code class="token punctuation">}</code>
+
+<code class="token keyword">function</code> <code class="token function">showAvatar</code><code class="token punctuation">(</code>githubUser<code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token keyword">return</code> <code class="token keyword">new</code> <code class="token class-name">Promise</code><code class="token punctuation">(</code><code class="token keyword">function</code><code class="token punctuation">(</code>resolve<code class="token punctuation">,</code> reject<code class="token punctuation">)</code> <code class="token punctuation">{</code>
+    <code class="token keyword">let</code> img <code class="token operator">=</code> document<code class="token punctuation">.</code><code class="token function">createElement</code><code class="token punctuation">(</code><code class="token string">'img'</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+    img<code class="token punctuation">.</code>src <code class="token operator">=</code> githubUser<code class="token punctuation">.</code>avatar_url<code class="token punctuation">;</code>
+    img<code class="token punctuation">.</code>className <code class="token operator">=</code> <code class="token string">"promise-avatar-example"</code><code class="token punctuation">;</code>
+    document<code class="token punctuation">.</code>body<code class="token punctuation">.</code><code class="token function">append</code><code class="token punctuation">(</code>img<code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+    <code class="token function">setTimeout</code><code class="token punctuation">(</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token operator">=&gt;</code> <code class="token punctuation">{</code>
+      img<code class="token punctuation">.</code><code class="token function">remove</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+      <code class="token function">resolve</code><code class="token punctuation">(</code>githubUser<code class="token punctuation">)</code><code class="token punctuation">;</code>
+    <code class="token punctuation">}</code><code class="token punctuation">,</code> <code class="token number">3000</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+  <code class="token punctuation">}</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+<code class="token punctuation">}</code>
+
+<code class="token comment">// Use them:</code>
+<code class="token function">loadJson</code><code class="token punctuation">(</code><code class="token string">'/article/promise-chaining/user.json'</code><code class="token punctuation">)</code>
+  <code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code>user <code class="token operator">=&gt;</code> <code class="token function">loadGithubUser</code><code class="token punctuation">(</code>user<code class="token punctuation">.</code>name<code class="token punctuation">)</code><code class="token punctuation">)</code>
+  <code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code>showAvatar<code class="token punctuation">)</code>
+  <code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code>githubUser <code class="token operator">=&gt;</code> <code class="token function">alert</code><code class="token punctuation">(</code><code class="token template-string"><code class="token string">`Finished showing </code><code class="token interpolation"><code class="token interpolation-punctuation punctuation">${</code>githubUser<code class="token punctuation">.</code>name<code class="token interpolation-punctuation punctuation">}</code></code><code class="token string">`</code></code><code class="token punctuation">)</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+  <code class="token comment">// ...</code></code><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre>
+        </div>
+      </div>
+      
+      </div><h2><a class="main__anchor" name="summary" href="https://javascript.info/promise-chaining#summary">Summary</a></h2><p>If a <code>.then</code> (or <code>catch/finally</code>, doesn’t matter) handler returns a promise, the rest of the chain waits until it settles. When it does, its result (or error) is passed further.</p>
+<p>Here’s a full picture:</p>
+<figure><div class="image" style="width:641px">
+      <div class="image__ratio" style="padding-top:52.886115444617786%"></div>
+      <img src="./Promises chaining_files/promise-handler-variants.png" alt="" width="641" height="339" class="image__image">
+      </div></figure></div></article><div class="tasks formatted"><h2 class="tasks__title" id="tasks"><a class="tasks__title-anchor main__anchor main__anchor main__anchor_noicon" href="https://javascript.info/promise-chaining#tasks">Tasks</a></h2><div class="task tasks__task"><div class="task__header"><div class="task__title-wrap"><h3 class="task__title"><a class="main__anchor" href="https://javascript.info/promise-chaining#promise-then-versus-catch" name="promise-then-versus-catch">Promise: then versus catch</a></h3><a class="task__open-link" href="https://javascript.info/task/then-vs-catch" target="_blank"></a></div><div class="task__header-note"></div><div class="task__content"><p>Are these code fragments equal? In other words, do they behave the same way in any circumstances, for any handler functions?</p>
+<div data-trusted="1" class="code-example" data-prism-highlighted="1">
+      <div class="codebox code-example__codebox">
+        
+        <div class="codebox__code" data-code="1">
+          <pre class="line-numbers  language-javascript"><code class=" language-javascript">promise<code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code>f1<code class="token punctuation">)</code><code class="token punctuation">.</code><code class="token keyword">catch</code><code class="token punctuation">(</code>f2<code class="token punctuation">)</code><code class="token punctuation">;</code></code><span class="line-numbers-rows"><span></span></span></pre>
+        </div>
+      </div>
+      
+      </div><p>Versus:</p>
+<div data-trusted="1" class="code-example" data-prism-highlighted="1">
+      <div class="codebox code-example__codebox">
+        
+        <div class="codebox__code" data-code="1">
+          <pre class="line-numbers  language-javascript"><code class=" language-javascript">promise<code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code>f1<code class="token punctuation">,</code> f2<code class="token punctuation">)</code><code class="token punctuation">;</code></code><span class="line-numbers-rows"><span></span></span></pre>
+        </div>
+      </div>
+      
+      </div><button class="task__solution" type="button">solution</button><div class="task__answer"><div class="task__answer-content"><p>The short answer is: <strong>no, they are not the equal</strong>:</p>
+<p>The difference is that if an error happens in <code>f1</code>, then it is handled by <code>.catch</code> here:</p>
+<div data-trusted="1" class="code-example" data-prism-highlighted="1">
+      <div class="codebox code-example__codebox">
+        
+        <div class="toolbar codebox__toolbar">
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="run" data-action="run" class="toolbar__button toolbar__button_run"></a>
+          </div>
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="open in sandbox" target="_blank" data-action="edit" class="toolbar__button toolbar__button_edit"></a>
+          </div>
+        </div>
+        <div class="codebox__code" data-code="1">
+          <pre class="line-numbers  language-javascript"><code class=" language-javascript">promise
+  <code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code>f1<code class="token punctuation">)</code>
+  <code class="token punctuation">.</code><code class="token keyword">catch</code><code class="token punctuation">(</code>f2<code class="token punctuation">)</code><code class="token punctuation">;</code></code><span class="line-numbers-rows"><span></span><span></span><span></span></span></pre>
+        </div>
+      </div>
+      
+      </div><p>…But not here:</p>
+<div data-trusted="1" class="code-example" data-prism-highlighted="1">
+      <div class="codebox code-example__codebox">
+        
+        <div class="toolbar codebox__toolbar">
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="run" data-action="run" class="toolbar__button toolbar__button_run"></a>
+          </div>
+          <div class="toolbar__tool">
+            <a href="https://javascript.info/promise-chaining#" title="open in sandbox" target="_blank" data-action="edit" class="toolbar__button toolbar__button_edit"></a>
+          </div>
+        </div>
+        <div class="codebox__code" data-code="1">
+          <pre class="line-numbers  language-javascript"><code class=" language-javascript">promise
+  <code class="token punctuation">.</code><code class="token function">then</code><code class="token punctuation">(</code>f1<code class="token punctuation">,</code> f2<code class="token punctuation">)</code><code class="token punctuation">;</code></code><span class="line-numbers-rows"><span></span><span></span></span></pre>
+        </div>
+      </div>
+      
+      </div><p>That’s because an error is passed down the chain, and in the second code piece there’s no chain below <code>f1</code>.</p>
+<p>In other words, <code>.then</code> passes results/errors to the next <code>.then/catch</code>. So in the first example, there’s a <code>catch</code> below, and in the second one – there isn’t, so the error is unhandled.</p>
+</div><button class="close-button task__answer-close" type="button" title="close"></button></div></div></div></div></div></div><div class="page__nav-wrap"><a class="page__nav page__nav_prev" href="https://javascript.info/promise-basics" data-tooltip="Promise"><span class="page__nav-text"><span class="page__nav-text-shortcut">Ctrl + <span class="page__nav-text-arr">←</span></span></span><span class="page__nav-text-alternate">Previous lesson</span></a><a class="page__nav page__nav_next" href="https://javascript.info/promise-error-handling" data-tooltip="Error handling with promises"><span class="page__nav-text"><span class="page__nav-text-shortcut">Ctrl + <span class="page__nav-text-arr">→</span></span></span><span class="page__nav-text-alternate">Next lesson</span></a></div><div class="article-tablet-foot tablet-only"><div class="article-tablet-foot__layout"><div class="share-icons"><span class="share-icons__title">Share</span><a class="share share_tw" href="https://twitter.com/share?url=https%3A%2F%2Fjavascript.info%2Fpromise-chaining"></a><a class="share share_fb" href="https://www.facebook.com/sharer/sharer.php?s=100&amp;p%5Burl%5D=https%3A%2F%2Fjavascript.info%2Fpromise-chaining"></a><a class="share share_gp" href="https://plus.google.com/share?url=https%3A%2F%2Fjavascript.info%2Fpromise-chaining"></a><a class="share share_vk" href="https://vkontakte.ru/share.php?url=https%3A%2F%2Fjavascript.info%2Fpromise-chaining"></a></div><div class="article-tablet-foot__map"><a class="map" href="https://javascript.info/tutorial/map" data-action="tutorial-map"><span class="map__text">Tutorial map</span></a></div></div></div><div class="comments formatted" id="comments"><div class="comments__header"><h2 class="comments__header-title"><a href="https://javascript.info/promise-chaining#comments" name="comments">Comments</a></h2><div class="comments__read-before"><span class="comments__read-before-link">read this before commenting…</span><div class="comments__read-before-popup"><div class="comments__read-before-popup-i"><ul><li>You're welcome to post additions, questions to the articles and answers to them.</li><li>To insert a few words of code, use the <code>&lt;code&gt;</code> tag, for several lines – use <code>&lt;pre&gt;</code>, for more than 10 lines – use a sandbox (<a href="https://plnkr.co/edit/?p=preview">plnkr</a>, <a href="http://jsbin.com/">JSBin</a>, <a href="http://codepen.io/">codepen</a>…)</li><li>If you can't understand something in the article – please elaborate.</li></ul></div></div></div></div><div id="disqus_thread"></div><script>var disqus_config = function() { if (!this.page) this.page = {}; Object.assign(this.page, {"url":"https:\/\/javascript.info\/promise-chaining","identifier":"\/promise-chaining"}); };</script><script>var disqus_shortname = "javascriptinfo";</script><script>var disqus_enabled = true;</script></div></main></div><div class="sidebar page__sidebar sidebar sidebar_sticky-footer" style="top: 0px;"><button class="sidebar__toggle" data-sidebar-toggle=""></button><a class="map" href="https://javascript.info/tutorial/map" data-action="tutorial-map" data-tooltip="Tutorial map"></a><div class="sidebar__inner"><div class="sidebar__content"><div class="sidebar__section"><h4 class="sidebar__section-title">Chapter</h4><nav class="sidebar__navigation"><ul class="sidebar__navigation-links"><li class="sidebar__navigation-link"><a class="sidebar__link" href="https://javascript.info/async">Promises, async/await</a></li></ul></nav></div><div class="sidebar__section"><h4 class="sidebar__section-title">Lesson navigation</h4><nav class="sidebar__navigation"><ul class="sidebar__navigation-links"><li class="sidebar__navigation-link"><a class="sidebar__link" href="https://javascript.info/promise-chaining#returning-promises">Returning promises</a></li><li class="sidebar__navigation-link"><a class="sidebar__link" href="https://javascript.info/promise-chaining#example-loadscript">Example: loadScript</a></li><li class="sidebar__navigation-link"><a class="sidebar__link" href="https://javascript.info/promise-chaining#bigger-example-fetch">Bigger example: fetch</a></li><li class="sidebar__navigation-link"><a class="sidebar__link" href="https://javascript.info/promise-chaining#summary">Summary</a></li></ul></nav></div><div class="sidebar__section"><nav class="sidebar__navigation"><ul class="sidebar__navigation-links"><li class="sidebar__navigation-link"><a class="sidebar__link" href="https://javascript.info/promise-chaining#tasks">Tasks (1)</a></li><li class="sidebar__navigation-link"><a class="sidebar__link" href="https://javascript.info/promise-chaining#comments">Comments</a></li></ul></nav></div><div class="sidebar__section"><div class="sidebar__section-title">Share</div><a class="share share_tw sidebar__share" href="https://twitter.com/share?url=https%3A%2F%2Fjavascript.info%2Fpromise-chaining"></a><a class="share share_fb sidebar__share" href="https://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=https%3A%2F%2Fjavascript.info%2Fpromise-chaining"></a><a class="share share_gp sidebar__share" href="https://plus.google.com/share?url=https%3A%2F%2Fjavascript.info%2Fpromise-chaining"></a></div><div class="sidebar__section"><a class="sidebar__link" href="https://github.com/javascript-tutorial/en.javascript.info/blob/master/1-js/11-async/03-promise-chaining/article.md">Edit on Github</a></div></div></div></div></div></div><div class="page-footer"><ul class="page-footer__list"><li class="page-footer__item page-footer__item_copy">©&nbsp;2007—2019&nbsp; Ilya Kantor</li><li class="page-footer__item page-footer__item_about"><a class="page-footer__link" href="https://javascript.info/about">about the project</a></li><li class="page-footer__item page-footer__item_contact"><a class="page-footer__link" href="https://javascript.info/about#contact-us">contact us</a></li><li class="page-footer__item page-footer__item_terms"><a class="page-footer__link" href="https://javascript.info/terms">terms of usage</a></li><li class="page-footer__item page-footer__item_privacy"><a class="page-footer__link" href="https://javascript.info/privacy">privacy policy</a></li></ul></div><progress class="tutorial-progress sticky" data-sticky="" value="73" max="83" data-tooltip="Lesson 73 of 83" style="position: fixed; top: 0px; left: 0px; z-index: 101; background: white; margin: 0px; width: 1262px;"></progress></body></html>

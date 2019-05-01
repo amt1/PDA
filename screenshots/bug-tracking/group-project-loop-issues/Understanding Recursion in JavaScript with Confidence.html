@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)https://www.thecodingdelight.com/understanding-recursion-javascript/ -->
+<html lang="en-US" prefix="og: http://ogp.me/ns#"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css"> .ttfm1{font-family: 'Lato';font-size:1.6em;line-height:1.7em;color:#000000;} </style>	<!--[if lt IE 9]>
+<script src="//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/cache/wpfc-minified/b4e7409ece7f0b494815e7f9f270ede6/2krun.js"></script>
+<script src="//css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]-->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/themes/rise/css/ie8.css"/>
+<![endif]-->
+<!--[if IE 7]>
+<link rel="stylesheet" type="text/css" href="//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/themes/rise/css/ie7.css"/>
+<![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Understanding Recursion in JavaScript with Confidence</title>
+<!-- Social Warfare v3.5.0 https://warfareplugins.com --><meta property="og:type" content="article"><meta property="og:url" content=""><meta property="og:site_name" content=""><meta property="article:published_time" content="2017-06-19T12:33:07+00:00"><meta property="article:modified_time" content="2018-07-17T06:47:42+00:00"><meta property="og:updated_time" content="2018-07-17T06:47:42+00:00"><meta property="og:description" content=""><meta property="og:title" content=""><meta property="article_author" content="https://www.facebook.com/profile.php?id=100011005513185"><meta property="article_publisher" content="https://www.facebook.com/CodeDelight/"><meta property="og:image" content="https://www.thecodingdelight.com/wp-content/uploads/2017/04/recursion-factorial-call-stack-e1493367276342.jpg"><meta name="image" property="og:image" content=""><meta property="og:image_width" content=""><meta property="og:image_height" content=""><meta property="twitter_title" content=""><meta property="twitter_description" content=""><meta property="twitter_image" content="https://www.thecodingdelight.com/wp-content/uploads/2017/04/recursion-factorial-call-stack-e1493367276342.jpg"><meta property="twitter_site" content="@JayLee189"><meta property="twitter_creator" content="@JayLee189"><meta property="twitter_card" content="summary_large_image"><style>@font-face {font-family: "sw-icon-font";src:url("//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/plugins/social-warfare/assets/fonts/sw-icon-font.eot?ver=3.5.0");src:url("//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/plugins/social-warfare/assets/fonts/sw-icon-font.eot?ver=3.5.0#iefix") format("embedded-opentype"),url("//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/plugins/social-warfare/assets/fonts/sw-icon-font.woff?ver=3.5.0") format("woff"),
+url("//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/plugins/social-warfare/assets/fonts/sw-icon-font.ttf?ver=3.5.0") format("truetype"),url("//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/plugins/social-warfare/assets/fonts/sw-icon-font.svg?ver=3.5.0#1445203416") format("svg");font-weight: normal;font-style: normal;}</style>
+<!-- Social Warfare v3.5.0 https://warfareplugins.com -->
+<!-- This site is optimized with the Yoast SEO Premium plugin v9.6.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<meta name="description" content="Understanding recursion in JavaScript will equip programmers to write expressive solutions and think recursively using recursive function calls.">
+<link rel="canonical" href="https://www.thecodingdelight.com/understanding-recursion-javascript/">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Understanding Recursion in JavaScript with Confidence">
+<meta property="og:description" content="Understanding recursion in JavaScript will equip programmers to write expressive solutions and think recursively using recursive function calls.">
+<meta property="og:url" content="https://www.thecodingdelight.com/understanding-recursion-javascript/">
+<meta property="og:site_name" content="The Coding Delight">
+<meta property="article:publisher" content="https://www.facebook.com/CodeDelight/">
+<meta property="article:author" content="https://www.facebook.com/profile.php?id=100011005513185">
+<meta property="article:tag" content="best practices">
+<meta property="article:tag" content="fundamentals">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="recursion">
+<meta property="article:tag" content="stack">
+<meta property="article:section" content="tutorials">
+<meta property="article:published_time" content="2017-06-19T12:33:07+00:00">
+<meta property="article:modified_time" content="2018-07-17T06:47:42+00:00">
+<meta property="og:updated_time" content="2018-07-17T06:47:42+00:00">
+<meta property="og:image" content="https://www.thecodingdelight.com/wp-content/uploads/2017/04/recursion-factorial-call-stack-e1493367276342.jpg">
+<meta property="og:image:secure_url" content="https://www.thecodingdelight.com/wp-content/uploads/2017/04/recursion-factorial-call-stack-e1493367276342.jpg">
+<meta property="og:image:width" content="720">
+<meta property="og:image:height" content="415">
+<meta property="og:image:alt" content="Visual illustration of the call stack when calling factorial(5)">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="Understanding recursion in JavaScript will equip programmers to write expressive solutions and think recursively using recursive function calls.">
+<meta name="twitter:title" content="Understanding Recursion in JavaScript with Confidence">
+<meta name="twitter:image" content="https://www.thecodingdelight.com/wp-content/uploads/2017/04/recursion-factorial-call-stack-e1493367276342.jpg">
+<script async="" src="./Understanding Recursion in JavaScript with Confidence_files/analytics.js"></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","url":"https://www.thecodingdelight.com/","sameAs":["https://www.facebook.com/CodeDelight/"],"@id":"#person","name":"Jay Lee"}</script>
+<!-- / Yoast SEO Premium plugin. -->
+<link rel="amphtml" href="https://www.thecodingdelight.com/understanding-recursion-javascript/amp/"><link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="The Coding Delight » Understanding Recursion in JavaScript with Confidence Comments Feed" href="https://www.thecodingdelight.com/understanding-recursion-javascript/feed/">
+<!-- <link rel='stylesheet' id='social-warfare-block-css-css'  href='//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/plugins/social-warfare/assets/js/post-editor/dist/blocks.style.build.css?ver=5.1' type='text/css' media='all' /> -->
+<!-- <link rel='stylesheet' id='wp-block-library-css'  href='//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-includes/css/dist/block-library/style.min.css?ver=5.1' type='text/css' media='all' /> -->
+<!-- <link rel='stylesheet' id='social_warfare-css'  href='//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/plugins/social-warfare/assets/css/style.min.css?ver=3.5.0' type='text/css' media='all' /> -->
+<!-- <link rel='stylesheet' id='rise-style-css'  href='//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/themes/rise/style.css?ver=5.1' type='text/css' media='all' /> -->
+<!-- <link rel='stylesheet' id='thrive-reset-css'  href='//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/themes/rise/css/reset.css?v=1.401.2' type='text/css' media='all' /> -->
+<!-- <link rel='stylesheet' id='thrive-main-style-css'  href='//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/themes/rise/css/main_blue.css?v=1.401.2' type='text/css' media='all' /> -->
+<!-- <link rel='stylesheet' id='fixedtoc-style-css'  href='//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/plugins/fixed-toc/frontend/assets/css/ftoc.min.css?ver=5.1' type='text/css' media='all' /> -->
+<link rel="stylesheet" type="text/css" href="./Understanding Recursion in JavaScript with Confidence_files/2kruh.css" media="all">
+<style id="fixedtoc-style-inline-css" type="text/css">
+.ftwp-in-post #ftwp-container-outer { height: auto; } .ftwp-in-post #ftwp-container-outer.ftwp-float-right { width: 250px; } #ftwp-container.ftwp-wrap #ftwp-contents { width: 250px; height: auto; font-size: 12px; } .ftwp-in-post #ftwp-container-outer #ftwp-contents { height: auto; } .ftwp-in-post #ftwp-container-outer.ftwp-float-right #ftwp-contents { width: 250px; } #ftwp-container.ftwp-wrap #ftwp-trigger { width: 50px; height: 50px; font-size: 30px; } #ftwp-container #ftwp-trigger.ftwp-border-medium { font-size: 29px; } #ftwp-container.ftwp-wrap #ftwp-header { font-size: 19.2px; font-family: inherit; } #ftwp-container.ftwp-wrap #ftwp-header-title { font-weight: bold; } #ftwp-container.ftwp-wrap #ftwp-list { font-size: 12px; font-family: inherit; } #ftwp-container #ftwp-list.ftwp-liststyle-decimal .ftwp-anchor::before { font-size: 12px; } #ftwp-container #ftwp-list.ftwp-strong-first>.ftwp-item>.ftwp-anchor .ftwp-text { font-size: 13.2px; } #ftwp-container #ftwp-list.ftwp-strong-first.ftwp-liststyle-decimal>.ftwp-item>.ftwp-anchor::before { font-size: 13.2px; } #ftwp-container.ftwp-wrap #ftwp-trigger { color: #333; background: rgba(243,243,243,0.95); } #ftwp-container.ftwp-wrap #ftwp-trigger { border-color: rgba(51,51,51,0.95); } #ftwp-container.ftwp-wrap #ftwp-contents { border-color: rgba(51,51,51,0.95); } #ftwp-container.ftwp-wrap #ftwp-header { color: #333; background: rgba(243,243,243,0.95); } #ftwp-container.ftwp-wrap #ftwp-contents:hover #ftwp-header { background: #f3f3f3; } #ftwp-container.ftwp-wrap #ftwp-list { color: #333; background: rgba(243,243,243,0.95); } #ftwp-container.ftwp-wrap #ftwp-contents:hover #ftwp-list { background: #f3f3f3; } #ftwp-container.ftwp-wrap #ftwp-list .ftwp-anchor:hover { color: #00A368; } #ftwp-container.ftwp-wrap #ftwp-list .ftwp-anchor:focus, #ftwp-container.ftwp-wrap #ftwp-list .ftwp-active, #ftwp-container.ftwp-wrap #ftwp-list .ftwp-active:hover { color: #fff; } #ftwp-container.ftwp-wrap #ftwp-list .ftwp-text::before { background: rgba(221,51,51,0.95); } .ftwp-heading:target::before { background: rgba(221,51,51,0.95); }
+</style>
+<!-- <link rel='stylesheet' id='prism-theme-css'  href='//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/plugins/ank-prism-for-wp/out/prism-css.min.css?ver=1506038579' type='text/css' media='all' /> -->
+<link rel="stylesheet" type="text/css" href="./Understanding Recursion in JavaScript with Confidence_files/2kruh(1).css" media="all">
+<script type="text/javascript">
+/* <![CDATA[ */
+var THO_Head = {"variations":{"1701":{"variations":{"86":"Sharpen your Problem Solving Skills as a Programmer","87":"The Programmer's Guide to Problem Solving Skills","88":"Master the Art of Problem Solving","89":"Level up your Problem Solving Skills"},"test_id":"22","winners":[]},"1009":{"variations":{"65":"Five Methods for Improving your Skills as a Programmer","66":"Five Methods to Improve your Skills as a Programmer","67":"Five Ways to Upgrade your Skills as a Programmer","68":"Five Ways to Sharpen your Skills as a Programmer","69":"Become a Better Programmer by Sharpening Your Skills","70":"Programmers Guide to Leveling Up","71":"Programmers Guide to Leveling Up Your Skills"},"test_id":"18","winners":{"6":"The 5 Effective Steps to Becoming a Better Programmer","14":"Five Methods of Improving your Skills as a Programmer"}},"110":{"variations":{"62":"JavaScript Hoisting Variable Scope Explained","63":"Exploring Hoisting and Variable Scope in JavaScript","64":"JavaScript Hoisting and Variable Scopes Simplified"},"test_id":"17","winners":[]},"326":{"variations":{"53":"Strings (std::string) Demystified in C++ (including concatenation)","54":"Strings in C++ Demystified ","55":"Introduction to Strings in C++","56":"String Concatenation in C++ Done the Right Way","57":"String Concatenation and Comparison in C++"},"test_id":"15","winners":[]},"108":{"variations":{"38":"Introduction to Javascript closure","39":"Introduction to Closures in JavaScript","40":"Understanding Closures with Clarity in JavaScript","41":"Understanding Closures in JavaScript","42":"JavaScript Closures in Plain English"},"test_id":"12","winners":[]},"986":{"variations":{"24":"A Detailed Introduction to the Red Black Tree","25":"Red Black Tree Primer - A Detailed Intro","26":"Understanding Red Black Trees - Detailed Guide","27":"Demystifying the Red Black Tree Data Structure"},"test_id":"8","winners":[]},"497":{"variations":{"21":"Introduction to the Binary Search Tree in JavaScript","22":"Getting to know the Binary Search Tree in JavaScript","23":"Diving into the Binary Search Tree in JavaScript"},"test_id":"7","winners":[]},"517":{"variations":{"12":"Write your own Binary Search Tree Implementation in JavaScript","13":"Binary Search Tree Implementation in JavaScript","14":"Detailed Binary Search tree Guide in JavaScript"},"test_id":"4","winners":[]},"712":{"variations":{"3":"Master the AVL Tree Implementation in Java \u2013 Detailed Guide","4":"Learn and Understand the AVL Tree","5":"Demystifying the AVL tree - Implementation in Java - Deep Dive","6":"Deep dive into the AVL tree in Java"},"test_id":"2","winners":[]},"740":{"variations":{"1":"The 7 Common Learning Mistakes Programmers Make","2":"Common learning mistakes made by programmers"},"test_id":"1","winners":[]}},"post_id":"592","element_tag":"thrive_headline","woo_tag":"tho_woo"};
+/* ]]> */
+</script>
+<script src="./Understanding Recursion in JavaScript with Confidence_files/2kruh.js" type="text/javascript"></script>
+<!-- <script type='text/javascript' src='//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/cache/wpfc-minified/a5f56371a4b9dd051d27df70be8568ff/2krun.js'></script> -->
+<!-- <script type='text/javascript' src='//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/cache/wpfc-minified/62acd449fb92e513d9f2829f82cb733e/2krun.js'></script> -->
+<!-- <script type='text/javascript' src='//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/cache/wpfc-minified/de13e9e528453cda424907e767a9a4ee/2krum.js'></script> -->
+<link rel="https://api.w.org/" href="https://www.thecodingdelight.com/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.thecodingdelight.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.thecodingdelight.com/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 5.1">
+<link rel="shortlink" href="https://www.thecodingdelight.com/?p=592">
+<link rel="alternate" type="application/json+oembed" href="https://www.thecodingdelight.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://www.thecodingdelight.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F&amp;format=xml">
+<style type="text/css">#tve_editor .ttfm1{font-family: 'Lato' !important;color: #000000;font-weight: 400 !important;}.ttfm1 input, .ttfm1 select, .ttfm1 textarea, .ttfm1 button {font-family: 'Lato' !important;color: #000000;font-weight: 400 !important;}#tve_editor .ttfm1.bold_text,.ttfm1 .bold_text,.ttfm1 b,.ttfm1 strong{font-weight: 700 !important;}.ttfm1.bold_text,.ttfm1 .bold_text,.ttfm1 b,.ttfm1 strong input, .ttfm1.bold_text,.ttfm1 .bold_text,.ttfm1 b,.ttfm1 strong select, .ttfm1.bold_text,.ttfm1 .bold_text,.ttfm1 b,.ttfm1 strong textarea, .ttfm1.bold_text,.ttfm1 .bold_text,.ttfm1 b,.ttfm1 strong button {font-weight: 700 !important;}</style>		<style type="text/css">.wp-video-shortcode {
+max-width: 100% !important;
+}
+.bSe a {
+clear: right;
+}
+.bSe blockquote {
+clear: both;
+}
+body { background:#FFF; }.cnt article h1.entry-title a { color:#333; }.cnt article h2.entry-title a { color:#333; }.bSe h1, h1.entry-title, h1.entry-title a { color:#333; }.bSe h2 { color:#464545; }.bSe h3 { color:#333; }.bSe h4 { color:#333; }.bSe h5 { color:#333; }.bSe h6 { color:#333; }.bSe p, .mry .awr-e p { color:#666; }.cnt .bSe { color:#666; }.cnt h1 a, .tve-woocommerce .bSe .awr .entry-title, .tve-woocommerce .bSe .awr .page-title{font-family:Roboto,sans-serif;}.bSe h1{font-family:Roboto,sans-serif;}.bSe h2,.tve-woocommerce .bSe h2{font-family:Roboto,sans-serif;}.bSe h3,.tve-woocommerce .bSe h3{font-family:Roboto,sans-serif;}.bSe h4{font-family:Roboto,sans-serif;}.bSe h5{font-family:Roboto,sans-serif;}.bSe h6{font-family:Roboto,sans-serif;}#text_logo{font-family:Roboto,sans-serif;}.cnt h1 a { font-weight:500; }.bSe h1 { font-weight:500; }.bSe h2 { font-weight:500; }.bSe h3 { font-weight:500; }.bSe h4 { font-weight:500; }.bSe h5 { font-weight:500; }.bSe h6 { font-weight:500; }.cnt{font-family:Roboto,sans-serif;font-weight:300;}article strong {font-weight: bold;}.cnt p, .tve-woocommerce .product p, .tve-woocommerce .products p, .brd ul li, header nav ul li a, header nav ul li > ul li a, .has-extended.has-heading .colch, footer, footer .fmm p, .aut-f{font-family:Roboto,sans-serif;font-weight:300;}article strong {font-weight: bold;}.bSe h1, .bSe .entry-title { font-size:46px; }.cnt { font-size:18px; }.thrivecb { font-size:18px; }.out { font-size:18px; }.aut p { font-size:18px; }.cnt p { line-height:1.5em; }.thrivecb { line-height:1.5em; }.bSe a, .cnt a { color:#24447b; }.bSe .faq h4{font-family:Roboto,sans-serif;font-weight:300;}article strong {font-weight: bold;}header nav > ul.menu > li > a { color:#fff; }header nav > ul.menu > li >  a:hover { color:#fff; }header nav > ul > li.current_page_item > a:hover { color:#fff; }header nav > ul > li.current_menu_item > a:hover { color:#fff; }header nav > ul > li.current_menu_item > a:hover { color:#fff; }header nav > ul > li > a:active { color:#fff; }header #logo > a > img { max-width:200px; }header ul.menu > li.h-cta > a { color:#FFFFFF!important; }header ul.menu > li.h-cta > a { background:#4b7cc7; }header ul.menu > li.h-cta > a { border-color:#4b7cc7; }header ul.menu > li.h-cta > a:hover { color:#4b7cc7!important; }header ul.menu > li.h-cta > a:hover { background:transparent; }</style>
+<meta property="fb:admins" content="Jay Lee"><meta property="fb:app_id" content="433769270318651">
+<!-- BEGIN ExactMetrics v5.3.7 Universal Analytics - https://exactmetrics.com/ -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-96649669-1', 'auto');
+ga('send', 'pageview');
+</script>
+<!-- END ExactMetrics Universal Analytics -->
+<style type="text/css">/*Table of contents*/
+#ftwp-trigger { float: right; }
+#ftwp-container-outer { margin-bottom: 40px; }
+/* Color of logo: force to white */
+#text-logo a { color: #FFF !important; }
+.awr-i a:not(.ftwp-anchor) { text-decoration: underline; }
+@media screen and ( max-width: 26.25em ) /* <= 420 */
+{
+#ftwp-contents, #ftwp-list { height: auto !important;}
+}
+/* AD STYLING */
+.adsense {
+height: 90px;
+background-color: #fff;
+display: block;
+margin: 0 auto;
+}
+.adsense:before { display: none !important; }
+.adsense ins    { width: 100%; height: 100%; display: block; }
+.adsense {
+position: relative;
+}
+.adsense__loading {
+width: 100%;
+height: 100%;
+background-color: rgba( 255, 255, 255, .9 );
+display: table;
+position: absolute;
+top: 0;
+left: 0;
+}
+.adsense--loaded .adsense__loading { display: none; }
+.adsense__loading span {
+text-align: center;
+vertical-align: middle;
+display: table-cell;
+}
+@media screen and ( max-width: 64em ) /* <= 1024 */
+{
+.adsense { width: 728px; height: 90px; }
+.adsense:before    { content: '1024'; }           
+}
+@media screen and ( max-width: 50em ) /* <= 800 */
+{
+.adsense { width: 468px; height: 60px; }
+.adsense:before    { content: '800'; }
+}
+@media screen and ( max-width: 33.75em ) /* <= 540 */
+{
+.adsense { width: 336px; height: 280px; }
+.adsense:before    { content: '540'; }
+}
+@media screen and ( max-width: 26.25em ) /* <= 420 */
+{
+.adsense { width: 250px; height: 250px; }
+.adsense:before    { content: '420'; }
+#ftwp-contents, #ftwp-list { height: auto !important;}
+}
+/* remove Social warfare whitespace at bottom */
+body { padding-bottom: 0 !important; }</style>
+<script charset="utf-8" src="./Understanding Recursion in JavaScript with Confidence_files/button.dd024c345fc26f7c7a8d9938b67e5d3d.js"></script></head>
+<body data-rsssl="1" class="post-template-default single single-post postid-592 single-format-standard custom-background has-ftoc" style="padding-top: 0px; padding-bottom: 0px;">
+<div class="theme-wrapper">
+<div class="fln">
+<div class="wrp clearfix">
+<div class="fl-l">
+<div id="text-logo" class="blue">
+<a href="https://www.thecodingdelight.com/">The Coding Delight</a>
+</div>
+</div>
+<div class="fl-s clearfix">
+<div class="cou thive-share-count thive-share-cnt-592" data-id="592">12 Shares</div>
+<ul>
+<li class="fb"><a href="https://www.facebook.com/sharer/sharer.php?u=https://www.thecodingdelight.com/understanding-recursion-javascript/" onclick="return ThriveApp.open_share_popup(this.href, 545, 433, 592);"><span>Share</span></a>
+</li>
+<li class="tw"><a href="https://twitter.com/share?text=Understanding%20Recursion%20in%20JavaScript%20with%20Confidence:&amp;url=https://www.thecodingdelight.com/understanding-recursion-javascript/" onclick="return ThriveApp.open_share_popup(this.href, 545, 433, 592);"><span>Tweet</span></a>
+</li>
+<li class="lk"><a href="https://www.linkedin.com/cws/share?url=https://www.thecodingdelight.com/understanding-recursion-javascript/" onclick="return ThriveApp.open_share_popup(this.href, 545, 433, 592);"><span>Share</span></a>
+</li>
+<li class="gg"><a href="https://plus.google.com/share?url=https://www.thecodingdelight.com/understanding-recursion-javascript/" onclick="return ThriveApp.open_share_popup(this.href, 545, 433, 592);"><span>Share</span></a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="h-bi">
+<div id="floating_menu" data-float="default" data-social="0">
+<header class="side" style="">
+<div class="h-i">
+<div class="wrp">
+<div id="text-logo" class="blue ">
+<a href="https://www.thecodingdelight.com/">The Coding Delight</a>
+</div>
+<div class="m-s">
+<div class="hsm"></div>
+<div class="m-si">
+<nav class="menu-header-menu-container"><ul id="menu-header-menu" class="menu"><li id="menu-item-1880" class="menu-item menu-item-type-post_type menu-item-object-page toplvl"><a href="https://www.thecodingdelight.com/articles/">Articles</a></li>
+<li id="menu-item-25" class="menu-item menu-item-type-post_type menu-item-object-page toplvl"><a href="https://www.thecodingdelight.com/tutorials/">Tutorials</a></li>
+<li id="menu-item-117" class="menu-item menu-item-type-post_type menu-item-object-page toplvl"><a href="https://www.thecodingdelight.com/about/">About</a></li>
+</ul></nav>										<!-- Cart Dropdown -->
+</div>
+</div>
+</div>
+</div>
+</header>
+</div>
+</div>
+<div class="brd">
+<div class="wrp">
+<ul>
+<li> You are here:</li>
+<li typeof="v:Breadcrumb"><a rel="v:url" property="v:title" class="home" href="https://www.thecodingdelight.com/"> Home&nbsp;»</a></li><li typeof="v:Breadcrumb"><a rel="v:url" property="v:title" href="https://www.thecodingdelight.com/tutorial/">tutorials</a></li><li typeof="v:Breadcrumb"><a class="no-link" rel="v:url" property="v:title" href="https://www.thecodingdelight.com/understanding-recursion-javascript/">&nbsp;» Understanding Recursion in JavaScript with Confidence</a></li>				</ul>
+</div>
+</div>
+<div class="wrp cnt">
+<div class="sAsCont">
+<aside class="sAs right">
+<section id="search-2"><div class="scn"><form action="https://www.thecodingdelight.com/" method="get" class="srh">
+<input type="text" id="search-field" class="search-field" placeholder="Search" name="s">
+<button type="submit" id="search-button" class="search-button sBn"></button>
+</form>
+</div></section>
+<section class="widget follow_me" id="widget_thrive_follow-2">
+<div class="scn">
+<div class="side_body">
+<p class="ttl">Follow</p>
+<ul>
+<li class="sm_icons">
+<div class="bubb">
+<div class="bubble">
+<div id="container-follow-facebook7771">
+<script type="text/javascript">
+jQuery( document ).ready( function () {
+jQuery( "#container-follow-facebook7771" ).append( "<iframe style='height:70px !important;' src='//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FCodeDelight%2F&width=292&height=32&colorscheme=light&show_faces=false&header=false&stream=false&show_border=false' id='follow_me_content_fb'></iframe>" );
+} );
+</script>
+<iframe style="height:70px !important;" src="./Understanding Recursion in JavaScript with Confidence_files/likebox.html" id="follow_me_content_fb"></iframe></div>
+</div>
+</div>
+<a href="javascript:void(0)" class="sm fb sm-1col" rel="facebook">
+<span></span>
+</a>
+</li>
+<li class="sm_icons">
+<div class="bubb">
+<div class="bubble">
+<div id="container-follow-twitter">
+<iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" class="twitter-follow-button twitter-follow-button-rendered" style="position: static; visibility: visible; width: 131px; height: 20px;" title="Twitter Follow Button" src="./Understanding Recursion in JavaScript with Confidence_files/follow_button.2e9f365dae390394eb8d923cba8c5b11.en.html" data-screen-name="JayLee189"></iframe>
+</div>
+<script>jQuery( window ).on( 'load', function () {
+ThriveApp.load_script( "twitter" );
+} );</script>
+</div>
+</div>
+<a href="javascript:void(0)" class="sm tw sm-2col" rel="twitter">
+<span></span>
+</a>
+</li>
+</ul>
+<div class="clear"></div>
+</div>
+</div>
+</section>
+<section id="archives-2"><div class="scn"><p class="ttl">Post Archives</p>		<ul>
+<li><a href="https://www.thecodingdelight.com/2018/03/">March 2018</a>&nbsp;(1)</li>
+<li><a href="https://www.thecodingdelight.com/2018/02/">February 2018</a>&nbsp;(1)</li>
+<li><a href="https://www.thecodingdelight.com/2018/01/">January 2018</a>&nbsp;(1)</li>
+<li><a href="https://www.thecodingdelight.com/2017/12/">December 2017</a>&nbsp;(1)</li>
+<li><a href="https://www.thecodingdelight.com/2017/10/">October 2017</a>&nbsp;(1)</li>
+<li><a href="https://www.thecodingdelight.com/2017/08/">August 2017</a>&nbsp;(3)</li>
+<li><a href="https://www.thecodingdelight.com/2017/07/">July 2017</a>&nbsp;(8)</li>
+<li><a href="https://www.thecodingdelight.com/2017/06/">June 2017</a>&nbsp;(10)</li>
+<li><a href="https://www.thecodingdelight.com/2017/05/">May 2017</a>&nbsp;(11)</li>
+<li><a href="https://www.thecodingdelight.com/2017/04/">April 2017</a>&nbsp;(9)</li>
+</ul>
+</div></section>		<section class="widget tabs_widget widget-rise-tabs" id="widget_thrive_tabs-7">
+<div class="scn">
+<div class="scT">
+<ul class="tabs clearfix">
+<li class="tS">
+<a href="https://www.thecodingdelight.com/understanding-recursion-javascript/">Recent Posts</a>
+</li>
+</ul>
+<div class="scTC scTC0" style="display: block;">
+<div class="pps clearfix">
+<div class="txt left  noImageTab">
+<a href="https://www.thecodingdelight.com/javascript-this/">Mastering the JavaScript this Keyword – Detailed Guide</a>
+<i>
+</i>
+</div>
+</div>
+<div class="pps clearfix">
+<div class="txt left  noImageTab">
+<a href="https://www.thecodingdelight.com/algorithmic-problem-solving-programmers/">Algorithmic Problem Solving for Programmers</a>
+<i>
+</i>
+</div>
+</div>
+<div class="pps clearfix">
+<div class="txt left  noImageTab">
+<a href="https://www.thecodingdelight.com/introduction-command-line/">A Gentle Introduction to the Command Line</a>
+<i>
+</i>
+</div>
+</div>
+<div class="pps clearfix">
+<div class="txt left  noImageTab">
+<a href="https://www.thecodingdelight.com/java-stringbuilder-class/">Implementing the Java StringBuilder Class</a>
+<i>
+</i>
+</div>
+</div>
+</div>
+</div>
+</div></section>
+</aside>
+</div>
+<div class="bSeCont">
+<section class="bSe left">
+<div class="awr">
+<h1 class="entry-title">Understanding Recursion in JavaScript with Confidence</h1>
+<div class="met">
+<ul class="meta">
+<li>
+June 19, 2017									</li>
+<li>
+/
+<a href="https://www.thecodingdelight.com/tutorial/">
+tutorials							</a>
+</li>
+<li>
+/
+By					<a href="https://www.thecodingdelight.com/author/ljay189/">
+Jay					</a>
+</li>
+<li>
+/
+<a href="https://www.thecodingdelight.com/understanding-recursion-javascript/#comments">
+14						COMMENTS					</a>
+</li>
+</ul>
+</div>
+<div class="awr-i">
+<div id="ftwp-container-outer" class="ftwp-float-right" style="height: 894px;"></div>
+<div id="ftwp-postcontent-start"></div>
+<p>Understanding recursion in JavaScript is not only considered difficult, recursive function calls in it of itself have a bad rap to its name. Some people go far as to even dub it as the unnecessarily memory intensive and complex version of a for/while loop. Okay, I may have slightly exaggerated the aforementioned statement.&nbsp;Before proceeding, I want to debunk the following beliefs that</p>
+<ol>
+<li>Recursion is impractical.</li>
+<li>It is something that I will never fully understand.</li>
+</ol>
+<p>First of all, <strong>recursion is not impractical</strong>. It may be difficult to understand at first, but this is why I wrote this post. To bring clarity to this issue. Recursion is a great way of breaking a big problem into smaller, identical problems. Thus, it brings greater clarity to the readers of the code.</p>
+<p>Before proceeding however, I recommend that readers brush up and study the following topics.</p>
+<ol>
+<li><a href="https://www.thecodingdelight.com/java-stack/">The stack data structure</a>.</li>
+<li><a href="https://www.thecodingdelight.com/javascript-function-part-1/">JavaScript functions</a>.</li>
+<li><a href="https://www.thecodingdelight.com/variable-scope-hoisting-javascript/">Variable scope and hoisting</a>.</li>
+</ol>
+<p>The language of choice for this tutorial will be <a href="https://www.javascript.com/" target="_blank" rel="noopener noreferrer">JavaScript</a>. On demand, I am also more than happy to write out the source code examples in either Java or C++.</p>
+<h2 id="ftoc-heading-1" class="ftwp-heading">Objectives</h2>
+<p>By the end of this post, I hope that the readers will</p>
+<ul>
+<li>Have a deeper understanding of recursion in JavaScript.</li>
+<li>Understand cases or problems where a recursive function would be a great tool to use.</li>
+<li>Utilize recursion to make newly written/existing code more readable.</li>
+<li>Identify and distinguish between good and bad use of recursion.</li>
+</ul>
+<p><span id="more-592"></span></p>
+<h2 id="ftoc-heading-2" class="ftwp-heading">What is recursion in programming?</h2>
+<p>In essence, recursion is&nbsp;when a function or a subroutine calls itself repeatedly. All recursive function calls&nbsp;<strong>must have a <span style="text-decoration: underline;">base case</span></strong>. A base case is a specific condition that causes the function to return a value instead of calling itself again. Base cases must exist in order to prevent the recursive function from calling itself infinitely. An error will be thrown if the base case is omitted or written incorrectly. I am certain that all programmers who have dabbled with recursive functions have come across this error at some point.</p>
+<blockquote><p><span style="color: #ff0000;">Uncaught RangeError: Maximum call stack size exceeded</span></p></blockquote>
+<p>In the previous paragraph, I mentioned the term “incorrect base case”. &nbsp;Here, I am referring to a base case that does not cover all the possible user inputs, which may lead to an specific input passing the base case. This will result in an endless recursive function call, resulting in a the call stack overflowing.&nbsp;In the upcoming cases, I am going to cover base cases in more details, using an example.</p>
+<h2 id="ftoc-heading-3" class="ftwp-heading">Base Case Simplified</h2>
+<p>While thinking about recursion, I suddenly had a AHA moment for explaining what a&nbsp;<span style="text-decoration: underline;"><strong>base case</strong></span> is. I am sharing this, because I am hoping that it will help readers understand what a base case really is. Simply, the base case is</p>
+<blockquote class="pulQ"><p>The answer to a problem at the&nbsp;lowest possible level</p><div class="clear"></div></blockquote>
+<p>I came up with this myself, so I am kind of proud. Let me explain what this means.</p>
+<p>For example we have a factorial function. What is the lowest possible level of a factorial? It is one factorial (1!), which equals 1.</p>
+<p>1 factorial (1!) = 1</p>
+<p>On hindsight, this might only make sense to me, but if it does make sense to you, hooray!</p>
+<p>I hope that with this explanation. the concept of base case is somewhat clearer. It is super important, because base cases are&nbsp;literally the building blocks of recursion. You cannot have a recursive function (without resulting in a stack overflow) without a base case.</p>
+<h2 id="ftoc-heading-4" class="ftwp-heading">Function calls&nbsp;are stored on the Call Stack</h2>
+<p>The reason why I asked viewers to familiarize themselves on the stack data structure is because function calls are stored on the call stack. The call stack is a specific implementation of the stack data structure. It is a LIFO (Last in, first out) data structure, meaning that function calls placed on the top of the call stack are also the first to be popped off. As mentioned in my other blog post, a stack is like a deck of cards.&nbsp;It is more convenient to place and draw cards from the top of the stack of cards.</p>
+<p><a href="https://personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/uploads/2017/04/stack-of-cards.jpeg"><img class="alignnone size-large wp-image-123" src="./Understanding Recursion in JavaScript with Confidence_files/stack-of-cards-1024x768.jpeg" alt="Stack of cards used to visually portray the stack data structure" width="1024" height="768"></a></p>
+<p>Some might understand how a stack words from the illustration. However, I also know that visualizing the functions stored will help readers understand with greater clarity. Therefore, in one of the upcoming sections, I will write out a recursive function with a base case. When learning/working on recursive function, examining the call stack by stepping into each function call via a debugging tool is a must. Having good debugging skills here is definitely a plus. If you aren’t used to debugging, now is a great time to start getting acquainted to it. Trust me, it will pay dividends in the near future.</p>
+<h2 id="ftoc-heading-5" class="ftwp-heading">What is the Call Stack?</h2>
+<p>Before heading into analyzing the recursive implementation of the factorial function, we need to have a basic understanding of the&nbsp;<strong>call stack</strong>. As mentioned in the previous section, functions are stored on the call stack. The most important thing to understand when writing recursive function calls is the following piece of information.</p>
+<blockquote><p><em><strong>In JavaScript function calls are popped off the stack when that function returns a value</strong></em></p></blockquote>
+<p>I thought the previous sentence was so important, that it was necessary to emphasize it. Note that even our very own machine manages a call stack or an execution stack. This is actually more advanced and complex&nbsp;and is beyond the scope of this tutorial. For the purposes of this tutorial, keep the quote fresh in your mind.</p>
+<h2 id="ftoc-heading-6" class="ftwp-heading">Tail Call Optimizations and Words of Warning</h2>
+<p>Note that in JavaScript and any other programming language that does not support <a href="https://stackoverflow.com/questions/310974/what-is-tail-call-optimization" target="_blank" rel="noopener">proper tail call optimization</a>&nbsp;run the risk of overflowing the call stack when dealing with large data sets. Although <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-addrestrictedfunctionproperties" target="_blank" rel="noopener">ES 2015 now supports tail call optimization in strict mode</a>&nbsp;(according to its specs),&nbsp;as you can see in the <a href="http://kangax.github.io/compat-table/es6/" target="_blank" rel="noopener">browser compatibility table</a>, we have a long way to go until it is supported on all the browsers.</p>
+<p>We will get the maximum call stack size exceeded error once again if the data set is too large and the tail call optimization is not made by the compiler.</p>
+<h2 id="ftoc-heading-7" class="ftwp-heading">Recursive function calls example – Factorial Function</h2>
+<p>Writing code is arguably one of the best ways to understanding recursion. Lets start off with a simple factorial function. By definition, a factorial function (according to <a href="https://en.wikipedia.org/wiki/Factorial">wikipedia</a>) is</p>
+<blockquote><p>the <a title="Product (mathematics)" href="https://en.wikipedia.org/wiki/Product_(mathematics)">product</a> of all positive <a title="Integer" href="https://en.wikipedia.org/wiki/Integer">integers</a> less than or equal to <i>n</i>.</p></blockquote>
+<p>In another words, the factorial of 5 (5!) would be 5 *4 * 3 * 2 * 1 = 120. Firstly, the number 5 is multiplied by itself minus one. This process repeats itself&nbsp;<span style="text-decoration: underline;">until the number becomes 1</span>. The factorial function&nbsp;involves the same task being broken down into multiple steps. Although&nbsp;the factorial method can be written with&nbsp;a loop, it can also be defined recursively. Why? Because the&nbsp;task itself can be broken down into the same smaller task.</p>
+<p>Can you identify what the base case in the example is? <strong>Hint</strong>: I underlined the base case in one of the previous sentences.</p>
+<pre class="line-numbers language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">function</span> <span class="token function">factorial</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> nextNum <span class="token operator">=</span> num <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// Base case</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>num <span class="token operator">===</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> num<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// return 1;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> num <span class="token operator">*</span> <span class="token function">factorial</span><span class="token punctuation">(</span>nextNum<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">factorial</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">// 120</span><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<h2 id="ftoc-heading-8" class="ftwp-heading">Dissecting and Analyzing the factorial function</h2>
+<p>Lets examine the code from <code>console.log(factorial(5));</code>. First of all, <code>console.log()</code>will be pushed onto stack. Afterwards, <code>factorial(5)</code> will be executed, and its results will be passed into the <code>console.log()</code> function. When we enter <code>factorial(5)</code>, the call stack will look something like this.</p>
+<p><a href="https://personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/uploads/2017/04/recursive-function-calls-call-stack-1.jpg"><img class="alignnone wp-image-601 size-large" src="./Understanding Recursion in JavaScript with Confidence_files/recursive-function-calls-call-stack-1-1024x511.jpg" alt="Introduction to the call stack, where functions are stored and popped off." width="1024" height="511"></a></p>
+<p>Lets skip to line 7 where the return statement is. The factorial function returns <code>num</code>&nbsp;(in our example, 5) multiplied by the return value of a recursive function call with 4 being passed in. Essentially, the function returns the following value</p>
+<pre class="line-numbers language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">return</span> <span class="token number">5</span> <span class="token operator">*</span> <span class="token function">factorial</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="line-numbers-rows"><span></span></span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<p>Because <code>factorial(4)</code> is a function, we will push that function call onto the call stack. Now, we will repeat the same process until we reach the base case I.e. when <code>num</code> equals 1. By this time, the call stack will look something like this.</p>
+<p><a href="https://personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/uploads/2017/04/understanding-recursion-call-stack-popping.jpg"><img class="alignnone size-large wp-image-691" src="./Understanding Recursion in JavaScript with Confidence_files/understanding-recursion-call-stack-popping-1024x600.jpg" alt="Understanding recursion by studying the call stack." width="1024" height="600"></a></p>
+<p>Once we reach the base case, the function <code>factorial(1)</code> returns the value <code>1</code>. Therefore, now that we know that <code>factorial(1)</code> equals 1, <code>factorial(2)</code> also returns a non-function value: <code>2 * factorial(1)</code> which is 2 * 1 = 2.</p>
+<p>Moving on, <code>factorial(3)</code> returns <code>3 * factorial(2)</code>, which equals 6. And so on, until we get to <code>factorial(5)</code>, which returns 5 * 24 = 120.</p>
+<p>At first, this might sound confusing, so I have done the liberty of adding a visual diagram to help readers digest this information.</p>
+<p><a href="https://personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/uploads/2017/04/recursion-factorial-call-stack.jpg"><img class="alignnone size-large wp-image-607" src="./Understanding Recursion in JavaScript with Confidence_files/recursion-factorial-call-stack-1024x590.jpg" alt="Visual illustration of the call stack when calling factorial(5)" width="1024" height="590"></a></p>
+<h2 id="ftoc-heading-9" class="ftwp-heading">Call Stack – How can I view it?</h2>
+<p>For the skeptics or those that are hands-on, you might be asking: Well, how can we actually verify this?</p>
+<p>If you are using the chrome web browser (often the simplest way), bring up chrome developer tools (built into chrome, no need to download) by pressing F12 (on Windows). All other major browser vendors should have their own built-in developer tools. On the top tab, you will see menu labels such as Elements, Profiles, Console, Network, Sources, etc. Click on&nbsp;<strong>Sources</strong>. For those using Chrome developer tools, you should see the following window.</p>
+<p><a href="https://personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/uploads/2017/04/recursion-chrome-developer-tools-debug.jpg"><img class="alignnone wp-image-610 size-large" src="./Understanding Recursion in JavaScript with Confidence_files/recursion-chrome-developer-tools-debug-1024x515.jpg" alt="The chrome developer tools debugging recursive function calls to factorial function" width="1024" height="515"></a></p>
+<p>Thanks to this neat tool, anybody can view the call stack visually. As you can see, when the recursive function call reaches the condition where <code>num === 1</code>, it will return 1. Afterwards, each of the factorial function calls will be popped off the stack as the function calls return.&nbsp;Hopefully, the factorial example was a clear explanation of how recursion works.</p>
+<p>Read the <a href="https://developer.chrome.com/devtools">Chrome DevTools Overview</a> for more information. If you are a front-end developer, chrome developer tools is definitely something you want to quickly get acquainted with.</p>
+<h2 id="ftoc-heading-10" class="ftwp-heading"><strong>How do I determine the base case? </strong></h2>
+<p>When<b>&nbsp;</b>determining the base case for the recursive function calls, it is important to consider the possible user inputs. Sometimes, it can be wise to impose assumptions to improve the performance. By imposing assumptions, you are leaving it up to the consumer of your function to make certain validation checks.</p>
+<p>In the factorial example, the base case has a major flaw. Care to guess what the flaw is? The flaw lies in the following line</p>
+<pre class="line-numbers language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">if</span> <span class="token punctuation">(</span>num <span class="token operator">===</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="line-numbers-rows"><span></span></span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<p>While the if statement may seem reasonable at first, what happens if I insert a negative number into the factorial function? If you are curious, be my guest and try it. Needless to say that the call stack will overflow, resulting in an error. Therefore, in this case, it would be prudent for the user to update the base case.</p>
+<p>Furthermore, what happens if I insert zero? By definition, 0! = 1, but if we enter zero here, a never ending spiral of recursive function calls can be made. Therefore, a more apt solution may be something like the following.</p>
+<pre class="line-numbers language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">if</span> <span class="token punctuation">(</span>num <span class="token operator">===</span> <span class="token number">1</span> <span class="token operator">||</span> num <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="line-numbers-rows"><span></span></span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<p>But wait a minute! We still haven’t factored out the possibility of the user passing in negative values. Well, we have two common, possible options:</p>
+<ol>
+<li>Add another if statement that checks whether number is less than zero, and handle that appropriately.</li>
+<li>Since a negative factorial in Math is <code>undefined</code>, document that a negative integer should not be passed into the factorial function. In another words, consumers of the API should make the check. This will ensure that we are not unnecessarily checking for negative values in each recursive function call.</li>
+</ol>
+<p>I personally prefer the latter approach in this case, but then again, I don’t think the factorial function should be expressed recursively.</p>
+<h2 id="ftoc-heading-11" class="ftwp-heading"><strong>Examples of poor use of recursion&nbsp;</strong></h2>
+<p>In the previous factorial example, I personally think that the recursive approach is not the best approach. Using a simple for loop makes the code much more simpler. Furthermore, the validation to check for negative numbers can be made before the loop.</p>
+<pre class="line-numbers language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">function</span> <span class="token function">iterativeFactorial</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>num <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">"Negative factorial results in undefined value."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">var</span> result <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>num <span class="token operator">&gt;</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        result <span class="token operator">*</span><span class="token operator">=</span> num<span class="token punctuation">;</span>
+        num<span class="token operator">--</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<p>The code above is much more robust. One can also argue that the while loop statement is simple enough to not require any explanation.</p>
+<p>So ultimately, it all comes down to asking the following question.</p>
+<blockquote><p>Is the code more readable when expressed in recursive format?</p></blockquote>
+<p>However, we also need to consider the robustness and overall performance of the code. Which leads us into the next section, where we will explore the potential trade-offs between the two traits and how to balance the two seemingly elusive traits.</p>
+<h2 id="ftoc-heading-12" class="ftwp-heading">Readability versus Performance</h2>
+<p>Readers might be wondering: do I need to consider performance when making a decision?<a href="https://en.wikiquote.org/wiki/Donald_Knuth" target="_blank" rel="noopener">&nbsp;Donald Knuth</a>, a famous computer scientist once said</p>
+<blockquote><p><em>We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil. Yet we should not pass up our opportunities in that critical 3%.</em></p></blockquote>
+<p>My personal answer is <span style="text-decoration: underline;"><strong>both yes and no</strong></span>. Before making that change for optimization questions, I advise readers to ask the following questions</p>
+<ol>
+<li>Does the optimization make my code more readable?</li>
+<li>By optimizing the code,&nbsp;is the performance gain critical?</li>
+</ol>
+<p>If the answer to both question is a solid no, then you know the answer: <strong>NO</strong>! However, if the performance gains are critical, but the optimization makes your code slightly less readable, it may be worth documenting. This is to help the&nbsp;next developer who comes across the code to understand it quickly.</p>
+<p>The golden rule here is <a href="https://www.thecodingdelight.com/write-clean-code/"><span style="text-decoration: underline;"><strong>Prioritize readability</strong></span></a>.&nbsp;Only optimize for performance if it is critical. Sometimes, when working with bad code, making optimizations can improve both performance and readability. If this is the case, don’t hesitate and go ham with the optimizations.</p>
+<h2 id="ftoc-heading-13" class="ftwp-heading"><strong>When is recursion a good&nbsp;choice?&nbsp;</strong></h2>
+<p>Recursion, by nature, is a repetitive task. Therefore, recursion is optimal in cases where a task&nbsp;is repeated multiple times AND can be defined in it of itself. Consider the <a href="https://www.thecodingdelight.com/binary-search-tree-implementation-javascript/" target="_blank" rel="noopener noreferrer">binary search tree implementation</a>. Each sub-tree in the binary tree is in it of itself, a binary search tree. This means that the traversal algorithm for the <a href="https://stackoverflow.com/questions/11436154/iterative-or-recursive-to-implement-a-binary-search-tree">binary search tree is an appropriate candidate for a recursive approach</a>.</p>
+<p>Another example would be the merge sort algorithm. In this algorithm, we are breaking up a collection into halves, until they all contain only one element. &nbsp;Afterwards, it is repeatedly compared and merged back into a sorted collection. As you can see,&nbsp;merge sort is conceptually based upon breaking up a big task into smaller, equal processes. Therefore, the merge sort is also an ideal candidate for recursion.</p>
+<p>Can merge sort be coded without recursion? Yes, but I believe that because it employs the <a href="http://www.geeksforgeeks.org/divide-and-conquer-set-1-find-closest-pair-of-points/" target="_blank" rel="noopener noreferrer">divide and conquer approach</a>, the recursive approach arguably makes more sense.</p>
+<blockquote><p>Recursion is a good choice when the problem at hand, or the data structure can be defined in it of itself.</p></blockquote>
+<p>Remember what I said&nbsp;in the previous section (regarding readability and performance)? When implementing recursive data structures, we generally prioritize readability, unless we really need the micro optimizations. In another words, unless the micro optimizations make the difference between the algorithm executing flawlessly and crashing on user request, we will prefer the more readable approach.</p>
+<p>If we have to add an extra 50 lines to a piece of already fairly complex logic to make it iterative, it generally isn’t the best idea.</p>
+<p>Please note that a recursive solution is very situation, so please, do not use it aimlessly, especially if the problem can be handled with a simple for loop.</p>
+<h2 id="ftoc-heading-14" class="ftwp-heading">Recursion Practice Exercises</h2>
+<p>Practice makes perfect. Just understanding how the call stack works and how the recursion example above works is not enough. In order to master recursion, developers need to understand not only how it works, but also the thought process behind recursion. The best way to practice is by implementing recursive function calls when solving problems.</p>
+<p>As you keep practicing, one of the number-one priority should be readability. As a developer, the number one priority should be writing code that is&nbsp;readable, simple and easy to make sense of. This is where the money is at. Because most of the time, developers spend time reading pre-existing code and maintaining it, instead of writing new code.</p>
+<p>During my downtime, I will code the solution to each of these exercises and upload the answers onto GitHub. All the best!</p>
+<h3 id="ftoc-heading-15" class="ftwp-heading">Warm-up Exercises</h3>
+<ol>
+<li>Reverse a string. The recursive function call should return the reversed result of the passed in string. E.g.
+<pre class="inline:true decode:1">reverseStr("cowbell") --&gt; "llebwoc"</pre>
+</li>
+<li>Fibonacci number. Get the nth Fibonacci number as the return value. E.g.
+<pre class="lang:default decode:true">fibonacci(5) --&gt; 5
+fibonacci(10) --&gt; 55
+fibonacci(15) --&gt; 610</pre>
+</li>
+<li>Count the number of reoccurring instances of a digit in a number (E.g. 79092342 has two 9s). For bonus points, create a generator function using <a href="https://www.thecodingdelight.com/javascript-closure/" target="_blank" rel="noopener noreferrer">closures</a> to create a recursive function using the value passed.
+<ul>
+<li>E.g. Function can generate instances such as
+<pre class="inline:true decode:1 ">count7, count8</pre>
+<p>which counts for the digits 7 and 8 respectively.</p></li>
+</ul>
+</li>
+<li>Using recursion, go through a string and remove characters that occur more than once. E.g. passing in <code>"Troll"</code>&nbsp;should return <code>"trol"</code>. Passing in&nbsp;<code>"abracadabra"</code> should return <code>"abrcd"</code>.</li>
+</ol>
+<h3 id="ftoc-heading-16" class="ftwp-heading">Intermediate Exercises</h3>
+<p>Okay, you are starting to get the hang of recursion. The following exercises should leave you scratching your head slightly. No pain, no gain right?</p>
+<ol>
+<li>Find the <a href="https://en.wikipedia.org/wiki/Greatest_common_divisor">greatest common&nbsp;divisor</a> of two numbers.</li>
+<li>Find the <a href="https://www.infoplease.com/science-health/factors-and-fractions/lowest-common-multiples">lowest common multiple</a> of two numbers. Assume that the two numbers&nbsp;are greater than or equal to 2.</li>
+</ol>
+<h3 id="ftoc-heading-17" class="ftwp-heading">Advanced&nbsp;Recursion Exercises</h3>
+<p>The purpose of&nbsp;these exercises is to train your mind to be able to use recursion to solve real world problems. When solving these problems, it often helps to hash out your thoughts vocally, or by drawing activity diagrams.</p>
+<ol>
+<li>Write a <a href="https://en.wikipedia.org/wiki/Binary_search_algorithm" target="_blank" rel="noopener noreferrer">binary search algorithm</a> that accepts an array. Readers can assume that the passed in array is sorted.</li>
+<li>Write your own implementation of the <a href="https://en.wikipedia.org/wiki/Merge_sort">merge sort algorithm</a>. As mentioned in a previous section, the merge sort algorithm&nbsp; divides the a big task into smaller tasks. It is one of the better scaling algorithms with a worst case performance of <code>n log (n)</code>. The purpose of this exercise is to train the reader to be able to break down a big task into smaller tasks. Therefore, I highly recommend readers to attempt this problem without <a href="https://github.com/JWLee89/The-Coding-Delight/blob/master/JavaScript/algorithms/sorts/merge-sort/mergeSort.js">looking at the answer</a> beforehand.</li>
+<li>Try implementing a recursive data structure. A good example to start off would be implementing the <a href="https://www.thecodingdelight.com/binary-search-tree-implementation-javascript/" target="_blank" rel="noopener noreferrer">binary search tree from scratch</a>. <strong>Note:&nbsp;</strong>This is quite a challenging exercise, so take your time. Don’t beat yourself if you don’t get it on your first try.</li>
+</ol>
+<h2 id="ftoc-heading-18" class="ftwp-heading">Recursion JavaScript Exercise Solutions</h2>
+<p>All <a href="https://github.com/JWLee89/The-Coding-Delight/tree/master/JavaScript/recursion">recursion exercises</a>&nbsp;and source code&nbsp;are uploaded on GitHub.</p>
+<p>Once again, I would like to take a moment to thank all the readers for taking time to read through this post.<strong> Please share with the community if this article helped you understand recursion</strong>. Also feel free to leave a comment, that would be highly encouraging and would spur me on to create even better content. And secondly, while reading, if there is anything that is verbose or difficult to understand, please let me know.</p>
+<p>Letting me know what to improve on will ensure that readers get better quality content in the future. Thirdly, feedback on what you, as a reader, liked on the post will let me know what to continue doing (and also hints on how to take it to the next level).</p>
+<p>If you are interested in seeing the solutions for the recursion exercises, read on ahead!</p>
+<p>&nbsp;</p>
+<h2 id="ftoc-heading-19" class="ftwp-heading">Recursion Exercise Walk-through</h2>
+<p>Due to demands and request, I will be adding a step-by-step guide on each of the recursion exercises. Please note that this will be a continual work in progress and more exercises along with solutions may be added in the future.</p>
+<p>Please continue to provide feedback, as it helps me identify which parts I can improve to make the content more comprehensive.</p>
+<p>For the sake of clarity and completeness, I will add solutions for both the <strong>iterative and recursive approach</strong>. Please note that this is only a single way of solving the problem. If you solve the problem using a different method, that is perfectly fine as well.</p>
+<p>Before going to GitHub and checking up my solution, I recommend readers to attempt each of the problems. If you go straight to the solution without even attempting to solve the problem, you will not improve as much.</p>
+<p>Okay, lets head straight into the first exercise.</p>
+<p><strong>Note:</strong>&nbsp;This section will be a <span style="text-decoration: underline;"><strong>continual work in progress</strong></span>. More solutions will be added as I continue to update this post. Currently swamped with a lot of work, but <strong>I am dedicated to make sure that you, the reader, gets great content ASAP</strong>. Expect this post to continuously be updated!</p>
+<h3 id="ftoc-heading-20" class="ftwp-heading">1. Reversing a String Solution</h3>
+<h4 id="ftoc-heading-21" class="ftwp-heading"><span style="text-decoration: underline;">Recursive Approach</span></h4>
+<p>Looks fairly simple right? In every recursive problem, I highly recommend starting off by identifying the <strong>task to be repeated</strong> and the <strong>base case</strong>. If you have read every single word up until now, you are probably sick and tired of hearing this from me right?</p>
+<p>First of all, the base case. Naturally, when a <strong>string only contains a single character or less&nbsp;</strong>(length of 1)<strong>, it is already reversed right</strong>?</p>
+<p>I say less than or equals to because if we limit our base case to a string of length 1, if somebody passes in an empty string, we will never reach the base case, and we will get a stack overflow error. Hope that makes sense 🙂</p>
+<pre class="line-numbers language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">if</span> <span class="token punctuation">(</span>str<span class="token punctuation">.</span>length <span class="token operator">&lt;=</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">return</span> str<span class="token punctuation">;</span><span class="line-numbers-rows"><span></span></span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<p><strong>This is the <span style="text-decoration: underline;">base case</span></strong>.</p>
+<p>Oh, before we go on, I just want to emphasize that there is no right or wrong order of solving the problem. We all think differently, so find the approach that makes the most sense to you. For me, I like to start off with identifying the base case. If that doesn’t work, feel free to try other approaches.</p>
+<p>Okay, now we need to write <strong>the task to be repeated</strong>.</p>
+<p>Lets identify what we want the base case to return. For example, lets say we are dealing with the following string.</p>
+<pre class="line-numbers language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">var</span> str <span class="token operator">=</span> <span class="token string">"troll"</span><span class="token punctuation">;</span><span class="line-numbers-rows"><span></span></span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<p>Question to ask here is:</p>
+<p><strong>Which character do you want to return from the base case?&nbsp;</strong></p>
+<p>If it were me, I would like to return the last character of the string from the base case. So far our function for reversing the string is as follows.</p>
+<pre class="line-numbers language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">function</span> <span class="token function">reverseStr</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>str<span class="token punctuation">.</span>length <span class="token operator">&lt;=</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">// base case</span>
+        <span class="token keyword">return</span> str<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<p>If we want the last character to be at the front, we will naturally want the recursive function call to be at the front of the statement like this right?</p>
+<pre class="line-numbers language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">return</span> <span class="token function">reverseStr</span><span class="token punctuation">(</span>str<span class="token punctuation">.</span><span class="token function">substr</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> str<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="line-numbers-rows"><span></span></span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<p>In this function, we are returning the following to the user.</p>
+<pre class="line-numbers language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">return</span> <span class="token function">reverseStr</span><span class="token punctuation">(</span><span class="token string">"roll"</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"t"</span><span class="token punctuation">;</span><span class="line-numbers-rows"><span></span></span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<p>We will continue to make the recursive function call until we reach the base case. The call stack will look something like this.</p>
+<div class="divi ddivi"></div>
+<p>Step 1: initial function call</p>
+<p><code>reverseStr("troll");</code></p>
+<p>&nbsp;</p>
+<div class="divi ddivi"></div>
+<p>Step 2: first recursive function call</p>
+<p><code>return reverseStr("roll") + "t";</code></p>
+<p>&nbsp;</p>
+<div class="divi ddivi"></div>
+<p>Step 3: second recursive function call</p>
+<p><code>return reverseStr("oll") + "r";</code></p>
+<p>&nbsp;</p>
+<div class="divi ddivi"></div>
+<p>Step 4: third recursive function call</p>
+<p><code>return reverseStr("ll") + "o";</code></p>
+<p>&nbsp;</p>
+<div class="divi ddivi"></div>
+<p>Step 5: fourth recursive function call</p>
+<p><code>return reverseStr("l") + "l";</code></p>
+<p>&nbsp;</p>
+<div class="divi ddivi"></div>
+<p>Step 6: Hit Base case. Return “l”.</p>
+<p><code>return "l";</code></p>
+<p>&nbsp;</p>
+<div class="divi ddivi"></div>
+<p>Afterwards, as you know, the results will bubble up as <code>reverseStr("l")</code> is popped off the call stack.</p>
+<p>Step 7 – 10: Pop off each function off the call stack and return result.</p>
+<p><code>return "l" + "l";</code></p>
+<p>&nbsp;</p>
+<p><code>return "ll" + "o";</code></p>
+<p>&nbsp;</p>
+<p><code>return "llo" + "r"</code></p>
+<p>&nbsp;</p>
+<p><code>return "llor" + "t";</code></p>
+<p>&nbsp;</p>
+<p>Hope that this makes sense. If you need me to elaborate, please leave a comment and I will update the post accordingly!</p>
+<h4><span style="text-decoration: underline;">Iterative Approach</span><span style="text-decoration: underline;"><br>
+</span></h4>
+<p>The iterative approach is very simple. By now you should know that prioritize readability and only optimize for performance when it is absolutely required.</p>
+<h5 id="ftoc-heading-22" class="ftwp-heading"><span style="text-decoration: underline;">The Easy Way</span></h5>
+<p>Before going on, want to know a super easy way of reversing a string? Here we go.</p>
+<pre class="line-numbers language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">function</span> <span class="token function">reverseStr</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> str<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">reverse</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">reverseStr</span><span class="token punctuation">(</span><span class="token string">"troll"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// "llort"</span><span class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<p>Super simple right? Here we are applying the <code>split()</code> method to the string <code>"troll"</code>&nbsp;. <a href="https://www.w3schools.com/jsref/jsref_split.asp" target="_blank" rel="noopener">Split</a>&nbsp;accepts two arguments. The first is called the&nbsp;<span style="text-decoration: underline;">separator</span> and the second argument is known as the limit. For the purposes of this tutorial, we will only be focusing on the separator.</p>
+<p>Here, we want each character in the string to be a single element of the resulting array. Therefore, we pass in an empty string.</p>
+<p><code>str.split("");</code></p>
+<p>In another words, we are converting the string into a character array, that looks like this</p>
+<p><code>['t', 'r', 'o', 'l', 'l'];</code></p>
+<p>&nbsp;</p>
+<p>because <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split" target="_blank" rel="noopener">split</a>&nbsp;returns an array, we are able to call&nbsp;<a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse?v=control" target="_blank" rel="noopener">reverse</a>&nbsp;to reverse the contents of our array. After the operation, our array looks like this.</p>
+<p><code>['l', 'l', 'o', 'r', 't'];</code></p>
+<p>&nbsp;</p>
+<p>The array is reversed now right? But we don’t want to return an array. We want to return a string to the caller of this method. Therefore, we need to convert the result to a string. A naive way would be to iterate through the array and build up a string like this.</p>
+<pre class="line-numbers language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">var</span> result <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> arr<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    result <span class="token operator">+</span><span class="token operator">=</span> arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<p>A more concise way is to utilize the array’s <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join?v=example" target="_blank" rel="noopener">join</a> method. Just as in the <code>split()</code> method, our separator will be an empty string, meaning we don’t want to add any additional characters in between the array elements when we convert it to a string.</p>
+<p>Hopefully this gives you ideas on how to reverse the string iteratively without using built-in methods.</p>
+<h5 id="ftoc-heading-23" class="ftwp-heading"><span style="text-decoration: underline;">The Harder Way</span></h5>
+<p>Okay, let us actually use a loop to take care of the reversing algorithm, instead of relying on the Array’s built-in <code>reverse()</code>&nbsp;method. We will, however, be using <code>split</code> to convert the string into a character array and <code>join</code> to combine the array back into string format.</p>
+<pre class="line-numbers language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">function</span> <span class="token function">reverseStr</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> charArr <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// TODO: Write out the reversing logic</span>
+<span class="token punctuation">}</span><span class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<p>Before proceeding, I want you to ask yourself the following question.</p>
+<p><strong>On each iteration</strong>, which <span style="text-decoration: underline;"><strong>two</strong></span> characters do we swap in order to reverse a string?</p>
+<p>Don’t peak at the answers until you have actually thought about it. Try writing out your thought process on a piece of paper. Organize your assumptions and logic in written form.</p>
+<p>Once you are ready, </p><h3></h3><div class="faq"><div class="faqI">
+<div class="faqB even">
+<h5>
+Click here to see the answer
+</h5>
+</div>
+<div class="faqC">
+<p>
+</p><p>Swap the first and last character in the first iteration. Afterwards, swap the second character and the second last character. Repeat the process until the characters we are swapping have equal index.</p>
+<p>I have attached a visual illustration of the logic below.</p>
+<p>As you can see from the diagram, when working with the string <code>"troll"</code>, &nbsp;on the third iteration, both the front and back index equal two, which means we have traveled through the entire string and made all the swaps necessary to produce a reversed string.</p>
+<p><a href="./Understanding Recursion in JavaScript with Confidence_files/understanding-recursion-javascript-iterative-reverse-string.jpg"><img class="alignnone size-full wp-image-2187" src="./Understanding Recursion in JavaScript with Confidence_files/understanding-recursion-javascript-iterative-reverse-string.jpg" alt="understanding recursion JavaScript iterative reverse string"></a></p>
+<p></p>
+</div>
+</div></div>
+<p>&nbsp;</p>
+<p>If you don’t need to see the answers, I am assuming you are confident and know how to reverse a string using the iterative approach.</p>
+<p>Let’s dive straight into the code.</p>
+<pre class="line-numbers language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">function</span> <span class="token function">reverseStr</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> charArr <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> frontIndex <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> backIndex <span class="token operator">=</span> charArr<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
+         frontIndex <span class="token operator">&lt;</span> charArr<span class="token punctuation">.</span>length<span class="token punctuation">;</span> frontIndex<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// Once backIndex is equal to front index, string is reversed.</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>backIndex <span class="token operator">===</span> frontIndex<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">// Perform swap</span>
+        <span class="token keyword">var</span> temp <span class="token operator">=</span> charArr<span class="token punctuation">[</span>backIndex<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        charArr<span class="token punctuation">[</span>backIndex<span class="token punctuation">]</span> <span class="token operator">=</span> charArr<span class="token punctuation">[</span>frontIndex<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        charArr<span class="token punctuation">[</span>frontIndex<span class="token punctuation">]</span> <span class="token operator">=</span> temp<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// Decrement index</span>
+        backIndex<span class="token operator">--</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> charArr<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">reverseStr</span><span class="token punctuation">(</span><span class="token string">"troll"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// "llort"</span><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<p>If you understood the explanation in “<span style="text-decoration: underline;">Click here to see the answer</span>“, this code will seem pretty straight forward. Hopefully all of this made perfect sense. If not, please feel free to leave a message and let me know.</p>
+<h3 id="ftoc-heading-24" class="ftwp-heading">2. Fibonacci number Solution</h3>
+<p>You most likely already know this, but just to be safe I am going to mention it again.</p>
+<p>Before solving any problem, building a system, or doing anything in programming, make sure that you first <strong><span style="text-decoration: underline;">understand the problem</span> before writing even a single line of code</strong>.</p>
+<p>Lets start off by answering the following question:</p>
+<blockquote class="pulQ"><p>What is a Fibonacci number? </p><div class="clear"></div></blockquote>
+<p>The Fibonacci number is a <span style="text-decoration: underline;"><strong>specific number</strong></span> from the <a href="https://www.livescience.com/37470-fibonacci-sequence.html" target="_blank" rel="noopener">Fibonacci sequence</a>. The formula for deriving a Fibonacci is as follows</p>
+<p><b>x<sub>n</sub> = x<sub>n-1</sub> + x<sub>n-2</sub></b></p>
+<p>source: <a href="https://www.mathsisfun.com/numbers/fibonacci-sequence.html" target="_blank" rel="noopener">mathisfun.com</a></p>
+<p>As quoted in the previous link, the next number in a Fibonacci sequence is equal to the previous number plus the previous number of the previous number.</p>
+<p>Lets say we have the following numbers</p>
+<blockquote><p><code>1, 1, 2, 3, 5, 8, 13, 21, 34, 55 ...</code></p></blockquote>
+<p>&nbsp;</p>
+<p>Try applying the formula above to the sequence. If you take the time and effort to actually go through the sequence and apply the formula to each of the numbers, you will realize that the equation holds true.</p>
+<p><strong>The lowest number we can add is one</strong>.</p>
+<p>If the previous number and the previous number in a Fibonacci sequence was 0 and 0 respectively, we will not get anywhere. We will constantly be adding the number zero, thus ending up nowhere.</p>
+<p><strong>Hint:</strong> that was a huge giveaway of what the base case for this recursive implementation.</p>
+<p>Expected return values for the fibonacci function are as follows</p>
+<blockquote>
+<pre class="">fibonacci(5) --&gt; 5
+fibonacci(6) --&gt; 8
+fibonacci(7) --&gt; 13
+fibonacci(8) --&gt; 21
+fibonacci(9) --&gt; 34
+fibonacci(10) --&gt; 55
+fibonacci(15) --&gt; 610</pre>
+</blockquote>
+<h4 id="ftoc-heading-25" class="ftwp-heading"><span style="text-decoration: underline;">Recursive Approach</span></h4>
+<p>Okay, now we understand what a Fibonacci sequence is, we can now write our own implementation to solve the problem.</p>
+<p>Just as with the previous exercise, we start off by identifying the base case, and which operation we will be repeating.</p>
+<p>I gave you a huge hint on what the base case is. Think about it and come back once you have the answer.</p>
+<p>The first time you think this through, it can be challenging. But that is why we are here right? To train our minds to process recursively. This will ultimately <a href="https://www.thecodingdelight.com/sharpen-problem-solving-skills-programmer/" target="_blank" rel="noopener">help you become a better problem solver</a>.</p>
+<h3></h3><div class="faq"><div class="faqI">
+<div class="faqB even">
+<h5>
+Click here to see the answer
+</h5>
+</div>
+<div class="faqC">
+<p>
+Base case is when passed in <strong>number equals one</strong>.</p>
+<p>However, what is to stop users from entering zero or a negative number? Therefore, we need to consider some of the possible conditions where the base case will never be called and cover for that so that the function will always terminate.</p>
+<pre class="line-numbers language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">function</span> <span class="token function">fibonacci</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// Base case</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>num <span class="token operator">&lt;=</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">switch</span> <span class="token punctuation">(</span>num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">case</span> <span class="token number">1</span><span class="token punctuation">:</span> <span class="token keyword">case</span> <span class="token number">2</span><span class="token punctuation">:</span> <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+            <span class="token keyword">case</span> <span class="token number">0</span><span class="token punctuation">:</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>   
+           <span class="token keyword">default</span><span class="token punctuation">:</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">"Please insert a positive integer"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>  <span class="token comment" spellcheck="true">// End switch statement</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<p>In a Fibonacci sequence, the first number is equal to 0 or 1. According to <a href="https://en.wikipedia.org/wiki/Fibonacci_number" target="_blank" rel="noopener">wikipedia</a>, the “modern usage” starts off with the first number in the Fibonacci sequence being zero.</p>
+<p>This is why we also added a <code>case 0</code> to the switch statement above to give users the flexibility of employing the conventional series or the “modern usage” while also throwing errors to prevent negative values from being passed in.</p>
+<p>This is not the most elegant solutions, but it definitely does a good job of communicating to users, the possible scenarios that will prevent the base case from ever being reached.</p>
+<p>We can also make checks to see whether a user passed in a floating point value or an integer, but we are going to&nbsp;<strong>assume</strong> that the user passes in an integer.</p>
+<p>Making accurate assumptions when programming is also a very important skill, so be sure to critically assess and weigh all your options before proceeding.</p>
+<p></p>
+</div>
+</div></div>
+<p>&nbsp;</p>
+<p>Now that we have our base case, we can start writing the task that we need to repeat. What is the mathematical formula for solving the problem? It is</p>
+<p><b>x<sub>n</sub> = x<sub>n-1</sub> + x<sub>n-2</sub></b></p>
+<p>Simply put, the easiest way to solve this problem would be to simply just apply and return that formula literally. Like the following.</p>
+<pre class="line-numbers language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">return</span> <span class="token function">fibonacci</span><span class="token punctuation">(</span>num <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">fibonacci</span><span class="token punctuation">(</span>num <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="line-numbers-rows"><span></span></span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<p>In terms of performance, the solution above is terrible and I think even terrible is an understatement. Later on, when I have more time, I will update this post to include potential techniques you can employ to drastically improve the performance of the Fibonacci function. For now, I recommend that you look up <a href="http://inlehmansterms.net/2015/03/01/javascript-memoization/" target="_blank" rel="noopener">memoization in JavaScript</a>.</p>
+<h4 id="ftoc-heading-26" class="ftwp-heading"><span style="text-decoration: underline;">Iterative Approach</span></h4>
+<p>Since we know the logic and formula for the Fibonacci sequence, we are going to jump straight into the code here. If any of the explanations in this section does not make sense, don’t hesitate to let me know.</p>
+<pre class="line-numbers language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">function</span> <span class="token function">fibonacciIter</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>num <span class="token operator">&lt;=</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>               <span class="token comment" spellcheck="true">// First two numbers of fib sequence is equal to 1</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> result <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>         <span class="token comment" spellcheck="true">// variable holding result</span>
+        <span class="token keyword">var</span> counter <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">// Starting point of iteration</span>
+        <span class="token keyword">var</span> prevNo <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>         <span class="token comment" spellcheck="true">// prev number aka xn-1</span>
+        <span class="token keyword">var</span> prevPrevNo <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>     <span class="token comment" spellcheck="true">// prev number of previous number aka xn-2</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>counter <span class="token operator">&lt;</span> num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            result <span class="token operator">=</span> prevNo <span class="token operator">+</span> prevPrevNo<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">// xn = xn-1 + xn-2</span>
+            <span class="token keyword">var</span> temp <span class="token operator">=</span> prevNo<span class="token punctuation">;</span>              <span class="token comment" spellcheck="true">// Temp variable to store value</span>
+            prevNo <span class="token operator">=</span> result<span class="token punctuation">;</span>                <span class="token comment" spellcheck="true">// xn-1 = xn</span>
+            prevPrevNo <span class="token operator">=</span> temp<span class="token punctuation">;</span>              <span class="token comment" spellcheck="true">// xn-2 = xn-1. Make sense right?</span>
+            counter<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<p>In the code above, the following statement is acting as our base case. Naturally, the first two numbers are equal to 1, so we return one if <code>num</code> is less than or equal to 2.</p>
+<pre class="line-numbers language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">if</span> <span class="token punctuation">(</span>num <span class="token operator">&lt;=</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>               <span class="token comment" spellcheck="true">// First two numbers of fib sequence is equal to 1</span>
+<span class="token punctuation">}</span><span class="line-numbers-rows"><span></span><span></span><span></span></span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<p>Take note that negative answers will also yield one. So if you want to address this issue, be my guess and add some defensive measures to the code above. It should be fairly straight forward.</p>
+<p>The upcoming section is where the real action is.</p>
+<pre class="line-numbers language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> result <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>         <span class="token comment" spellcheck="true">// variable holding result</span>
+    <span class="token keyword">var</span> counter <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">// Starting point of iteration</span>
+    <span class="token keyword">var</span> prevNo <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>         <span class="token comment" spellcheck="true">// prev number aka xn-1. Equals one. Fib sequence starts like 1,1,2,3,5 ...</span>
+    <span class="token keyword">var</span> prevPrevNo <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>     <span class="token comment" spellcheck="true">// prev number of previous number aka xn-2. Start with 1. See above comment.</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>counter <span class="token operator">&lt;</span> num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        result <span class="token operator">=</span> prevNo <span class="token operator">+</span> prevPrevNo<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">// xn = xn-1 + xn-2</span>
+        <span class="token keyword">var</span> temp <span class="token operator">=</span> prevNo<span class="token punctuation">;</span>              <span class="token comment" spellcheck="true">// Temp variable to store value</span>
+        prevNo <span class="token operator">=</span> result<span class="token punctuation">;</span>                <span class="token comment" spellcheck="true">// xn-1 = xn</span>
+        prevPrevNo <span class="token operator">=</span> temp<span class="token punctuation">;</span>              <span class="token comment" spellcheck="true">// xn-2 = xn-1. Make sense right?</span>
+        counter<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">return</span> result<span class="token punctuation">;</span><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<p>I would say that the comments and the code combined together explains the logic, but for the sake of completeness, let us walk through this problem step by step.</p>
+<p>Take note that <code>counter = 2</code>. &nbsp;This is our starting point. Thus, we need to initialize counter to 2, and also initialize <code>prevNo</code> and <code>prevPrevNo</code> to 1. Why? Because the first two items in the Fibonacci sequence are 1 and 1.</p>
+<p>E.g. <strong>1</strong>, <strong>1</strong>, 2, 3, 5, 8, 13 …</p>
+<p>The rest of the variables will be set in the <code>while</code> loop.</p>
+<p>On each iteration, we are applying the following formula.</p>
+<p><b>x<sub>n</sub> = x<sub>n-1</sub> + x<sub>n-2</sub></b></p>
+<p><code>var temp</code> is used to temporarily store <code>prevNo</code> so that we can override the previous previous number (<code>prevPrevNo</code>or <b> x<sub>n-2</sub></b>) with the previousNumber (<code>prevNo</code>&nbsp;or <b>x<sub>n-1</sub></b>). Like the following</p>
+<p><b>x<sub>n-1</sub>&nbsp;= x<sub>n-2</sub></b></p>
+<p>Lastly, we are incrementing counter (<code>counter++</code>) to iterate n amount of times and reach the condition for terminating the <code>while</code> loop.</p>
+<h3 id="ftoc-heading-27" class="ftwp-heading">3. Digit Counter Solution</h3>
+<p>In this exercise, we are counting the number of times a certain digit occurs in a number. For example, if we are looking for the number of 9s in the number 79092342, the function should return 2, as two nines can be found.</p>
+<p>So first of all, lets look at the arguments that the function should receive. I think it should be two. The first argument being the number we will be working with. The second argument should be the number we are looking for.</p>
+<pre class="language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">function</span> <span class="token function">digitCounter</span><span class="token punctuation">(</span>number<span class="token punctuation">,</span> digitToCount<span class="token punctuation">)</span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<p>Here is a question for you.</p>
+<blockquote class="pulQ"><p>Should we assume that the reader appropriately inserts a number that is 0-9 as the digit to count? Or should we add validations in our function? </p><div class="clear"></div></blockquote>
+<p><strong>Critically assessing and weighing these kind of options is what <span style="text-decoration: underline;">separates a decent programmer from a good programmer</span></strong>. Here are some factors that you should consider.</p>
+<ul>
+<li>What is the cost of adding the validation check?</li>
+<li>What are the possibilities of incorrect inputs being passed in?</li>
+</ul>
+<p>In this case, the validation check only takes <strong>O(1)</strong> constant time, so I suggest adding it to minimize human error. If however, the time complexity of adding the check ramps up to <strong>O(n)</strong>&nbsp;linear time – checking a whole list, you may want to add assumptions to the function and comment your code so that users pass in the appropriate data.</p>
+<p>Here, we can add the following validation check</p>
+<pre class="line-numbers language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">if</span> <span class="token punctuation">(</span>digitToCount <span class="token operator">&gt;</span> <span class="token number">9</span> <span class="token operator">||</span> digitToCount <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">"digitToCount must be between 0 and 9"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="line-numbers-rows"><span></span><span></span><span></span></span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<p>Or you can be smart and convert first the digit to a string. Afterwards, check the length of the string and see if it does not equal one.</p>
+<pre class="line-numbers language-javascript code-toolbar"><code class=" language-javascript"><span class="token comment" spellcheck="true">// Validation checks</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> digitToCount <span class="token operator">!==</span> <span class="token string">"string"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    digitToCount <span class="token operator">=</span> digitToCount<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>digitToCount<span class="token punctuation">.</span>length <span class="token operator">!==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">"Please enter a single digit."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<p>This is quite a nice solution in this case, because we will eventually have to convert the number to a <code>string</code> in order to compare its individual digits.</p>
+<p>Think about it for a moment. If it is a negative number, the string will have a minimum length of 2. If the number is greater than 9, will have a length of 2. Therefore, only numbers from 0 to 9 will have a length of 1 when converted to a string. Pretty neat right?</p>
+<p>Of course, there are other ways of approaching this problem. This is just simply one approach out of many. Therefore, feel free to be as creative as you want.</p>
+<p>In the next section, we will examine the recursive approach to the problem.</p>
+<h4 id="ftoc-heading-28" class="ftwp-heading"><span style="text-decoration: underline;">Recursive Approach</span></h4>
+<p>I think you are getting more and more confident with recursion now, so I am going to get straight to the point.</p>
+<pre class="line-numbers language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">function</span> <span class="token function">getDigitCount</span><span class="token punctuation">(</span>num<span class="token punctuation">,</span> digitToCount<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// Validation checks. Note that you can also throw an error if digit is not a number to make check strict.</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> digitToCount <span class="token operator">!==</span> <span class="token string">"string"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        digitToCount <span class="token operator">=</span> digitToCount<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>digitToCount<span class="token punctuation">.</span>length <span class="token operator">!==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">"Please enter a single digit."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> num <span class="token operator">!==</span> <span class="token string">"number"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">"num must be of type number"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// Keep track of digits</span>
+    <span class="token keyword">var</span> digitOccurCount <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// Convert number to string</span>
+    num <span class="token operator">=</span> num<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> recursiveDigitCounter <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>num<span class="token punctuation">,</span> digitToCount<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// Base case</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>num<span class="token punctuation">.</span>length <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">var</span> currentNumber <span class="token operator">=</span> num<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>currentNumber <span class="token operator">===</span> digitToCount<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            digitOccurCount<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">recursiveDigitCounter</span><span class="token punctuation">(</span>num<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> num<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">,</span> digitToCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token function">recursiveDigitCounter</span><span class="token punctuation">(</span>num<span class="token punctuation">,</span> digitToCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> digitOccurCount<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">getDigitCount</span><span class="token punctuation">(</span><span class="token number">133337</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<p>Note that this is not the most optimal approach. And there is plenty of room for refactoring to improve performance and readability. But the logic should be fairly clear and self-explanatory.</p>
+<p>After converting the number to a string, we are using a very similar approach to the approach employed in the <strong>reversing a string exercise</strong> earlier on.</p>
+<p>Therefore, I am not going to bother repeating myself.</p>
+<p>If you really want me to add explanations, feel free to contact me and let me know. I will follow up as soon as I can.</p>
+<h4 id="ftoc-heading-29" class="ftwp-heading"><span style="text-decoration: underline;">Iterative Approach</span></h4>
+<p>Iterative approach is much more simpler and elegant for this kind of operation. Therefore, I recommend using the iterative approach.</p>
+<p>If you think about it, I am sure that you found implementing the recursive approach much more challenging right?</p>
+<p>Anyhow, lets get straight into the code.</p>
+<p>For the sake of brevity, I am going to remove the validation checks, which are included in the recursive approach. We will be solely focusing on the code inside of the <code>for</code> loop.</p>
+<pre class="line-numbers language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">function</span> <span class="token function">getDigitCountIter</span><span class="token punctuation">(</span>num<span class="token punctuation">,</span> digitToCount<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">var</span> digitOccurCount <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    num <span class="token operator">=</span> num<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> len <span class="token operator">=</span> num<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> curNum <span class="token operator">=</span> <span class="token function">Number</span><span class="token punctuation">(</span>num<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>curNum <span class="token operator">===</span> digitToCount<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            digitOccurCount<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> digitOccurCount<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<div>The iterative approach is so simple that we barely have to explain it. All we are doing in the loop is converting the string item back into a number and comparing it. If it is the digit we are counting, increment the counter. Simple right?</div>
+<div></div>
+<div>Let us move onto the next question.</div>
+<div>
+<h3 id="ftoc-heading-30" class="ftwp-heading">4. Solution to Removing characters that occur more than once</h3>
+<p>The first question that you may ask is</p>
+<blockquote class="pulQ"><p>How do I keep track of the characters that we have seen and check whether they occurred more than once? </p><div class="clear"></div></blockquote>
+<p>If this is your first time dealing with this kind of problem, it may be potentially daunting. But don’t worry, we will examine this problem step by step together.</p>
+</div>
+<p>The big problem to keep track of here is to keep a record of all the characters we encountered. In JavaScript, the simplest way of doing this is storing in a JavaScript object. E.g.</p>
+<pre class="line-numbers language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">var</span> charMap <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span class="line-numbers-rows"><span></span></span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<p>This might not make any sense right now, but trust me when I say that we are going somewhere.</p>
+<p>Because manipulating strings in each iteration via concatenation can be somewhat pricey, we are going to store the characters inside of an array and convert it to a string once we have iterated through the entire string.</p>
+<p>When we examine a character in the string, we will be doing the following activities.</p>
+<pre class="line-numbers language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">var</span> charMap <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> result <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="line-numbers-rows"><span></span><span></span><span></span></span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<ol>
+<li>Check whether <code>charMap</code> has the key value ‘a’;
+<ul>
+<li>If the character ‘a’ exists, do not add it to <code>result</code>.</li>
+<li>If it doesn’t, add new property ‘a’ to <code>charMap</code> with value set to true to mark it as having occurred.</li>
+</ul>
+</li>
+</ol>
+<p>Here is what the key checking operation described above looks like as code.</p>
+<pre class="line-numbers language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>charMap<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span>char<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    charMap<span class="token punctuation">[</span>char<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// mark as having occurred</span>
+    result<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>char<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment" spellcheck="true">// push into results</span>
+<span class="token punctuation">}</span><span class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<p>Although there are other ways of approaching this problem, this solution is the one I think is easiest to understand. Now that we have gone through the meat of the problem, lets take a look at the recursive approach to the problem.</p>
+<p>Before we move on, I would like to explain the reason why we are storing repeated characters inside of a JavaScript object as opposed to an array.</p>
+<h3></h3><div class="faq"><div class="faqI">
+<div class="faqB even">
+<h5>
+Reason for storing Repeated Characters in JavaScript Object
+</h5>
+</div>
+<div class="faqC">
+<p>
+</p><p><strong>Faster lookup time</strong>.</p>
+<p>Because JavaScript objects work like a hash map, we can take advantage of its built-in hashing functions to make lookup operations much more faster. If we stored repeated results inside of an array, we would have to iterate through each of the elements to see if it is re-occurring.</p>
+<p>Of course, to reduce search time, we can store them in alphabetical order to employ the binary search technique, but that would mean that our insertion time will increase from <code>O(1)</code> to <code>O(log n)</code>.</p>
+<p>Using the JavaScript object is a quick and relatively painless solution. Another way would be to use ES6’s <code>Set</code> data structure, which supports quick lookup time as well.</p>
+<p>Let me remind you that with each optimization there is a trade-off.&nbsp; For example, where are our results being stored in? Memory right? Although the process now becomes speedier, it takes up more memory.</p>
+<p>Furthermore, when implementing a recursive solution, each subsequent function call is taking up memory on the call stack (usually <code>O(N)</code>). Please bear this in mind when writing recursive implementations.</p>
+<p></p>
+</div>
+</div></div>
+<h4 id="ftoc-heading-31" class="ftwp-heading"><span style="text-decoration: underline;">Recursive Approach</span></h4>
+<p>Here is the code snippet that we will be working with.</p>
+<pre class="line-numbers language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">function</span> <span class="token function">removeReoccurringCharacters</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> str <span class="token operator">!==</span> <span class="token string">"string"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">"Please enter a string!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">var</span> charMap <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> result <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> removeRepeatingChar <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> len <span class="token operator">=</span> str<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// base case</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>len <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> str<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">var</span> firstChar <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>charMap<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span>firstChar<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            charMap<span class="token punctuation">[</span>firstChar<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// mark as having occurred</span>
+            result<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>firstChar<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment" spellcheck="true">// push into results</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">removeRepeatingChar</span><span class="token punctuation">(</span>str<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> len<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token function">removeRepeatingChar</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> result<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">removeReoccurringCharacters</span><span class="token punctuation">(</span><span class="token string">"creeeedisgiiiid"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">// credisg</span><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<p>Everything here is fairly standard. One thing I would like to point out here, is that because we are working with external, mutable values, which in this case are <code>charMap</code> and <code>result</code> respectively, our recursive function does not need to return a value.</p>
+<p>Note that because <code>charMap</code> and <code>result</code> are contained within its own scope of <code>function removeReoccurringCharacters</code>, we don’t have to worry about side effects.</p>
+<p>As I mentioned, we are using <code>array</code>as a string builder so that we don’t have to pay the price of concatenating strings, which can become costly when working with a large string.</p>
+<p>Once we have the final string, we are simply going to call <code>join()</code>&nbsp;on result to form a string and return that.</p>
+<h4 id="ftoc-heading-32" class="ftwp-heading"><span style="text-decoration: underline;">Iterative Approach</span></h4>
+<p>We pretty much explained the logic, so I am going to paste the code below. One point I would like to mention is that in all the four exercises we’ve walked through together, all of these solutions are better off implemented iteratively rather than recursively. In terms of BOTH performance and readability.</p>
+<p>Remember to critically assess the trade-offs before making a decision.</p>
+<pre class="line-numbers language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">function</span> <span class="token function">removeReoccurringCharactersIter</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> str <span class="token operator">!==</span> <span class="token string">"string"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">"Please enter a string!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">var</span> charMap <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> result <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> charArray <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span>charArray<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> currentChar <span class="token operator">=</span> charArray<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// Character doesn't exist. Add to result</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>charMap<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span>currentChar<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            charMap<span class="token punctuation">[</span>currentChar<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// mark as character having occurred</span>
+            result<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>currentChar<span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment" spellcheck="true">// push into results</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">// Otherwise, do nothing</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> result<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+<h2 id="ftoc-heading-33" class="ftwp-heading">Final Words</h2>
+<p>And that is it! By now, you should be fairly familiar with JavaScript recursion and understanding how it works behind the scenes. I hope that you learned a lot from reading and working through this tutorial, and that it has given you a boost in your journey towards becoming a better programmer.</p>
+<p>Until next time, peace and happy coding!</p>
+<p>You probably need to rest your brain if you managed to read this entire post in one seating.</p>
+<div id="ftwp-postcontent-end"></div>
+<span id="tho-end-content" style="display: block; visibility: hidden;"></span><div class="swp_social_panel swp_horizontal_panel swp_flat_fresh  swp_default_full_color swp_other_full_color swp_individual_full_color scale-100 scale-full_width" data-min-width="900px" data-float-color="#ffffff" data-float="left" data-float-mobile="bottom" data-transition="slide"><div class="nc_tweetContainer swp_share_button swp_facebook" data-network="facebook"><a class="nc_tweet swp_share_link" rel="nofollow noreferrer noopener" target="_blank" href="https://www.facebook.com/share.php?u=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F" data-link="https://www.facebook.com/share.php?u=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F"><span class="iconFiller"><span class="spaceManWilly"><i class="sw swp_facebook_icon"></i><span class="swp_share">Share</span></span></span><span class="swp_count" style="transition: padding 0.1s linear 0s;">11</span></a></div><div class="nc_tweetContainer swp_share_button swp_linkedin" data-network="linkedin"><a class="nc_tweet swp_share_link" rel="nofollow noreferrer noopener" target="_blank" href="https://www.linkedin.com/cws/share?url=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F" data-link="https://www.linkedin.com/cws/share?url=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F"><span class="iconFiller"><span class="spaceManWilly"><i class="sw swp_linkedin_icon"></i><span class="swp_share">Share</span></span></span><span class="swp_count" style="transition: padding 0.1s linear 0s;">1</span></a></div><div class="nc_tweetContainer swp_share_button swp_google_plus" data-network="google_plus"><a class="nc_tweet swp_share_link" rel="nofollow noreferrer noopener" target="_blank" href="https://plus.google.com/share?url=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F" data-link="https://plus.google.com/share?url=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F"><span class="iconFiller"><span class="spaceManWilly"><i class="sw swp_google_plus_icon"></i><span class="swp_share">+1</span></span></span><span class="swp_count" style="transition: padding 0.1s linear 0s;">3</span></a></div><div class="nc_tweetContainer swp_share_button swp_pinterest" data-network="pinterest"><a rel="nofollow noreferrer noopener" class="nc_tweet swp_share_link noPop" onclick="var e=document.createElement(&#39;script&#39;);
+e.setAttribute(&#39;type&#39;,&#39;text/javascript&#39;);
+e.setAttribute(&#39;charset&#39;,&#39;UTF-8&#39;);
+e.setAttribute(&#39;src&#39;,&#39;//assets.pinterest.com/js/pinmarklet.js?r=&#39;+Math.random()*99999999);
+document.body.appendChild(e);
+"><span class="iconFiller"><span class="spaceManWilly"><i class="sw swp_pinterest_icon"></i><span class="swp_share">Pin</span></span></span><span class="swp_count" style="transition: padding 0.1s linear 0s;">1</span></a></div><div class="nc_tweetContainer swp_share_button swp_reddit" data-network="reddit"><a class="nc_tweet swp_share_link" rel="nofollow noreferrer noopener" target="_blank" href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F" data-link="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F"><span class="iconFiller"><span class="spaceManWilly"><i class="sw swp_reddit_icon"></i><span class="swp_share">Reddit</span></span></span><span class="swp_count" style="transition: padding 0.1s linear 0s;">19</span></a></div><div class="nc_tweetContainer swp_share_button swp_twitter" data-network="twitter"><a class="nc_tweet swp_share_link" rel="nofollow noreferrer noopener" target="_blank" href="https://twitter.com/intent/tweet?text=Understanding+Recursion+in+JavaScript+with+Confidence&amp;url=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F&amp;via=JayLee189" data-link="https://twitter.com/intent/tweet?text=Understanding+Recursion+in+JavaScript+with+Confidence&amp;url=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F&amp;via=JayLee189"><span class="iconFiller"><span class="spaceManWilly"><i class="sw swp_twitter_icon"></i><span class="swp_share">Tweet</span></span></span><span class="swp_count" style="transition: padding 0.1s linear 0s;">11</span></a></div><div class="nc_tweetContainer swp_share_button swp_hacker_news" data-network="hacker_news"><a class="nc_tweet swp_share_link" rel="nofollow noreferrer noopener" target="_blank" href="https://news.ycombinator.com/submitlink?u=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F&amp;t=Understanding+Recursion+in+JavaScript+with+Confidence" data-link="https://news.ycombinator.com/submitlink?u=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F&amp;t=Understanding+Recursion+in+JavaScript+with+Confidence"><span class="swp_count swp_hide" style="transition: padding 0.1s linear 0s;"><span class="iconFiller"><span class="spaceManWilly"><i class="sw swp_hacker_news_icon"></i><span class="swp_share">Vote</span></span></span></span></a></div><div class="nc_tweetContainer swp_share_button total_shares total_sharesalt"><span class="swp_count " style="transition: padding 0.1s linear 0s;">35 <span class="swp_label">Shares</span></span></div></div>	</div>
+<div class="clear"></div>
+<div class="aut">
+<div class="aut-t">
+<h3>
+About the Author			<a href="https://www.thecodingdelight.com/author/ljay189/">Jay</a>
+</h3>
+<p>I am a programmer currently living in Seoul, South Korea. I created this blog as an outlet to express what I know / have been learning in text form for retaining knowledge and also to hopefully help the wider community. 
+I am passionate about data structures and algorithms. The back-end and databases is where my heart is at.</p>
+<div class="aut-s">
+<span class="aut-f">follow me on:</span>
+<div class="ss">
+</div>
+</div>
+</div>
+<div class="aut-i">
+<div class="aui" style="background-image: url(&#39;https://secure.gravatar.com/avatar/39272fb830fd948dbba8896007ee310b?s=180&amp;d=mm&amp;r=g&#39;)"></div>
+</div>
+</div>	
+<div class="rltpi clearfix">
+<div class="awr">
+<h4>Related Posts</h4>
+<a href="https://www.thecodingdelight.com/bad-code/" class="rlt left">
+<div class="rlti" style="background-image: url(&#39;//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/uploads/2017/08/dont-leave-your-code-out-to-dry-280x150.jpg&#39;)">
+</div>
+<span>02 Aug, 2017</span>
+<p>Nine Common Traits and Ways of Identifying Bad Code</p>
+</a>
+<a href="https://www.thecodingdelight.com/good-coding-practices-tips-enhance-code-quality/" class="rlt left">
+<div class="rlti" style="background-image: url(&#39;//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/uploads/2017/07/good-coding-practices-method-names-are-like-heading-sentences.jpg&#39;)">
+</div>
+<span>29 Jul, 2017</span>
+<p>Good Coding Practices – Five Tips to Enhance Code Quality</p>
+</a>
+<a href="https://www.thecodingdelight.com/writing-good-code/" class="rlt left">
+<div class="rlti" style="background-image: url(&#39;//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/uploads/2017/07/writing-good-code-best-practice-280x150.jpg&#39;)">
+</div>
+<span>26 Jul, 2017</span>
+<p>Best Practices != Writing Good Code – Evaluating code quality</p>
+</a>
+<a href="https://www.thecodingdelight.com/learn-new-programming-language/" class="rlt left">
+<div class="rlti" style="background-image: url(&#39;//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/uploads/2017/07/learn-new-programming-language-effectively-feature-300x300.jpg&#39;)">
+</div>
+<span>04 Jul, 2017</span>
+<p>How to Learn a New Programming Language Effectively</p>
+</a>
+</div>
+</div>			<div class="pnav">
+<a class="pav left" href="https://www.thecodingdelight.com/learning-new-programming-language-python/">
+<span>Previous Post</span>
+<span>Learning New Programming Language – Python</span>
+</a>
+<a class="pav right" href="https://www.thecodingdelight.com/javascript-es6-best-parts/">
+<span>Next Post</span>
+<span>JavaScript ES6 The Best Parts</span>
+</a>
+</div>
+</div>
+<div id="disqus_thread">
+</div>
+</section>
+</div>										
+</div>
+<div class="rpb">
+<div class="wrp">
+<h4>Popular posts</h4>
+<div class="csc">
+<div class="colm foc ">
+<div class="rpi-i">
+<a href="https://www.thecodingdelight.com/understanding-recursion-javascript/">
+<div class="rpi" style="background-image: url(&#39;//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/uploads/2017/04/recursion-factorial-call-stack-e1493367276342.jpg&#39;)"></div>
+<h5>Understanding Recursion in JavaScript with Confidence</h5>
+</a>
+<a href="https://www.thecodingdelight.com/tutorial/" class="cat">
+tutorials							</a>
+<div class="date">Jun 19, 2017</div>
+</div>
+</div>
+<div class="colm foc ">
+<div class="rpi-i">
+<a href="https://www.thecodingdelight.com/common-learning-mistakes-programmers-make/">
+<div class="rpi" style="background-image: url(&#39;//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/uploads/2017/04/multitasking-meme.png&#39;)"></div>
+<h5><thrive_headline click="" tho-post-740="" tho-test-1="" data-post-id="740" data-test-id="1" class="tho_title_changed">Common learning mistakes made by programmers</thrive_headline></h5>
+</a>
+<a href="https://www.thecodingdelight.com/articles/" class="cat">
+articles							</a>
+<div class="date">Apr 29, 2017</div>
+</div>
+</div>
+<div class="colm foc ">
+<div class="rpi-i">
+<a href="https://www.thecodingdelight.com/queue-linked-list/">
+<div class="rpi" style="background-image: url(&#39;//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/uploads/2017/07/waiting-in-line-300x300.jpeg&#39;)"></div>
+<h5>Simple Queue Implementation Guide (Using the Linked List)</h5>
+</a>
+<a href="https://www.thecodingdelight.com/tutorial/" class="cat">
+tutorials							</a>
+<div class="date">Aug 25, 2017</div>
+</div>
+</div>
+<div class="colm foc lst">
+<div class="rpi-i">
+<a href="https://www.thecodingdelight.com/doubly-linked-list/">
+<div class="rpi" style="background-image: url(&#39;//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/uploads/2017/07/doubly-linked-list-illustration-280x150.jpg&#39;)"></div>
+<h5>Doubly Linked List Implementation Guide | Data Structures</h5>
+</a>
+<a href="https://www.thecodingdelight.com/tutorial/" class="cat">
+tutorials							</a>
+<div class="date">Jul 21, 2017</div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>			<div class="clear"></div>
+
+<footer>
+<div class="fmm">
+<div class="wrp">
+<div class="ft-m">
+</div>
+</div>
+<div class="wrp">
+<div class="ft-c">
+<p>
+@Copyright 2018 by The Coding Delight. 														</p>
+</div>
+<div class="ft-s">
+<span>Connect With Me:</span>
+<ul>
+<li class="tw">
+<a href="https://twitter.com/JayLee189" target="_blank"></a>
+</li>
+</ul>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+</footer>
+<script async="" type="text/javascript">
+/*
+A JavaScript plugin for lazy-loading responsive Google Adsense ads.
+-
+By Osvaldas Valutis, www.osvaldas.info
+Available for use under the MIT License
+*/
+;( function( root, factory )
+{
+var pluginName = 'adsenseLoader';
+if( typeof define === 'function' && define.amd ) define([], factory( pluginName ));
+else if( typeof exports === 'object' ) module.exports = factory( pluginName );
+else root[ pluginName ] = factory( pluginName );
+}( this, function( pluginName )
+{
+'use strict';
+var scriptUrl        = '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
+scriptLoaded    = false,
+throttleTO        = 250,
+defaultOpts =
+{
+laziness:    1,
+onLoad:        false,
+},
+extendObj = function( defaults, options )
+{
+var prop, extended = {};
+for( prop in defaults )
+if( Object.prototype.hasOwnProperty.call( defaults, prop ))
+extended[ prop ] = defaults[ prop ];
+for( prop in options )
+if( Object.prototype.hasOwnProperty.call( options, prop ))
+extended[ prop ] = options[ prop ];
+return extended;
+},
+addClass = function( el, className )
+{
+if( el.classList )    el.classList.add( className );
+else                el.className += ' ' + className;
+},
+getOffset = function( el )
+{
+var rect = el.getBoundingClientRect();
+return { top: rect.top + document.body.scrollTop, left: rect.left + document.body.scrollLeft };
+},
+loadScript = function( url, callback )
+{
+var s    = document.createElement( 'script' );
+s.src    = url;
+s.async    = true;
+s.addEventListener( 'load', function()
+{
+s.parentNode.removeChild( s );
+if( typeof callback === 'function' )
+callback();
+});
+document.body.appendChild( s );
+},
+throttle = function(a,b){var c,d;return function(){var e=this,f=arguments,g=+new Date;c&&g<c+a?(clearTimeout(d),d=setTimeout(function(){c=g,b.apply(e,f)},a)):(c=g,b.apply(e,f))}},
+adsToLoad    = [],
+adsLoaded    = [],
+adsPending    = [],
+loadAd = function( ad )
+{
+( adsbygoogle = window.adsbygoogle || []).push({});
+var onLoadFn = ad._adsenseLoaderData.options.onLoad;
+if( typeof onLoadFn === 'function' )
+{
+ad.querySelector( 'iframe' ).addEventListener( 'load', function()
+{
+onLoadFn( ad );
+});
+}
+},
+initAds = function()
+{
+if( !adsToLoad.length ) return true;
+var winScroll = window.pageYOffset,
+winHeight = window.innerHeight;
+adsToLoad.forEach( function( ad )
+{
+var offset     = getOffset( ad ).top,
+laziness = ad._adsenseLoaderData.options.laziness + 1;
+// if the element is too far below || too far above
+if( offset - winScroll > winHeight * laziness || winScroll - offset - ad.offsetHeight - ( winHeight * laziness ) > 0 )
+return true;
+adsToLoad                    = removeAdFromList( adsToLoad, ad );
+ad._adsenseLoaderData.width    = getAdWidth( ad );
+addClass( ad.children[ 0 ], 'adsbygoogle' );
+adsLoaded.push( ad );
+if( typeof adsbygoogle !== 'undefined' ) loadAd( ad );
+else adsPending.push( ad );
+if( !scriptLoaded )
+{
+scriptLoaded = true;
+loadScript( scriptUrl, function()
+{
+adsPending.forEach( loadAd );
+});
+}
+});
+},
+resizeAds = function()
+{
+if( !adsLoaded.length ) return true;
+var anyNew = false;
+adsLoaded.forEach( function( ad )
+{
+if( ad._adsenseLoaderData.width != getAdWidth( ad ))
+{
+anyNew            = true;
+adsLoaded        = removeAdFromList( adsLoaded, ad );
+ad.innerHTML    = ad._adsenseLoaderData.originalHTML;
+adsToLoad.push( ad );
+}
+});
+if( anyNew ) initAds();
+},
+getAdWidth = function( ad )
+{
+return parseInt( window.getComputedStyle( ad, ':before' ).getPropertyValue( 'content' ).slice( 1, -1 ) || 9999 );
+},
+removeAdFromList = function( list, element )
+{
+return list.filter( function( entry )
+{
+return entry !== element;
+});
+},
+normalizeAdElement = function( ad, options )
+{
+ad._adsenseLoaderData =
+{
+originalHTML:    ad.innerHTML,
+options:        options
+};
+ad.adsenseLoader = function( method )
+{
+if( method == 'destroy' )
+{
+adsToLoad    = removeAdFromList( adsToLoad, ad );
+adsLoaded    = removeAdFromList( adsLoaded, ad );
+adsPending    = removeAdFromList( adsLoaded, ad );
+ad.innerHTML = ad._adsenseLoaderData.originalHTML;
+}
+};
+return ad;
+};
+window.addEventListener( 'scroll', throttle( throttleTO, initAds ));
+window.addEventListener( 'resize', throttle( throttleTO, initAds ));
+window.addEventListener( 'resize', throttle( throttleTO, resizeAds ));
+function Plugin( elements, options )
+{
+if( typeof elements === 'string' )                    elements = document.querySelectorAll( elements );
+else if( typeof elements.length === 'undefined' )    elements = [ elements ];
+options = extendObj( defaultOpts, options );
+[].forEach.call( elements, function( entry )
+{
+entry = normalizeAdElement( entry, options );
+adsToLoad.push( entry );
+});
+this.elements = elements;
+initAds();
+}
+Plugin.prototype =
+{
+destroy: function()
+{
+this.elements.forEach( function( entry )
+{
+entry.adsenseLoader( 'destroy' );
+});
+}
+};
+window.adsenseLoaderConfig = function( options )
+{
+if( typeof options.scriptUrl !== 'undefined' )
+scriptUrl = options.scriptUrl;
+if( typeof options.throttle !== 'undefined' )
+throttleTO = options.throttle;
+};
+return Plugin;
+}));
+new adsenseLoader( '.adsense',
+{
+onLoad: function( ad )
+{
+if( ad.classList )
+ad.classList.add( 'adsense--loaded' ); // IE 10+
+else
+el.className += ' ' + 'adsense--loaded'; // IE 8-9
+}   
+});
+</script>				<script type="text/javascript">
+jQuery( ".tabs_widget .scT ul li" ).on( 'click', function ( e ) {
+var $li = jQuery( this ),
+tabs_wrapper = $li.parents( ".tabs_widget" ).first(),
+target_tab = tabs_wrapper.find( ".scTC" ).eq( $li.index() );
+tabs_wrapper.find( ".tS" ).removeClass( "tS" );
+$li.addClass( 'tS' );
+tabs_wrapper.find( ".scTC" ).hide();
+target_tab.show();
+e.preventDefault();
+} );
+</script>
+<!--[if lte IE 9]>
+<script>
+(function($) {
+$(document).ready(function() {
+$( '#ftwp-container' ).addClass( 'ftwp-ie9' );
+});
+})(jQuery);
+</script>
+<![endif]-->
+<script type="text/javascript">
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"http-www-thecodingdelight-com"};
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.16"},"disqusIdentifier":"592 https:\/\/www.thecodingdelight.com\/?p=592","disqusShortname":"http-www-thecodingdelight-com","disqusTitle":"Understanding Recursion in JavaScript with Confidence","disqusUrl":"https:\/\/www.thecodingdelight.com\/understanding-recursion-javascript\/","postId":"592"};
+var dclCustomVars = {"dcl_progress_text":"Loading..."};
+/* ]]> */
+</script>
+<script src="./Understanding Recursion in JavaScript with Confidence_files/2krui.js" type="text/javascript"></script>
+<!-- <script type='text/javascript' src='//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/cache/wpfc-minified/0c79c490bc75270c0439a07e80eebbfb/2krum.js'></script> -->
+<!-- <script type='text/javascript' src='//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/cache/wpfc-minified/c774cd6757b3e441085231838f6db98f/2krum.js'></script> -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var socialWarfare = {"addons":[{"name":"Social Warfare - Pro","key":"pro","core_required":"3.3.0","product_id":63157,"store_url":"https:\/\/www.thecodingdelight.com","version":"3.5.0","filepath":"\/home\/thecodi9\/public_html\/wp-content\/plugins\/social-warfare-pro\/social-warfare-pro.php","license_key":true,"is_registered":true},"pro"],"post_id":"592","floatBeforeContent":"1"};
+/* ]]> */
+</script>
+<script src="./Understanding Recursion in JavaScript with Confidence_files/2krui(1).js" type="text/javascript"></script>
+<!-- <script type='text/javascript' src='//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/cache/wpfc-minified/5bf959fa499d49851ed20f7025d30bcc/2krul.js'></script> -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var ThriveApp = {"ajax_url":"https:\/\/www.thecodingdelight.com\/wp-admin\/admin-ajax.php","is_singular":"1","post_type":"post","lazy_load_comments":"1","comments_loaded":"0","theme_uri":"https:\/\/www.thecodingdelight.com\/wp-content\/themes\/rise","translations":{"ProductDetails":"Product Details"}};
+/* ]]> */
+</script>
+<script src="./Understanding Recursion in JavaScript with Confidence_files/2krui(2).js" type="text/javascript"></script>
+<!-- <script type='text/javascript' src='//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/cache/wpfc-minified/513f4328e1b7cfcc68a08dfbfbf55a2f/2kruj.js'></script> -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"https:\/\/www.thecodingdelight.com\/wp-admin\/admin-ajax.php","force_ajax_send":"1","is_crawler":""};
+/* ]]> */
+</script>
+<script src="./Understanding Recursion in JavaScript with Confidence_files/2krui(3).js" type="text/javascript"></script>
+<!-- <script type='text/javascript' src='//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/cache/wpfc-minified/edb22bbe440d7f098e81e3333504c6b0/2krui.js'></script> -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var fixedtocOption = {"showAdminbar":"","inOutEffect":"zoom","isNestedList":"1","isColExpList":"1","showColExpIcon":"1","isAccordionList":"","isQuickMin":"1","isEscMin":"1","isEnterMax":"1","fixedMenu":"#floating_menu","scrollOffset":"10","fixedOffsetX":"10","fixedOffsetY":"0","fixedPosition":"middle-right","contentsFixedHeight":"0","inPost":"1","contentsFloatInPost":"right","contentsWidthInPost":"250","contentsHeightInPost":"","inWidget":"","fixedWidget":"","triggerBorder":"medium","contentsBorder":"medium","triggerSize":"50"};
+/* ]]> */
+</script>
+<script src="./Understanding Recursion in JavaScript with Confidence_files/2krui(4).js" type="text/javascript"></script>
+<!-- <script type='text/javascript' src='//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/cache/wpfc-minified/5943cf3eb7b2176445ec5ad88d2bcc29/2krui.js'></script> -->
+<!-- <script type='text/javascript' src='//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/cache/wpfc-minified/5ed664a1d68e38e40857383e9fc4dd07/2krui.js'></script> -->
+<!-- <script type='text/javascript' src='//personalzone-hulgokm2zfcmm9u.netdna-ssl.com/wp-content/cache/wpfc-minified/567907e09f69f15713cbf968c886d09f/2krui.js'></script> -->
+<script type="text/javascript">/*<![CDATA[*/var THO_Front = THO_Front || {}; THO_Front.data = {"end_of_content_id":"tho-end-content","is_single":true,"log_url":"https:\/\/www.thecodingdelight.com\/wp-json\/tho\/v1\/logs","active_triggers":{"viewport":"thrive_headline"},"log_engagements":[],"post_id":592,"test_id":0,"const":{"_e_click":1,"_e_scroll":2,"_e_time":3,"_impression":1,"_engagement":2}}/*]]> */</script><div class="swp_social_panelSide swp_floating_panel swp_social_panel swp_boxed swp_default_full_color swp_other_full_color swp_individual_full_color slide swp_float_left swp_side_center scale-100 float-position-center-left" data-min-width="900px" data-float-color="#ffffff" data-float="left" data-float-mobile="bottom" data-transition="slide" style="top: 88px; left: 5px;"><div class="nc_tweetContainer swp_share_button total_shares total_sharesalt"><span class="swp_count " style="transition: padding 0.1s linear 0s;">35 <span class="swp_label">Shares</span></span></div><div class="nc_tweetContainer swp_share_button swp_facebook" data-network="facebook"><a class="nc_tweet swp_share_link" rel="nofollow noreferrer noopener" target="_blank" href="https://www.facebook.com/share.php?u=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F" data-link="https://www.facebook.com/share.php?u=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F"><span class="iconFiller"><span class="spaceManWilly"><i class="sw swp_facebook_icon"></i><span class="swp_share">Share</span></span></span><span class="swp_count" style="transition: padding 0.1s linear 0s;">11</span></a></div><div class="nc_tweetContainer swp_share_button swp_linkedin" data-network="linkedin"><a class="nc_tweet swp_share_link" rel="nofollow noreferrer noopener" target="_blank" href="https://www.linkedin.com/cws/share?url=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F" data-link="https://www.linkedin.com/cws/share?url=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F"><span class="iconFiller"><span class="spaceManWilly"><i class="sw swp_linkedin_icon"></i><span class="swp_share">Share</span></span></span><span class="swp_count" style="transition: padding 0.1s linear 0s;">1</span></a></div><div class="nc_tweetContainer swp_share_button swp_google_plus" data-network="google_plus"><a class="nc_tweet swp_share_link" rel="nofollow noreferrer noopener" target="_blank" href="https://plus.google.com/share?url=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F" data-link="https://plus.google.com/share?url=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F"><span class="iconFiller"><span class="spaceManWilly"><i class="sw swp_google_plus_icon"></i><span class="swp_share">+1</span></span></span><span class="swp_count" style="transition: padding 0.1s linear 0s;">3</span></a></div><div class="nc_tweetContainer swp_share_button swp_pinterest" data-network="pinterest"><a rel="nofollow noreferrer noopener" class="nc_tweet swp_share_link noPop" onclick="var e=document.createElement(&#39;script&#39;);
+e.setAttribute(&#39;type&#39;,&#39;text/javascript&#39;);
+e.setAttribute(&#39;charset&#39;,&#39;UTF-8&#39;);
+e.setAttribute(&#39;src&#39;,&#39;//assets.pinterest.com/js/pinmarklet.js?r=&#39;+Math.random()*99999999);
+document.body.appendChild(e);
+"><span class="iconFiller"><span class="spaceManWilly"><i class="sw swp_pinterest_icon"></i><span class="swp_share">Pin</span></span></span><span class="swp_count" style="transition: padding 0.1s linear 0s;">1</span></a></div><div class="nc_tweetContainer swp_share_button swp_reddit" data-network="reddit"><a class="nc_tweet swp_share_link" rel="nofollow noreferrer noopener" target="_blank" href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F" data-link="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F"><span class="iconFiller"><span class="spaceManWilly"><i class="sw swp_reddit_icon"></i><span class="swp_share">Reddit</span></span></span><span class="swp_count" style="transition: padding 0.1s linear 0s;">19</span></a></div></div><script type="text/javascript"> var swp_nonce = "9b7fdc6e75";
+function parentIsEvil() { var html = null; try { var doc = top.location.pathname; } catch(err){ }; if(typeof doc === "undefined") { return true } else { return false }; }; if (parentIsEvil()) { top.location = self.location.href; };var url = "https://www.thecodingdelight.com/understanding-recursion-javascript/";if(url.indexOf("stfi.re") != -1) { var canonical = ""; var links = document.getElementsByTagName("link"); for (var i = 0; i < links.length; i ++) { if (links[i].getAttribute("rel") === "canonical") { canonical = links[i].getAttribute("href")}}; canonical = canonical.replace("?sfr=1", "");top.location = canonical; console.log(canonical);};var swpFloatBeforeContent = true;var swpClickTracking = false; swpPinIt={"enabled":false};</script></div>
+
+<div id="ftwp-container" class="ftwp-wrap ftwp-minimize ftwp-middle-right ftwp-fixed-to-post" style=""><button type="button" id="ftwp-trigger" class="ftwp-shape-round ftwp-border-medium ftwp-transform-left-center ftwp-fade-trigger" title="click To Maximize The Table Of Contents" style="left: 781px; right: auto;"><span class="ftwp-trigger-icon ftwp-icon-number"></span></button><nav id="ftwp-contents" class="ftwp-shape-square ftwp-border-medium ftwp-transform-left-center" style="left: 781px; right: auto; top: 0px; height: 694px;"><header id="ftwp-header"><span id="ftwp-header-control" class="ftwp-icon-number"></span><button type="button" id="ftwp-header-minimize" class="ftwp-icon-minimize"></button><h3 id="ftwp-header-title">Contents</h3></header><ol id="ftwp-list" class="ftwp-liststyle-decimal ftwp-effect-bounce-to-right ftwp-list-nest ftwp-strong-first ftwp-colexp ftwp-colexp-icon" style="height: 628px;"><li class="ftwp-item"><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-1"><span class="ftwp-text">Objectives</span></a></li><li class="ftwp-item"><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-2"><span class="ftwp-text">What is recursion in programming?</span></a></li><li class="ftwp-item"><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-3"><span class="ftwp-text">Base Case Simplified</span></a></li><li class="ftwp-item"><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-4"><span class="ftwp-text">Function calls&nbsp;are stored on the Call Stack</span></a></li><li class="ftwp-item"><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-5"><span class="ftwp-text">What is the Call Stack?</span></a></li><li class="ftwp-item"><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-6"><span class="ftwp-text">Tail Call Optimizations and Words of Warning</span></a></li><li class="ftwp-item"><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-7"><span class="ftwp-text">Recursive function calls example – Factorial Function</span></a></li><li class="ftwp-item"><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-8"><span class="ftwp-text">Dissecting and Analyzing the factorial function</span></a></li><li class="ftwp-item"><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-9"><span class="ftwp-text">Call Stack – How can I view it?</span></a></li><li class="ftwp-item"><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-10"><span class="ftwp-text">How do I determine the base case?</span></a></li><li class="ftwp-item"><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-11"><span class="ftwp-text">Examples of poor use of recursion&nbsp;</span></a></li><li class="ftwp-item"><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-12"><span class="ftwp-text">Readability versus Performance</span></a></li><li class="ftwp-item"><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-13"><span class="ftwp-text">When is recursion a good&nbsp;choice?&nbsp;</span></a></li><li class="ftwp-item ftwp-has-sub ftwp-expand"><button type="button" class="ftwp-icon-expand"></button><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-14"><span class="ftwp-text">Recursion Practice Exercises</span></a><ol class="ftwp-sub"><li class="ftwp-item"><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-15"><span class="ftwp-text">Warm-up Exercises</span></a></li><li class="ftwp-item"><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-16"><span class="ftwp-text">Intermediate Exercises</span></a></li><li class="ftwp-item"><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-17"><span class="ftwp-text">Advanced&nbsp;Recursion Exercises</span></a></li></ol></li><li class="ftwp-item"><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-18"><span class="ftwp-text">Recursion JavaScript Exercise Solutions</span></a></li><li class="ftwp-item ftwp-has-sub ftwp-expand"><button type="button" class="ftwp-icon-expand"></button><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-19"><span class="ftwp-text">Recursion Exercise Walk-through</span></a><ol class="ftwp-sub"><li class="ftwp-item ftwp-has-sub ftwp-collapse"><button type="button" class="ftwp-icon-collapse"></button><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-20"><span class="ftwp-text">1. Reversing a String Solution</span></a><ol class="ftwp-sub"><li class="ftwp-item ftwp-has-sub ftwp-collapse"><button type="button" class="ftwp-icon-collapse"></button><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-21"><span class="ftwp-text">Recursive Approach</span></a><ol class="ftwp-sub"><li class="ftwp-item"><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-22"><span class="ftwp-text">The Easy Way</span></a></li><li class="ftwp-item"><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-23"><span class="ftwp-text">The Harder Way</span></a></li></ol></li></ol></li><li class="ftwp-item ftwp-has-sub ftwp-expand"><button type="button" class="ftwp-active ftwp-icon-expand"></button><a class="ftwp-anchor ftwp-active" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-24"><span class="ftwp-text">2. Fibonacci number Solution</span></a><ol class="ftwp-sub"><li class="ftwp-item"><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-25"><span class="ftwp-text">Recursive Approach</span></a></li><li class="ftwp-item"><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-26"><span class="ftwp-text">Iterative Approach</span></a></li></ol></li><li class="ftwp-item ftwp-has-sub ftwp-collapse"><button type="button" class="ftwp-icon-collapse"></button><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-27"><span class="ftwp-text">3. Digit Counter Solution</span></a><ol class="ftwp-sub"><li class="ftwp-item"><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-28"><span class="ftwp-text">Recursive Approach</span></a></li><li class="ftwp-item"><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-29"><span class="ftwp-text">Iterative Approach</span></a></li></ol></li><li class="ftwp-item ftwp-has-sub ftwp-collapse"><button type="button" class="ftwp-icon-collapse"></button><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-30"><span class="ftwp-text">4. Solution to Removing characters that occur more than once</span></a><ol class="ftwp-sub"><li class="ftwp-item"><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-31"><span class="ftwp-text">Recursive Approach</span></a></li><li class="ftwp-item"><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-32"><span class="ftwp-text">Iterative Approach</span></a></li></ol></li></ol></li><li class="ftwp-item"><a class="ftwp-anchor" href="https://www.thecodingdelight.com/understanding-recursion-javascript/#ftoc-heading-33"><span class="ftwp-text">Final Words</span></a></li></ol></nav></div><iframe scrolling="no" frameborder="0" allowtransparency="true" src="./Understanding Recursion in JavaScript with Confidence_files/widget_iframe.2e9f365dae390394eb8d923cba8c5b11.html" title="Twitter settings iframe" style="display: none;"></iframe><div class="nc_wrapper swp_floating_horizontal_wrapper left" style="background-color: rgb(255, 255, 255); display: none;"><div class="swp_social_panel swp_horizontal_panel swp_flat_fresh  swp_default_full_color swp_other_full_color swp_individual_full_color scale-100 scale-full_width nc_floater" data-min-width="900px" data-float-color="#ffffff" data-float="left" data-float-mobile="bottom" data-transition="slide" style="width: 680px; left: 91px;"><div class="nc_tweetContainer swp_share_button swp_facebook" data-network="facebook"><a class="nc_tweet swp_share_link" rel="nofollow noreferrer noopener" target="_blank" href="https://www.facebook.com/share.php?u=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F" data-link="https://www.facebook.com/share.php?u=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F"><span class="iconFiller"><span class="spaceManWilly"><i class="sw swp_facebook_icon"></i><span class="swp_share">Share</span></span></span><span class="swp_count" style="transition: padding 0.1s linear 0s;">11</span></a></div><div class="nc_tweetContainer swp_share_button swp_linkedin" data-network="linkedin"><a class="nc_tweet swp_share_link" rel="nofollow noreferrer noopener" target="_blank" href="https://www.linkedin.com/cws/share?url=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F" data-link="https://www.linkedin.com/cws/share?url=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F"><span class="iconFiller"><span class="spaceManWilly"><i class="sw swp_linkedin_icon"></i><span class="swp_share">Share</span></span></span><span class="swp_count" style="transition: padding 0.1s linear 0s;">1</span></a></div><div class="nc_tweetContainer swp_share_button swp_google_plus" data-network="google_plus"><a class="nc_tweet swp_share_link" rel="nofollow noreferrer noopener" target="_blank" href="https://plus.google.com/share?url=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F" data-link="https://plus.google.com/share?url=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F"><span class="iconFiller"><span class="spaceManWilly"><i class="sw swp_google_plus_icon"></i><span class="swp_share">+1</span></span></span><span class="swp_count" style="transition: padding 0.1s linear 0s;">3</span></a></div><div class="nc_tweetContainer swp_share_button swp_pinterest" data-network="pinterest"><a rel="nofollow noreferrer noopener" class="nc_tweet swp_share_link noPop" onclick="var e=document.createElement(&#39;script&#39;);
+e.setAttribute(&#39;type&#39;,&#39;text/javascript&#39;);
+e.setAttribute(&#39;charset&#39;,&#39;UTF-8&#39;);
+e.setAttribute(&#39;src&#39;,&#39;//assets.pinterest.com/js/pinmarklet.js?r=&#39;+Math.random()*99999999);
+document.body.appendChild(e);
+"><span class="iconFiller"><span class="spaceManWilly"><i class="sw swp_pinterest_icon"></i><span class="swp_share">Pin</span></span></span><span class="swp_count" style="transition: padding 0.1s linear 0s;">1</span></a></div><div class="nc_tweetContainer swp_share_button swp_reddit" data-network="reddit"><a class="nc_tweet swp_share_link" rel="nofollow noreferrer noopener" target="_blank" href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F" data-link="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F"><span class="iconFiller"><span class="spaceManWilly"><i class="sw swp_reddit_icon"></i><span class="swp_share">Reddit</span></span></span><span class="swp_count" style="transition: padding 0.1s linear 0s;">19</span></a></div><div class="nc_tweetContainer swp_share_button swp_twitter" data-network="twitter"><a class="nc_tweet swp_share_link" rel="nofollow noreferrer noopener" target="_blank" href="https://twitter.com/intent/tweet?text=Understanding+Recursion+in+JavaScript+with+Confidence&amp;url=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F&amp;via=JayLee189" data-link="https://twitter.com/intent/tweet?text=Understanding+Recursion+in+JavaScript+with+Confidence&amp;url=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F&amp;via=JayLee189"><span class="iconFiller"><span class="spaceManWilly"><i class="sw swp_twitter_icon"></i><span class="swp_share">Tweet</span></span></span><span class="swp_count" style="transition: padding 0.1s linear 0s;">11</span></a></div><div class="nc_tweetContainer swp_share_button swp_hacker_news" data-network="hacker_news"><a class="nc_tweet swp_share_link" rel="nofollow noreferrer noopener" target="_blank" href="https://news.ycombinator.com/submitlink?u=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F&amp;t=Understanding+Recursion+in+JavaScript+with+Confidence" data-link="https://news.ycombinator.com/submitlink?u=https%3A%2F%2Fwww.thecodingdelight.com%2Funderstanding-recursion-javascript%2F&amp;t=Understanding+Recursion+in+JavaScript+with+Confidence"><span class="swp_count swp_hide" style="transition: padding 0.1s linear 0s;"><span class="iconFiller"><span class="spaceManWilly"><i class="sw swp_hacker_news_icon"></i><span class="swp_share">Vote</span></span></span></span></a></div><div class="nc_tweetContainer swp_share_button total_shares total_sharesalt"><span class="swp_count " style="transition: padding 0.1s linear 0s;">35 <span class="swp_label">Shares</span></span></div></div></div></body></html>
