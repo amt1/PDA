@@ -41,6 +41,7 @@ end
 # this end statement should be after the final function not before it
 
 def self.cards_total(cards)
+# this should not be self - doesn't need a class method
   total
   # total is not a complete variable declaration, 
   # also it should be initialised to zero
@@ -48,6 +49,7 @@ def self.cards_total(cards)
     total += card.value
     return "You have a total of" + total
     # this return statement should be outside the for loop or it will repeat
+    # also the integer total needs converting to a string
   end
 end
 
